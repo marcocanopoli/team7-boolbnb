@@ -15,8 +15,8 @@
             'longitude' => 11.2648974,
             'visible' => 1,
             'price' => 50.00,
-            'description' => "Appartamento nel cuore del Centro Storico di Firenze a poche decine di metri dalla Casa di Dante e da Piazza Signoria e il Duomo . Si trova al secondo piano di un palazzo antico ricavato da una antica struttura a torre. Non c'è ascensore ma gli scalini non sono molti. E' disponibile un Wi-Fi ultraveloce ed una grande cucina/soggiorno con TV e lettore DVD , frigorifero e congelatore, lavello in marmo, fornello, forno, microonde e lavastoviglie, ampio bagno con vasca/doccia."
-        ],
+            'description' => "Appartamento nel cuore del Centro Storico di Firenze a poche decine di metri dalla Casa di Dante e da Piazza Signoria e il Duomo . Si trova al secondo piano di un palazzo antico ricavato da una antica struttura a torre. Non c'è ascensore ma gli scalini non sono molti. E' disponibile un Wi-Fi ultraveloce ed una grande cucina/soggiorno con TV e lettore DVD , frigorifero e congelatore, lavello in marmo, fornello, forno, microonde e lavastoviglie, ampio bagno con vasca/doccia.",
+            'guests' => 5        ],
         [   
             'user_id' => 2,
             'title' => 'SINGLE BEDROOM IN THE CITY CENTER',
@@ -38,7 +38,8 @@
             Cucina e bagno devono essere condivisi con Mauro e sua figlia entrambi vaccinati per il Covid. Il prezzo non include la colazione, ma puoi usare la cucina e preparare i pasti da solo.
             Il check-in deve essere effettuato dopo le 13:00. Check-out entro mezzogiorno.
             Altre cose da tenere a mente
-            Mauro ti chiederà un documento (passaporto, carta d'identità o patente di guida) per la registrazione, in conformità alla legge italiana. A CAUSA DEL CORONAVIRUS, AL MOMENTO POSSO ACCETTARE PRENOTAZIONI SOLO DA PAESI EUROPEI E REGNO UNITO, IN POSSESSO DI DOCUMENTO CHE PROVA CHE L'OSPITE È VACCINATO. TUTTAVIA LA PRENOTAZIONE PUO 'ESSERE ANNULLATA SE LE DISPOSIZIONI DEL MINISTERO DELLA SALUTE VENGONO MODIFICATE PER I GIORNI PRENOTATI."
+            Mauro ti chiederà un documento (passaporto, carta d'identità o patente di guida) per la registrazione, in conformità alla legge italiana. A CAUSA DEL CORONAVIRUS, AL MOMENTO POSSO ACCETTARE PRENOTAZIONI SOLO DA PAESI EUROPEI E REGNO UNITO, IN POSSESSO DI DOCUMENTO CHE PROVA CHE L'OSPITE È VACCINATO. TUTTAVIA LA PRENOTAZIONE PUO 'ESSERE ANNULLATA SE LE DISPOSIZIONI DEL MINISTERO DELLA SALUTE VENGONO MODIFICATE PER I GIORNI PRENOTATI.",
+            'guests' => 3
         ],
         [   
             'user_id' => 3,
@@ -61,7 +62,8 @@
             Inside the room there is a small bathroom with sink, shower and toilet.
             There is also a minibar, a microwave, a kettle, a machine with espresso capsules, snacks and crockery.
             The standard layout is with a double bed, but if necessary two single beds can be prepared. There is also an armchair bed, which can be set up as a third bed.
-            Free WiFi."
+            Free WiFi.",
+            'guests' => 6 
         ],    
         [   
             'user_id' => 4,
@@ -88,7 +90,8 @@
             Accesso per gli ospiti
             I miei ospiti avranno accesso illimitato ed esclusivo a tutto appartamento.
             Altre cose da tenere a mente
-            C'è da tenere in considerazione il fatto che a Palermo si mangia benissimo quindi, probabilmente, tornerete a casa con qualche chiletto in più, ma pienamente soddisfatti"
+            C'è da tenere in considerazione il fatto che a Palermo si mangia benissimo quindi, probabilmente, tornerete a casa con qualche chiletto in più, ma pienamente soddisfatti",
+            'guests' => 2 
         ],
         [
             'user_id' => 5,
@@ -108,7 +111,8 @@
             The space
             Recently renovated modern studio, complete with kitchenette, private bathroom and terrace. Strategic area Very close to the Central Station and walking in 5 minutes and 10 minutes from Piazza Maggiore. 5 minutes walk from Mambo.
             Other things to note
-            I only speak Italian so I communicate with a message."
+            I only speak Italian so I communicate with a message.",
+            'guests' => 5 
         ]
 
     ];
