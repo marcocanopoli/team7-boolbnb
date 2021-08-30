@@ -49,7 +49,7 @@ class User extends Authenticatable
     ];
 
     //one to many
-    protected function houses() {
+    public function houses() {
         return $this->hasMany('App\House');
     }
 }

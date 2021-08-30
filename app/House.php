@@ -26,8 +26,16 @@ class House extends Model
 
     // protected $with = [];
 
-    //one to many
+    //one to many->side many
     public function user() {
         return $this->belongsTo('App\User');
+    }
+    
+    //one to many->side one
+    public function photos() {
+        return $this->hasMany('App\Photo');
+    }
+    public function messages() {
+        return $this->hasMany('App\Message');
     }
 }
