@@ -82,7 +82,7 @@
             </div>
             <div class="mx-2">
                 <label for="zip_code">CAP</label>
-                <input type="number" name="zip_code" value="{{ old('zip_code') }}" class="form-control @error('zip_code') is-invalid @enderror" id="zip_code"
+                <input type="text" name="zip_code" value="{{ old('zip_code') }}" class="form-control @error('zip_code') is-invalid @enderror" id="zip_code"
                 placeholder="Inserisci il CAP">
                 @error('zip_code')
                     <small class="text-danger">{{ $message }}</small>

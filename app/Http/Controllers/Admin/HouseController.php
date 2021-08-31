@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\House;
 use App\HouseType;
 use App\Service;
+use Illuminate\Support\Facades\Auth;
 
 class HouseController extends Controller
 {
@@ -15,9 +16,26 @@ class HouseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $houses = House::all();
+
+    private $validation = [
+        'title' => 'required|max:100',
+        'rooms' => 'required|numeric|min:1|max:255',
+        'beds' => 'required|numeric|min:1|max:255',
+        'bathrooms' => 'required|numeric|min:1|max:255',
+        'square_meters' => 'required|numeric|min:14|max:1000',
+        'city' => 'required|max:60',
+        'address' => 'required|max:100',
+        'zip_code' => 'required|min:4|max:10',
+        'description' => 'required|max:3000',
+        'price' => 'required|numeric|min:1|max:9999',
+        'guests' => 'required|numeric|min:1|max:20',
+        'visible' => 'required|numeric|min:0|max:1',
+        'services' => 'required|exists:services,id',
+        'house_types' => 'required|exists:house_types,id',
+    ];
+
+    public function index() {
+        $houses = House::where('user_id', Auth::id())->get();
         return view('admin.houses.index', compact('houses'));
     }
 
@@ -42,7 +60,10 @@ class HouseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $request->validate($this->validation);
+        dd($data);
     }
 
     /**
