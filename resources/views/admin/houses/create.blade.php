@@ -2,6 +2,15 @@
 
 @section('content')
 <div class="container create-form">
+    {{-- @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif --}}
     <form action="{{ route('admin.houses.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('POST')
@@ -45,6 +54,13 @@
                 <label for="rooms">Numero camere</label>
                 <input type="number" name="rooms" value="{{ old('rooms') }}" class="form-control @error('rooms') is-invalid @enderror" id="rooms" placeholder="Camere disponibili">
                 @error('rooms')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
+            <div class="form-group mx-2">
+                <label for="guests">Numero ospiti</label>
+                <input type="number" name="guests" value="{{ old('guests') }}" class="form-control @error('guests') is-invalid @enderror" id="guests" placeholder="Numero ospiti">
+                @error('guests')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>
@@ -115,9 +131,9 @@
         <div class="form-group">
             <h6>Disponibilità</h6>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input @error('visible') is-invalid @enderror" type="radio" value="{{old('visible')}}" name="visible">
+                    <input class="form-check-input @error('visible') is-invalid @enderror" type="radio" value="1" checked name="visible">
                     <label class="form-check-label mr-2 not-strong" for="visible">Disponibile</label>
-                    <input class="form-check-input ml-2 @error('visible') is-invalid @enderror" type="radio" value="{{old('visible')}}" name="visible">
+                    <input class="form-check-input ml-2 @error('visible') is-invalid @enderror" type="radio" value="2" @if(old('visible') == 2) checked @endif name="visible">
                     <label class="form-check-label not-strong" for="visible">Attualmente non disponibile</label>
                 </div> 
             @error('visible')

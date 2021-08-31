@@ -29,7 +29,7 @@ class HouseController extends Controller
         'description' => 'required|max:3000',
         'price' => 'required|numeric|min:1|max:9999',
         'guests' => 'required|numeric|min:1|max:20',
-        'visible' => 'required|numeric|min:0|max:1',
+        'visible' => 'required|numeric|min:1|max:2',
         'services' => 'required|exists:services,id',
         'house_types' => 'required|exists:house_types,id',
     ];
@@ -61,8 +61,12 @@ class HouseController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        if ($data['visible'] == '2') {
+            $data['visible'] = 0;
+        }
 
         $request->validate($this->validation);
+        
         dd($data);
     }
 
