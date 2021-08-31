@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\House;
+use App\HouseType;
+use App\Service;
 
 class HouseController extends Controller
 {
@@ -26,7 +28,10 @@ class HouseController extends Controller
      */
     public function create()
     {
-        //
+        $houseTypes = HouseType::all();
+        $services = Service::all();
+
+        return view('admin.houses.create', compact('houseTypes', 'services'));
     }
 
     /**
@@ -46,9 +51,9 @@ class HouseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(House $house)
     {
-        //
+        return view('admin.houses.show', compact('house'));
     }
 
     /**

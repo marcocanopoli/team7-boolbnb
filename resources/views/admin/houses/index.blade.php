@@ -3,7 +3,10 @@
 
 @section('content')
     <div class="container">
-        <h1>Houses</h1>
+        <div class="d-flex my-4">
+            <h1>Houses</h1> 
+            <a class="btn btn-primary align-self-center mx-4" href="{{route('admin.houses.create')}}">Aggiungi una struttura</a>
+        </div>
             <table class="table">
                 <thead>
                 <tr>
@@ -30,7 +33,7 @@
                         @endif --}}
                         </td>
                         <td>
-                        <a class="btn btn-info" href="#">SHOW</a>
+                        <a class="btn btn-info" href="{{route('admin.houses.show', $house)}}">SHOW</a>
                         </td>
                         <td>
                         <a class="btn btn-warning" href="#">EDIT</a>
