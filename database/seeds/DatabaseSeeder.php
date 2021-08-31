@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ViewSeeder::class);
         $this->call(HouseTypeSeeder::class);
         $this->call(ServiceSeeder::class);
+        $this->call(PromotionSeeder::class);
     }
 }
