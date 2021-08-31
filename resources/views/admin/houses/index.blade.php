@@ -39,7 +39,7 @@
                         <form action="#" method="POST">
                             @csrf
                             @method('DELETE')
-                            {{-- <input class="btn btn-danger" type="submit" onclick="return confirm('Do you want delete this post? this action can\'tn be undone')" value="DELETE"> --}}
+                            <input class="btn btn-danger" type="submit" onclick="return confirm('Do you want delete this post? this action can\'tn be undone')" value="DELETE">
                         </form>
                         </td>
                     </tr>
