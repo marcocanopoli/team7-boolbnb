@@ -12,11 +12,18 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware('auth') //autenticazione
+    ->namespace('Admin') //-> direttiva al path Admin/HomeController
+    ->name('admin.') // direttiva alla route admin.pizzas.index admin.yournames.show
+    ->prefix('admin') //url rotte
+    ->group(function() {
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::resource('houses', 'HouseController');	
+
+});
+
+Route::get("{any?}", "HomeController@index")->where("any", ".*")->name('home');
+
+// Route::get('/home', 'HomeController@index')->name('home');
