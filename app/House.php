@@ -46,5 +46,10 @@ class House extends Model
     public function house() {
         return $this->hasOne('App\House');
     }
+    
+    //many to many
+    public function services() {
+		return $this->belongsToMany('App\Service');
+	}
 
 }
