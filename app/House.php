@@ -41,4 +41,10 @@ class House extends Model
     public function views() {
         return $this->hasMany('App\View');
     }
+
+    //one to one
+    public function house() {
+        return $this->hasOne('App\House');
+    }
+
 }
