@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'BoolBnB') }}</title>
-
+    
     <!-- Scripts -->    
     <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Styles -->
@@ -30,7 +30,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link {{Route::currentRouteName() == 'admin.houses.index' ? 'active' : '' }}" href="{{ route('admin.houses.index') }}">Houses List</a>
+                            <a class="nav-link {{Route::currentRouteName() == 'admin.houses.index' ? 'active' : '' }}" href="{{ route('admin.houses.index') }}">Le mie strutture</a>
                         </li>
                     </ul>
 

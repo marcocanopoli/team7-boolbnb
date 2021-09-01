@@ -14,36 +14,37 @@
     @endif
 
     <h1>{{$house->title}}</h1>
-    <div class="d-flex">
+    <div class="d-flex mt-4">
         <div class="show-info">
-            <span>Numero camere: {{$house->rooms}}</span>
-            <span>Numero letti: {{$house->beds}}</span>
-            <span>Numero bagni: {{$house->bathrooms}}</span>
-            <span>Mq: {{$house->square_meters}}</span>
-            <span class="my-2">Indirizzo: {{$house->address}}, {{$house->zip_code}}, {{$house->city}} </span>
+            <strong>Numero camere: <span>{{$house->rooms}}</span></strong>
+            <strong>Numero letti: <span>{{$house->beds}}</span></strong>
+            <strong>Numero bagni: <span>{{$house->bathrooms}}</span></strong>
+            <strong>Mq: <span>{{$house->square_meters}}</span></strong>
+            <strong class="mt-2">Indirizzo: <span>{{$house->address}}, {{$house->zip_code}}, {{$house->city}}</span></strong>
             <small>LA: {{$house->latitude}}</small>
             <small>LO: {{$house->longitude}}</small>
-            <span>Descrizione:</span>
-            <p class="my-2">{{$house->description}}</p>
-            <span>Numero ospiti: {{$house->guests}}</span>
-            <span>
+            <strong class="my-2">Descrizione:</strong>
+            <p>{{$house->description}}</p>
+            <strong>Numero ospiti: <span>{{$house->guests}}</span></strong>
+            <strong>
                 @if ($house->visible) 
                     Disponibile
                 @else
                     Attualmente non disponibile
                 @endif
-            </span>
-            <span>Prezzo: {{$house->price}} &euro;</span>
+            </strong>
+            <strong>Prezzo: <span>{{$house->price}} &euro;</span></strong>
         </div>
 
-        <div class="show-photos d-flex flex-wrap align-items-start">
+        <div class="show-photos d-flex flex-wrap">
             @foreach ($house->photos as $photo)
                 <img src="{{ asset('storage/' . $photo->path) }}" alt="{{ 'Foto' . $photo->id }}">
             @endforeach
         </div>
 
     </div>
-    <a class="btn btn-secondary my-4" href="{{ route('admin.houses.index') }}">Elenco case</a>
+    <a class="btn btn-primary my-4" href="{{ route('admin.houses.index') }}">ELENCO STRUTTURE</a>
+    <a class="btn btn-warning ml-2" href="{{route('admin.houses.edit', $house)}}">MODIFICA</a>
 </div>
 
 @endsection

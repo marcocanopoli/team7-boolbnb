@@ -33,21 +33,23 @@ class HouseController extends Controller
         'guests' => 'required|numeric|min:1|max:20',
         'visible' => 'required|numeric|min:1|max:2',
         'services' => 'required|exists:services,id',
-        'house_type_id' => 'required|exists:house_types,id'
+        'house_type_id' => 'required|exists:house_types,id',
+        'photos.*' => 'image|max:2048'
     ];
+
     private $createValidationPhoto = [
         'photos' => 'required|array|min:1|max:15',
-        'photos.*' => 'image|max:2048'
     ];
+
     private $editValidationPhoto = [
         'photos' => 'array|min:1|max:15',
-        'photos.*' => 'image|max:2048'
     ];
 
 
     public function index() {
         $houses = House::where('user_id', Auth::id())->get();
-        return view('admin.houses.index', compact('houses'));
+        $houseTypes = HouseType::all();
+        return view('admin.houses.index', compact('houses', 'houseTypes'));
     }
 
     /**
@@ -72,11 +74,10 @@ class HouseController extends Controller
     public function store(Request $request)
     {   
         $data = $request->all();
+
         if ($data['visible'] == '2') {
             $data['visible'] = 0;
         }
-
-        // dd($data);
 
         $request->validate($this->validation);
         $request->validate($this->createValidationPhoto);
@@ -93,10 +94,7 @@ class HouseController extends Controller
 
         foreach ($data['photos'] as $photo) {
             $path = Storage::put('houses/photos/' . $newHouse->id, $photo);
-            Photo::create([
-                'house_id' => $newHouse->id,
-                'path' => $path
-            ]);
+            Photo::create(['house_id' => $newHouse->id, 'path' => $path]);
         }
 
         return redirect()
@@ -152,22 +150,23 @@ class HouseController extends Controller
             }
         }
 
-        //delete product imgs checkboxes
+        //delete photos
         if (array_key_exists('delete-imgs', $data)) {
-            foreach ($data['delete-imgs'] as $imgCheck) {
-                $img = Photo::find($imgCheck);
-                Storage::delete($img->path);
-                $img->delete();
+            foreach ($data['delete-imgs'] as $photoCheckbox) {
+                $photo = Photo::find($photoCheckbox);
+                Storage::delete($photo->path);
+                $photo->delete();
             }
 
             //delete empty folder
-            $imgsCount = Photo::where('house_id', $house->id)->count(); 
-            if($imgsCount == 0) {
+            $photoCount = Photo::where('house_id', $house->id)->count(); 
+            if($photoCount == 0) {
                 Storage::deleteDirectory('houses/photos/' . $house->id);
             }
         }
 
         $house->update($data);
+        $house->services()->sync($data['services']);
 
         return redirect()
         ->route('admin.houses.show', $house->id)

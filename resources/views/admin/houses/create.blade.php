@@ -1,8 +1,8 @@
 @extends('layouts.app')
-@dump($houseTypes)
 @section('content')
 <div class="container create-form">
-    @if ($errors->any())
+
+    {{-- @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
@@ -10,7 +10,12 @@
             @endforeach
         </ul>
     </div>
-    @endif
+    @endif --}}
+
+    <div class="d-flex my-4">
+        <h1>Creazione nuova struttura</h1>
+    </div>
+
     <form action="{{ route('admin.houses.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('POST')
@@ -150,7 +155,7 @@
             <div class="form-check ">
                 <input class="form-check-input" type="checkbox" id="service-{{ $service->id }}" value="{{ $service->id }}" name="services[]" {{ in_array($service->id, old('services', [])) ? 'checked' : '' }}
                 >
-                <label class="form-check-label text-capitalize not-strong" for="service-{{ $service->id }}">{{ $service->name }}</label>
+                <label class="form-check-label not-strong" for="service-{{ $service->id }}">{{ $service->name }}</label>
             </div>     
             @endforeach 
             @error('services')
@@ -203,9 +208,8 @@
         </div>
         {{-- /Prezzo --}}
 
-        <button type="submit" class="btn btn-primary">Crea</button>
-        <a class="btn btn-warning ml-2" href="{{ route('admin.houses.index') }}">Annulla</a>
-
+        <button type="submit" class="btn btn-primary">CREA</button>
+        <a class="btn btn-warning ml-2" href="{{ route('admin.houses.index') }}">ELENCO STRUTTURE</a>
     </form>
 </div>
 @endsection

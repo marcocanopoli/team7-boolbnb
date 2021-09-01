@@ -1,6 +1,6 @@
 <?php 
 
-    $images = [
+    return [
         [
             'house_id' => 1,
             'path' => 'https://a0.muscache.com/im/pictures/264136e5-dd2a-47c2-93dc-2e0e1098bd49.jpg?im_w=1440'
@@ -23,5 +23,3 @@
         ]
         
     ];
-
-    return $images;

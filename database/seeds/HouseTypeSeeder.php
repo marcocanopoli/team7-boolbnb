@@ -12,30 +12,16 @@ class HouseTypeSeeder extends Seeder
      */
     public function run()
     {
-        $houseType = [
-            [
-                'name' => 'appartamento'
-            ],
-            [
-                'name' => 'villa'
-            ],
-            [
-
-                'name' => 'stanza singola'
-            ],
-            [
-                'name' => 'studio'
-            ],
-            [
-                'name' => 'cottage'
-            ]
-
+        $houseTypes = [
+            'Appartamento',
+            'Villa',
+            'Stanza singola',
+            'Studio',
+            'Cottage'
         ];
 
-        foreach ($houseType as $type) {
-            $newType = new HouseType();
-            $newType->fill($type);
-            $newType->save();
+        foreach ($houseTypes as $type) {
+            HouseType::create(['name' => $type]);
         }
     }
 }
