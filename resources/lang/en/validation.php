@@ -133,6 +133,10 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'photos.*' => [
+            'image' => "Formato immagine non valido.",
+            'max' =>  "La dimensione non puo' essere maggiore di :max kilobytes.",
+        ]
     ],
 
     /*
@@ -146,6 +150,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'photos.*' => 'foto'
+    ],
 
 ];

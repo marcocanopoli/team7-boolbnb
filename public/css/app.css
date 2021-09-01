@@ -1,5 +1,28 @@
 @import url(https://fonts.googleapis.com/css?family=Manrope:wght@200,300,400,500,600,700&display=swap);@charset "UTF-8";
 
+.show-info,
+.show-photos {
+  width: 50%;
+}
+
+.show-info span {
+  display: block;
+}
+
+.show-photos img {
+  padding-right: 15px;
+  padding-bottom: 15px;
+  height: 150px;
+  width: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.create-form label:not(.not-strong),
+.create-form h6 {
+  font-weight: 600;
+}
+
 /*!
  * Bootstrap v4.6.0 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
@@ -10940,14 +10963,5 @@ a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6;
   }
-}
-
-.show-info span {
-  display: block;
-}
-
-.create-form label:not(.not-strong),
-.create-form h6 {
-  font-weight: 600;
 }
 

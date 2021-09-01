@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\House;
 use App\HouseType;
 use App\Service;
-use Illuminate\Support\Facades\Auth;
+use App\Photo;
 
 class HouseController extends Controller
 {
@@ -32,6 +34,8 @@ class HouseController extends Controller
         'visible' => 'required|numeric|min:1|max:2',
         'services' => 'required|exists:services,id',
         'house_types' => 'required|exists:house_types,id',
+        'photos' => 'required|array|min:1|max:15',
+        'photos.*' => 'image|max:2048'
     ];
 
     public function index() {
@@ -66,8 +70,27 @@ class HouseController extends Controller
         }
 
         $request->validate($this->validation);
+        $data['user_id'] = Auth::id();
+        $data['longitude'] = 11.1111;
+        $data['latitude'] = 22.2222;        
         
-        dd($data);
+        $newHouse = new House();
+        $newHouse->fill($data);
+        $newHouse->save();
+        
+        $newHouse->services()->attach($data['services']);
+
+        foreach ($data['photos'] as $photo) {
+            $path = Storage::put('houses/photos/' . $newHouse->id, $photo);
+            Photo::create([
+                'house_id' => $newHouse->id,
+                'path' => $path
+            ]);
+        }
+
+        return redirect()
+            ->route('admin.houses.show', $newHouse->id)
+            ->with('created', $newHouse->title);
     }
 
     /**
@@ -87,9 +110,11 @@ class HouseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(House $house)
     {
-        //
+        $houseTypes = HouseType::all();
+        $services = Service::all();
+        return view('admin.houses.edit', compact('house', 'houseTypes', 'services'));
     }
 
     /**
@@ -110,8 +135,17 @@ class HouseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(House $house)
     {
-        //
+        $house->delete();
+
+        foreach ($house->photos as $photo) {
+            Storage::delete($photo->path);
+        }
+        Storage::deleteDirectory('houses/photos/' . $house->id);
+
+        return redirect()
+            ->route('admin.houses.index')
+            ->with('deleted', $house->title);
     }
 }

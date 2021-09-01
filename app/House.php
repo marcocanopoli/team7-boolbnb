@@ -24,7 +24,7 @@ class House extends Model
         'visible'
     ];
 
-    // protected $with = [];
+    protected $with = [ 'photos', 'services'];
 
     //one to many->side many
     public function user() {
@@ -43,8 +43,8 @@ class House extends Model
     }
 
     //one to one
-    public function house() {
-        return $this->hasOne('App\House');
+    public function houseType() {
+        return $this->hasOne('App\HouseType');
     }
 
     //many to many

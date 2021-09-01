@@ -1,0 +1,29 @@
+//House Show
+.show-info,
+.show-photos {
+    width: 50%;
+}
+
+.show-info {
+    span {
+        display: block;
+    }
+}
+
+.show-photos {
+    img {
+        padding-right: 15px;
+        padding-bottom: 15px;
+        height: 150px;
+        width: 200px;
+        object-fit: cover;
+    }
+}
+
+//House Create
+.create-form {
+    label:not(.not-strong),
+    h6{
+        font-weight: 600;
+    } 
+}

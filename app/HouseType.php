@@ -12,7 +12,7 @@ class HouseType extends Model
         'name'
     ];
 
-    public function housetype() {
-        return $this->belongsTo('App\HouseType');
+    public function house() {
+        return $this->belongsTo('App\House');
     }
 }
