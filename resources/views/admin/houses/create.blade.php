@@ -1,8 +1,8 @@
 @extends('layouts.app')
-
+@dump($houseTypes)
 @section('content')
 <div class="container create-form">
-    {{-- @if ($errors->any())
+    @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
@@ -10,7 +10,7 @@
             @endforeach
         </ul>
     </div>
-    @endif --}}
+    @endif
     <form action="{{ route('admin.houses.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('POST')
@@ -37,16 +37,17 @@
 
         {{-- Tipologia --}}
         <div class="form-group">
-            <label for="house_types">Tipo di struttura </label>
-            <select class="form-control @error('house_types') is-invalid @enderror" name="house_types" id="house_types">
+            <label for="house_type_id">Tipo di struttura </label>
+            <select class="form-control @error('house_type_id') is-invalid @enderror" name="house_type_id" id="house_type_id">
                 <option value="">-- Seleziona il tipo di struttura--</option>
                 @foreach ($houseTypes as $type)
+                
                 <option value="{{ $type->id }}"
-                    {{ ($type->id == old('house_types')) ? 'selected' : '' }}
+                    {{ ($type->id == old('house_type_id')) ? 'selected' : '' }}
                     >{{ $type->name }}</option>
                     @endforeach
                 </select>
-                @error('house_types')
+                @error('house_type_id')
                 <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>

@@ -8,6 +8,7 @@ class House extends Model
 {
     protected $fillable = [
         'user_id',
+        'house_type_id',
         'title',
         'rooms',
         'beds',
@@ -30,6 +31,9 @@ class House extends Model
     public function user() {
         return $this->belongsTo('App\User');
     }
+    public function housetype() {
+        return $this->belongsTo('App\HouseType');
+    }
     
     //one to many->side one
     public function photos() {
@@ -40,11 +44,6 @@ class House extends Model
     }
     public function views() {
         return $this->hasMany('App\View');
-    }
-
-    //one to one
-    public function houseType() {
-        return $this->hasOne('App\HouseType');
     }
 
     //many to many

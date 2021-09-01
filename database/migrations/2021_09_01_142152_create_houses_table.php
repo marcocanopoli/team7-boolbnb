@@ -21,7 +21,11 @@ class CreateHousesTable extends Migration
                     ->references('id')
                     ->on('users')
                     ->onDelete('CASCADE');
-
+            $table->unsignedBigInteger('house_type_id')->nullable();
+            $table->foreign('house_type_id')
+                    ->references('id')
+                    ->on('house_types')
+                    ->onDelete('SET NULL');
             $table->string('title', 100);
             $table->unsignedTinyInteger('rooms')->default(1);
             $table->unsignedTinyInteger('beds')->default(1);

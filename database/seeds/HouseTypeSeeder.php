@@ -14,23 +14,19 @@ class HouseTypeSeeder extends Seeder
     {
         $houseType = [
             [
-                'house_id' => 1,
                 'name' => 'appartamento'
             ],
             [
-                'house_id' => 3,
                 'name' => 'villa'
             ],
             [
-                'house_id' => 2,
+
                 'name' => 'stanza singola'
             ],
             [
-                'house_id' => 4,
                 'name' => 'studio'
             ],
             [
-                'house_id' => 5,
                 'name' => 'cottage'
             ]
 

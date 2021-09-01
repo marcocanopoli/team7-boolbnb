@@ -3,6 +3,7 @@
     $houses = [
         [   
             'user_id' => 1,
+            'house_type_id' => 1,
             'title' => 'Stanza privata in unità in affitto - Host: Maria Grazia',
             'rooms' => 1,
             'beds' => 1,
@@ -19,6 +20,7 @@
             'guests' => 5        ],
         [   
             'user_id' => 2,
+            'house_type_id' => 3,
             'title' => 'SINGLE BEDROOM IN THE CITY CENTER',
             'rooms' => 1,
             'beds' => 1,
@@ -43,6 +45,7 @@
         ],
         [   
             'user_id' => 3,
+            'house_type_id' => 4,
             'title' => 'Ampia stanza con ingresso indipendente in centro',
             'rooms' => 1,
             'beds' => 2,
@@ -67,6 +70,7 @@
         ],    
         [   
             'user_id' => 4,
+            'house_type_id' => 2,
             'title' => 'Ciuri ri Puisia Intero appartamento',
             'rooms' => 2,
             'beds' => 3,
@@ -95,6 +99,7 @@
         ],
         [
             'user_id' => 5,
+            'house_type_id' => 5,
             'title' => 'B&B studio apartment 3 Attico Galliera',
             'rooms' => 2,
             'beds' => 3,

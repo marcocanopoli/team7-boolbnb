@@ -1,8 +1,8 @@
 @extends('layouts.app')
-
+{{-- @dump($house->services) --}}
 @section('content')
 <div class="container create-form">
-    {{-- @if ($errors->any())
+    @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
@@ -10,7 +10,8 @@
             @endforeach
         </ul>
     </div>
-    @endif --}}
+    @endif
+    
     <form action="{{ route('admin.houses.update', $house->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
@@ -37,16 +38,16 @@
 
         {{-- Tipologia --}}
         <div class="form-group">
-            <label for="house_types">Tipo di struttura </label>
-            <select class="form-control @error('house_types') is-invalid @enderror" name="house_types" id="house_types">
+            <label for="house_type_id">Tipo di struttura </label>
+            <select class="form-control @error('house_type_id') is-invalid @enderror" name="house_type_id" id="house_type_id">
                 <option value="">-- Seleziona il tipo di struttura--</option>
                 @foreach ($houseTypes as $type)
                 <option value="{{ $type->id }}"
-                    {{ ($type->id == old('house_types')) ? 'selected' : '' }}
+                    {{ ($type->id == old('house_type_id', $house->house_type_id )) ? 'selected' : '' }}
                     >{{ $type->name }}</option>
                     @endforeach
                 </select>
-                @error('house_types')
+                @error('house_type_id')
                 <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>
@@ -148,6 +149,9 @@
             @foreach ($services as $service)
             <div class="form-check ">
                 <input class="form-check-input" type="checkbox" id="service-{{ $service->id }}" value="{{ $service->id }}" name="services[]"
+                @if (count($house->services->where('id', $service->id)))
+                    checked
+                @endif
                 >
                 <label class="form-check-label text-capitalize not-strong" for="service-{{ $service->id }}">{{ $service->name }}</label>
             </div>     
@@ -160,9 +164,27 @@
         </div>
         {{-- /Servizi --}}
         
+        {{-- photo gallery --}}
+        <label class="form-label">Foto della struttura: </label>
+        <div class="d-flex flex-wrap mb-5">
+            @foreach ($house->photos as $img)
+            <div class="edit-photos">
+                <img src="{{ asset('storage/' . $img->path)}}" alt="House-img-{{ $img->id }}" class="mb-2 me-3 d-block">
+                @if (count($house->photos) > 1 )
+                <div class="form-check form-check-inline d-flex"> 
+                    <input class="form-check-input me-2" type="checkbox" id="delete-img-{{ $img->id }}" name="delete-imgs[]" value="{{ $img->id }}">
+                    <label class="form-check-label" for="delete-img-{{ $img->id }}">Delete</label>
+                </div>
+                @endif
+            </div>
+            @endforeach
+        </div>
+        {{-- /photo gallery --}}
+
+
         {{-- Foto --}}
-        <div class="form-group input-images mb-4">
-            <label for="photos">Foto della struttura (max 15)</label>
+        <div class="form-group input-images mb-5">
+            <label for="photos">Carica foto (max 15)</label>
             <input type="file" name="photos[]" class="form-control-file @error('photos') is-invalid @enderror" id="photos"  multiple>
 
             @foreach ($errors->get('photos.*') as $index => $error)
@@ -202,7 +224,7 @@
         </div>
         {{-- /Prezzo --}}
 
-        <button type="submit" class="btn btn-primary">Crea</button>
+        <button type="submit" class="bnb-btn bnb-btn-brand ">Aggiorna</button>
         <a class="btn btn-warning ml-2" href="{{ route('admin.houses.index') }}">Annulla</a>
 
     </form>

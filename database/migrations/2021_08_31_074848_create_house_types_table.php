@@ -15,11 +15,6 @@ class CreateHouseTypesTable extends Migration
     {
         Schema::create('house_types', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('house_id')->nullable();
-            $table->foreign('house_id')
-                ->references('id')
-                ->on('houses')
-                ->onDelete('CASCADE');
             $table->string('name', 30)->unique();
             $table->timestamps();
         });
