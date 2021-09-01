@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class HouseType extends Model
 
 {
-    protected $fillable = [
-        'name'
-    ];
+    protected $fillable = ['name'];
 
-    public function house() {
+    protected $with = ['houses'];
+
+    public function houses() {
         return $this->hasMany('App\House');
     }
 }

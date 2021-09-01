@@ -1,8 +1,9 @@
 @extends('layouts.app')
-{{-- @dump($house->services) --}}
 @section('content')
+
 <div class="container create-form">
-    @if ($errors->any())
+    
+    {{-- @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
@@ -10,7 +11,11 @@
             @endforeach
         </ul>
     </div>
-    @endif
+    @endif --}}
+    
+    <div class="d-flex my-4">
+        <h1>Modifica: <span class="text-info">{{$house->title}}</span></h1>
+    </div>
     
     <form action="{{ route('admin.houses.update', $house->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -153,7 +158,7 @@
                     checked
                 @endif
                 >
-                <label class="form-check-label text-capitalize not-strong" for="service-{{ $service->id }}">{{ $service->name }}</label>
+                <label class="form-check-label not-strong" for="service-{{ $service->id }}">{{ $service->name }}</label>
             </div>     
             @endforeach 
             @error('services')
@@ -167,13 +172,13 @@
         {{-- photo gallery --}}
         <label class="form-label">Foto della struttura: </label>
         <div class="d-flex flex-wrap mb-5">
-            @foreach ($house->photos as $img)
+            @foreach ($house->photos as $photo)
             <div class="edit-photos">
-                <img src="{{ asset('storage/' . $img->path)}}" alt="House-img-{{ $img->id }}" class="mb-2 me-3 d-block">
+                <img src="{{ asset('storage/' . $photo->path)}}" alt="House-img-{{ $photo->id }}" class="mb-2 me-3 d-block">
                 @if (count($house->photos) > 1 )
                 <div class="form-check form-check-inline d-flex"> 
-                    <input class="form-check-input me-2" type="checkbox" id="delete-img-{{ $img->id }}" name="delete-imgs[]" value="{{ $img->id }}">
-                    <label class="form-check-label" for="delete-img-{{ $img->id }}">Delete</label>
+                    <input class="form-check-input me-2" type="checkbox" id="delete-img-{{ $photo->id }}" name="delete-imgs[]" value="{{ $photo->id }}">
+                    <label class="form-check-label" for="delete-img-{{ $photo->id }}">Delete</label>
                 </div>
                 @endif
             </div>
@@ -185,14 +190,12 @@
         {{-- Foto --}}
         <div class="form-group input-images mb-5">
             <label for="photos">Carica foto (max 15)</label>
-            <input type="file" name="photos[]" class="form-control-file @error('photos') is-invalid @enderror" id="photos"  multiple>
-
+            <input type="file" name="photos[]" class="form-control-file @error('photos') is-invalid @enderror" id="photos" multiple>
             @foreach ($errors->get('photos.*') as $index => $error)
                 @foreach($error as $message)
                     <small class="text-danger">{{ $message }}</small><br>
                 @endforeach
             @endforeach
-
         </div>
         {{-- /Foto --}}
 
@@ -224,8 +227,8 @@
         </div>
         {{-- /Prezzo --}}
 
-        <button type="submit" class="bnb-btn bnb-btn-brand ">Aggiorna</button>
-        <a class="btn btn-warning ml-2" href="{{ route('admin.houses.index') }}">Annulla</a>
+        <button type="submit" class="bnb-btn bnb-btn-brand ">AGGIORNA</button>
+        <a class="btn btn-warning ml-2" href="{{ route('admin.houses.index') }}">ELENCO STRUTTURE</a>
 
     </form>
 </div>

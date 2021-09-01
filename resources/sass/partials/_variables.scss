@@ -1,5 +1,5 @@
-
 // Colors
+
 //grays
 $white: #FFF;
 $black: #181818;
@@ -16,5 +16,5 @@ $primary-2 :#ae0186;
 $brand-start: #e01b51;
 $brand-end: #dd1a5a;
 
-$brand-h:  linear-gradient(90deg, #e01b51, #dd1a5a);
-$primary-h:  linear-gradient(90deg, #70019c, #ae0186);
+$brand-h:  linear-gradient(90deg, #{$brand-start}, #{$brand-end});
+$primary-h:  linear-gradient(90deg, #{$primary-1}, #{$primary-2});

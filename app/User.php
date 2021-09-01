@@ -26,10 +26,13 @@ class User extends Authenticatable
         'profile_pic'
     ];
 
-    protected $with = [ 
-        'houses' 
-    ];
+    protected $with = ['houses'];
 
+    //one to many
+    public function houses() {
+        return $this->hasMany('App\House');
+    }
+    
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -47,9 +50,5 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    //one to many
-    public function houses() {
-        return $this->hasMany('App\House');
-    }
 }
+
