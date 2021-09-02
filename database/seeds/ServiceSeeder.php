@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 use App\Service;
 
 class ServiceSeeder extends Seeder
@@ -12,38 +13,12 @@ class ServiceSeeder extends Seeder
      */
     public function run()
     {
-        $services = [
-            'Cucina',
-            'Aria condizionata',
-            'Asciugatrice',
-            'Colazione inclusa',
-            'Ferro da stiro',
-            'Wi-Fi',
-            'Culla',
-            'Rilevatore di fumo',
-            'Kit cortesia',
-            'Riscaldamento',
-            'Lavatrice',
-            'Camino',
-            'TV',
-            'Asciugacapelli',
-            'Vista mare',
-            'Vista montagna',
-            'Vista lago',
-            'Animali ammessi',
-            'Cancellazione gratuita',
-            'Posto auto'
-        ];
-
-        // $services = [
-        //     [
-        //         'icon' => 
-        //     ],
-        // ]
-
+        $services = config('bnb_services');
+      
         foreach ($services as $service) {
             $newService = new Service();
-            $newService->name = $service;
+            $newService->name = $service['name'];
+            $newService->icon = $service['icon'];
             $newService->save();
         }
     }
