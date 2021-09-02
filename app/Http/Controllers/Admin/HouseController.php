@@ -152,12 +152,18 @@ class HouseController extends Controller
             }
         }
 
-        //delete photos
+       //delete photos
         if (array_key_exists('delete-imgs', $data)) {
-            foreach ($data['delete-imgs'] as $photoCheckbox) {
-                $photo = Photo::find($photoCheckbox);
-                Storage::delete($photo->path);
-                $photo->delete();
+
+            if (count($house->photos) == (count($data['delete-imgs']))) {
+                return back()->withErrors("Attenzione! Non è possibile eliminare tutte le foto!");
+            }
+            else {
+                foreach ($data['delete-imgs'] as $photoCheckbox) {
+                    $photo = Photo::find($photoCheckbox);
+                    Storage::delete($photo->path);
+                    $photo->delete();
+                }
             }
 
             //delete empty folder

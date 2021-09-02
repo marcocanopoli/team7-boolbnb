@@ -3,16 +3,6 @@
 
 <div class="container create-form">
     
-    {{-- @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif --}}
-    
     <div class="d-flex my-4">
         <h1>Modifica: <span class="text-info">{{$house->title}}</span></h1>
     </div>
@@ -227,8 +217,8 @@
         </div>
         {{-- /Prezzo --}}
         <div class="control">
-            <button type="submit" class="bnb-btn bnb-btn-brand ">AGGIORNA</button>
-            <a class="btn btn-warning ml-2" href="{{ route('admin.houses.index') }}">ELENCO STRUTTURE</a>
+            <button type="submit" class="bnb-btn bnb-btn-brand">AGGIORNA</button>
+            <a class="bnb-a bnb-btn-r5 bnb-btn-white ml-2" href="{{ route('admin.houses.index') }}">ELENCO STRUTTURE</a>
         </div>
 
     </form>
