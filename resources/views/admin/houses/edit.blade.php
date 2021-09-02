@@ -226,9 +226,10 @@
             @enderror
         </div>
         {{-- /Prezzo --}}
-
-        <button type="submit" class="bnb-btn bnb-btn-brand ">AGGIORNA</button>
-        <a class="btn btn-warning ml-2" href="{{ route('admin.houses.index') }}">ELENCO STRUTTURE</a>
+        <div class="control">
+            <button type="submit" class="bnb-btn bnb-btn-brand ">AGGIORNA</button>
+            <a class="btn btn-warning ml-2" href="{{ route('admin.houses.index') }}">ELENCO STRUTTURE</a>
+        </div>
 
     </form>
 </div>

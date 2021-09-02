@@ -35,6 +35,12 @@ class ServiceSeeder extends Seeder
             'Posto auto'
         ];
 
+        // $services = [
+        //     [
+        //         'icon' => 
+        //     ],
+        // ]
+
         foreach ($services as $service) {
             $newService = new Service();
             $newService->name = $service;

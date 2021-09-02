@@ -150,7 +150,7 @@
 
         {{-- Servizi --}}
         <h6>Servizi disponibili</h6>
-        <div class="form-group d-flex flex-column flex-wrap" style="height: 250px;">
+        <div class="create-services form-group d-flex flex-column flex-wrap">
             @foreach ($services as $service)
             <div class="form-check ">
                 <input class="form-check-input" type="checkbox" id="service-{{ $service->id }}" value="{{ $service->id }}" name="services[]" {{ in_array($service->id, old('services', [])) ? 'checked' : '' }}
@@ -176,6 +176,11 @@
                     <small class="text-danger">{{ $message }}</small><br>
                 @endforeach
             @endforeach
+            @error('photos')
+            <div>
+                <small class="text-danger">{{ $message }}</small> 
+            </div>
+            @enderror
 
         </div>
         {{-- /Foto --}}

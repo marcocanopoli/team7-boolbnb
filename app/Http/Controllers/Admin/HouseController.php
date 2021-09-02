@@ -79,8 +79,8 @@ class HouseController extends Controller
             $data['visible'] = 0;
         }
 
-        $request->validate($this->validation);
-        $request->validate($this->createValidationPhoto);
+        $allCreateValidation = array_merge($this->createValidationPhoto, $this->validation);
+        $request->validate($allCreateValidation);
 
         $data['user_id'] = Auth::id();
         $data['longitude'] = 11.1111;
@@ -110,7 +110,8 @@ class HouseController extends Controller
      */
     public function show(House $house)
     {
-        return view('admin.houses.show', compact('house'));
+        $houseTypes = HouseType::all();
+        return view('admin.houses.show', compact('house', 'houseTypes'));
     }
 
     /**
@@ -136,8 +137,9 @@ class HouseController extends Controller
     public function update(Request $request, House $house)
     {
         $data = $request->all();
-        $request->validate($this->validation);
-        $request->validate($this->editValidationPhoto);
+
+        $allEditValidation = array_merge($this->editValidationPhoto, $this->validation);
+        $request->validate($allEditValidation);
 
         //add photo ok
         if(array_key_exists('photos', $data)) {
