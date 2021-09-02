@@ -141,6 +141,11 @@ button {
   border-top: 1px solid rgba(113, 113, 113, 0.3);
 }
 
+.house-container img {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
 .house-container .details-container p {
   color: #717171;
   font-size: 14px;
@@ -176,6 +181,15 @@ button {
   margin-bottom: 15px;
   margin-right: 15px;
   height: 125px;
+}
+
+.service-svg {
+  display: inline-block;
+  width: 20px;
+}
+
+.service-svg img {
+  height: 16px;
 }
 
 .edit-photos {

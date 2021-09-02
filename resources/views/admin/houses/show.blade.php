@@ -49,7 +49,12 @@
                 <strong>Servizi inclusi:</strong>
                 <ul class="mt-3 list-unstyled d-flex flex-column flex-wrap">
                 @foreach ($house->services as $service)
-                    <li>{{$service['name']}}</li>
+                    <li>
+                        <div class="service-svg mr-2">
+                            <img src="{{asset('images/services_icons/'.$service->icon)}}" alt="{{$service->icon}}">
+                        </div>
+                        {{$service['name']}}
+                    </li>
                 @endforeach
                 </ul>
             </div>
