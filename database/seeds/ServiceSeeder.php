@@ -14,7 +14,7 @@ class ServiceSeeder extends Seeder
     public function run()
     {
         $services = config('bnb_services');
-        
+      
         foreach ($services as $service) {
             $newService = new Service();
             $newService->name = $service['name'];

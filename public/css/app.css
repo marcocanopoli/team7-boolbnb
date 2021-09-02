@@ -11,6 +11,27 @@ html {
   letter-spacing: 0.5px;
 }
 
+a.bnb-a {
+  color: #181818;
+}
+
+a.bnb-a:hover {
+  color: #181818;
+  text-decoration: none;
+}
+
+.control button,
+.control a {
+  color: #181818;
+  text-decoration: none;
+}
+
+.control button:hover,
+.control a:hover {
+  color: #ff385c;
+  text-decoration: none;
+}
+
 h1,
 h2 {
   font-weight: 300;
@@ -68,16 +89,32 @@ button {
   font-weight: 500;
   letter-spacing: 1.25px;
   border-radius: 30px;
-}
-
-.bnb-btn-brand {
-  color: #FFF;
-  background: #ff385c;
   transition: all 0.15s ease-in-out;
 }
 
+.bnb-btn-r5 {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1.25px;
+  border-radius: 5px;
+  transition: all 0.15s ease-in-out;
+}
+
+.bnb-btn-brand {
+  border: 1px solid transparent;
+  color: #FFF;
+  background: #ff385c;
+}
+
 .bnb-btn-brand:hover {
-  background: #dd1a5a;
+  border: 1px solid #ff385c;
+  background: #FFF;
+}
+
+.bnb-btn-brand-2 {
+  color: #ff385c;
+  border: 1px solid #ff385c;
 }
 
 .bnb-btn-dark {
@@ -91,25 +128,40 @@ button {
 }
 
 .bnb-btn-white {
-  border-color: #F7F7F7;
-  background-color: #FFF;
-  color: #FFF;
+  border: 1px solid #484848;
+  color: #484848;
 }
 
 .bnb-btn-white:hover {
-  border-color: #F7F7F7;
+  background-color: rgba(113, 113, 113, 0.1);
+}
+
+.house-container {
+  padding: 20px 0;
+  border-top: 1px solid rgba(113, 113, 113, 0.3);
+}
+
+.house-container .details-container p {
+  color: #717171;
+  font-size: 14px;
+}
+
+.show-details ul,
+.create-services {
+  height: 250px;
 }
 
 .edit-photos img,
-.show-photos img {
+.show-photos img,
+.img-container img {
   height: 150px;
   -o-object-fit: cover;
      object-fit: cover;
 }
 
 .show-info,
-.show-photos {
-  width: 50%;
+.show-details {
+  width: 45%;
 }
 
 .show-info strong {
@@ -120,14 +172,9 @@ button {
   font-weight: 400;
 }
 
-.show-photos {
-  padding-left: 30px;
-}
-
 .show-photos img {
   margin-bottom: 15px;
   margin-right: 15px;
-  width: calc(33.33% - 15px);
   height: 125px;
 }
 
