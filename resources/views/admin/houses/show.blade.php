@@ -38,7 +38,7 @@
             <p>{{$house->description}}</p>
             <strong>Prezzo: <span>{{$house->price}} &euro;</span></strong>
             <strong class="color-brand mt-2">
-                @if ($house->visible) 
+                @if ($house->visible == 1) 
                     Disponibile
                 @else
                     Attualmente non disponibile
