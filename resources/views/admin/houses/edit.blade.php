@@ -48,10 +48,10 @@
             </div>
         {{-- /Tipologia --}}
 
-        <div class="d-flex">
+        <div class="row d-flex">
 
             {{-- Camere --}}
-            <div class="form-group mr-2">
+            <div class="form-group col-12 col-md-6">
                 <label for="rooms">Numero camere</label>
                 <input type="number" name="rooms" value="{{ old('rooms', $house->rooms) }}" class="form-control @error('rooms') is-invalid @enderror" id="rooms" placeholder="Camere disponibili">
                 @error('rooms')
@@ -61,7 +61,7 @@
             {{-- /Camere --}}
 
             {{-- Ospiti --}}
-            <div class="form-group mx-2">
+            <div class="form-group col-12 col-md-6">
                 <label for="guests">Numero ospiti</label>
                 <input type="number" name="guests" value="{{ old('guests', $house->guests) }}" class="form-control @error('guests') is-invalid @enderror" id="guests" placeholder="Numero ospiti">
                 @error('guests')
@@ -71,7 +71,7 @@
             {{-- /Ospiti --}}
 
             {{-- Letti --}}
-            <div class="form-group mx-2">
+            <div class="form-group col-12 col-md-6">
                 <label for="beds">Numero letti</label>
                 <input type="number" name="beds" value="{{ old('beds', $house->beds) }}" class="form-control @error('beds') is-invalid @enderror" id="beds" placeholder="Letti disponibili">
                 @error('beds')
@@ -81,7 +81,7 @@
             {{-- /Letti --}}
             
             {{-- Bagni --}}
-            <div class="form-group mx-2">
+            <div class="form-group col-12 col-md-6">
                 <label for="bathrooms">Numero bagni</label>
                 <input type="number" name="bathrooms" value="{{ old('bathrooms', $house->bathrooms) }}" class="form-control @error('bathrooms') is-invalid @enderror" id="bathrooms" placeholder="Bagni disponibili">
                 @error('bathrooms')
@@ -91,7 +91,7 @@
             {{-- /Bagni --}}
 
             {{-- MQ --}}
-            <div class="form-group mx-2">
+            <div class="form-group col-12 col-md-6">
                 <label for="square_meters">Mq</label>
                 <input type="number" name="square_meters" value="{{ old('square_meters', $house->square_meters) }}" class="form-control @error('square_meters') is-invalid @enderror" id="square_meters"
                 placeholder="Inserisci i Mq">
@@ -102,10 +102,10 @@
             {{-- /MQ --}}            
         </div>
         
-        <div class="form-group d-flex">
+        <div class="form-group row d-flex">
 
             {{-- Indirizzo --}}
-            <div class="mr-2">
+            <div class="col-12 col-md-4 mb-2">
                 <label for="address">Indirizzo</label>
                 <input type="text" name="address" value="{{ old('address', $house->address) }}" class="form-control @error('address') is-invalid @enderror" id="address"
                 placeholder="Indirizzo della struttura">
@@ -116,7 +116,7 @@
             {{-- /Indirizzo --}}
 
             {{-- CAP --}}
-            <div class="mx-2">
+            <div class="col-12 col-md-4 mb-2">
                 <label for="zip_code">CAP</label>
                 <input type="text" name="zip_code" value="{{ old('zip_code', $house->zip_code) }}" class="form-control @error('zip_code') is-invalid @enderror" id="zip_code"
                 placeholder="Inserisci il CAP">
@@ -127,7 +127,7 @@
             {{-- /CAP --}}
 
             {{-- Citta' --}}
-            <div class="mx-2">
+            <div class="col-12 col-md-4 mb-2">
                 <label for="city">Citta'</label>
                 <input type="text" name="city" value="{{ old('city', $house->city) }}" class="form-control @error('city') is-invalid @enderror" id="city"
                 placeholder="Inserisci la città">
@@ -140,7 +140,7 @@
 
         {{-- Servizi --}}
         <h6>Servizi disponibili</h6>
-        <div class="form-group d-flex flex-column flex-wrap" style="height: 250px;">
+        <div class="edit-services form-group">
             @foreach ($services as $service)
             <div class="form-check ">
                 <input class="form-check-input" type="checkbox" id="service-{{ $service->id }}" value="{{ $service->id }}" name="services[]"
@@ -161,9 +161,9 @@
         
         {{-- photo gallery --}}
         <label class="form-label">Foto della struttura: </label>
-        <div class="d-flex flex-wrap mb-5">
+        <div class="row mb-5">
             @foreach ($house->photos as $photo)
-            <div class="edit-photos">
+            <div class="edit-photos col-12 col-sm-5 col-md-3">
                 <img src="{{ asset('storage/' . $photo->path)}}" alt="House-img-{{ $photo->id }}" class="mb-2 me-3 d-block">
                 @if (count($house->photos) > 1 )
                 <div class="form-check form-check-inline d-flex"> 
@@ -178,7 +178,7 @@
 
 
         {{-- Foto --}}
-        <div class="form-group input-images mb-5">
+        <div class="form-group mb-4">
             <label for="photos">Carica foto (max 15)</label>
             <input type="file" name="photos[]" class="form-control-file @error('photos') is-invalid @enderror" id="photos" multiple>
             @foreach ($errors->get('photos.*') as $index => $error)
@@ -192,11 +192,15 @@
         {{-- Disponibilita' --}}
         <div class="form-group">
             <h6>Disponibilita'</h6>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input @error('visible') is-invalid @enderror" type="radio" value="1" checked name="visible">
-                <label class="form-check-label mr-2 not-strong" for="visible">Disponibile</label>
-                <input class="form-check-input ml-2 @error('visible') is-invalid @enderror" type="radio" value="2" @if(old('visible', 0) == 2) checked @endif name="visible">
-                <label class="form-check-label not-strong" for="visible">Attualmente non disponibile</label>
+            <div class="edit-visible pl-3">
+                <div class="mr-5">
+                    <input class="form-check-input @error('visible') is-invalid @enderror" type="radio" value="1" checked name="visible">
+                    <label class="form-check-label mr-2 not-strong" for="visible">Disponibile</label>
+                </div>
+                <div>
+                    <input class="form-check-input @error('visible') is-invalid @enderror" type="radio" value="2" @if(old('visible', 0) == 2) checked @endif name="visible">
+                    <label class="form-check-label not-strong" for="visible">Attualmente non disponibile</label>
+                </div>
             </div> 
             @error('visible')
             <div>
@@ -207,20 +211,26 @@
         {{-- /Disponibilita' --}}
 
         {{-- Prezzo --}}
-        <div class="form-group w-25 mb-5">
-            <label for="price">Prezzo per notte</label>
-            <input type="number" name="price" value="{{ old('price', $house->price) }}" step="0.01" min="1" class="form-control @error('price') is-invalid @enderror" id="price"
-            placeholder="Inserisci il prezzo per notte">
-            @error('price')
-            <small class="text-danger">{{ $message }}</small>
-            @enderror
+        <div class="row">
+            <div class="form-group mb-5 col-md-4">
+                <label for="price">Prezzo per notte</label>
+                <input type="number" name="price" value="{{ old('price', $house->price) }}" step="0.01" min="1" class="form-control @error('price') is-invalid @enderror" id="price"
+                placeholder="Inserisci il prezzo per notte">
+                @error('price')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+            </div>
         </div>
         {{-- /Prezzo --}}
-        <div class="control">
-            <button type="submit" class="bnb-btn bnb-btn-brand">AGGIORNA</button>
-            <a class="bnb-a bnb-btn-r5 bnb-btn-white ml-2" href="{{ route('admin.houses.index') }}">ELENCO STRUTTURE</a>
-        </div>
 
+        <div class="row btn-row">
+            <div class="col-12 col-sm-6 col-md-2 my-2">
+                <a class="bnb-a bnb-btn bnb-btn-white bnb-btn-resp" href="{{ route('admin.houses.index') }}">ANNULLA</a>
+            </div>
+            <div class="col-12 col-sm-6 col-md-2 my-2">
+                <button type="submit" class="bnb-a bnb-btn bnb-btn-brand bnb-btn-resp">AGGIORNA</button>
+            </div>
+        </div> 
     </form>
 </div>
 @endsection

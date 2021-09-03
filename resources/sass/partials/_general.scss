@@ -19,15 +19,8 @@ a.bnb-a {
     }
 }
 
-.control button,
-.control a {
-    color: $black;
-    text-decoration: none;
-
-    &:hover {
-        color: $brand;
-        text-decoration: none;
-    }
+.color-brand {
+    color: $brand;
 }
 
 //Headlines
@@ -82,10 +75,6 @@ button {
     background: none;
 };
 
-.color-brand {
-    color: $brand;
-}
-
 .bnb-btn,
 .bnb-btn-r5 {
     padding: 8px 16px;
@@ -109,6 +98,8 @@ button {
     &:hover {
         border: 1px solid $brand;
         background: $white;
+        color: $brand;
+        text-decoration: none;
     }
 }
 
@@ -134,6 +125,17 @@ button {
     &:hover {
         background-color: rgba($gray-1, 0.1);
     }
+}
+
+.btn-row {
+    display: flex;
+    flex-direction: column-reverse ;
+   .bnb-btn-resp,
+   a.bnb-btn-resp {
+       display:  block;
+       width: 100%;
+       text-align: center;
+   }
 }
 
 //Index 
@@ -229,14 +231,19 @@ button {
 
 @media screen and (min-width: 576px) {
 
-    .create-services {
+    .create-services,
+    .edit-services {
         display: flex;
         flex-flow: column wrap;
         height: 250px;
     }
 
-    .create-visible {
+    .create-visible,
+    .edit-visible {
         display: flex;
     }
 
+    .btn-row {
+        flex-direction: row ;
+    }
 }

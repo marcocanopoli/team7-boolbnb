@@ -20,16 +20,8 @@ a.bnb-a:hover {
   text-decoration: none;
 }
 
-.control button,
-.control a {
-  color: #181818;
-  text-decoration: none;
-}
-
-.control button:hover,
-.control a:hover {
+.color-brand {
   color: #ff385c;
-  text-decoration: none;
 }
 
 h1,
@@ -83,10 +75,6 @@ button {
   background: none;
 }
 
-.color-brand {
-  color: #ff385c;
-}
-
 .bnb-btn,
 .bnb-btn-r5 {
   padding: 8px 16px;
@@ -113,6 +101,8 @@ button {
 .bnb-btn-brand:hover {
   border: 1px solid #ff385c;
   background: #FFF;
+  color: #ff385c;
+  text-decoration: none;
 }
 
 .bnb-btn-brand-2 {
@@ -137,6 +127,18 @@ button {
 
 .bnb-btn-white:hover {
   background-color: rgba(113, 113, 113, 0.1);
+}
+
+.btn-row {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.btn-row .bnb-btn-resp,
+.btn-row a.bnb-btn-resp {
+  display: block;
+  width: 100%;
+  text-align: center;
 }
 
 .house-container {
@@ -215,14 +217,20 @@ button {
 }
 
 @media screen and (min-width: 576px) {
-  .create-services {
+  .create-services,
+  .edit-services {
     display: flex;
     flex-flow: column wrap;
     height: 250px;
   }
 
-  .create-visible {
+  .create-visible,
+  .edit-visible {
     display: flex;
+  }
+
+  .btn-row {
+    flex-direction: row;
   }
 }
 
