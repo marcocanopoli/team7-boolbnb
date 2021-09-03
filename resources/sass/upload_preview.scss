@@ -1,0 +1,81 @@
+@import './partials/animations';
+@import './partials/variables';
+
+#photos {
+    display: none;            
+}
+
+#upload-label {
+    width: 100%;
+}
+
+#empty-preview-text {
+    font-size: 24px;
+    color: $gray-2;
+}
+
+#preview-photos {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-auto-rows: min-content;
+    gap: 25px;
+    margin-top: 50px;
+    min-height: 170px;
+    padding: 25px;
+    border: 5px dashed $brand;
+    border-radius: 30px;
+    
+    & span {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);        
+    }
+
+    .preview-box {
+        display: grid;           
+        position: relative;
+        width: 100%;
+        border-radius: 15px;
+        overflow: hidden;
+
+        &:before {
+            content: "";
+            display: block;
+            padding-bottom: 100%;
+        }
+        
+        .preview-photo {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            animation: .8s ease-in-out fade-blur-in;
+            transition: .2s ease-in-out;
+        }        
+        &:hover .preview-photo {
+            scale: 150%;
+        }
+        
+        // .preview-delete {
+        //     display: flex;
+        //     justify-content: center;
+        //     align-items: center;
+        //     width: 100%;
+        //     height: 100%;
+
+        //     &:before {
+        //         position: absolute;
+        //         content: url('../images/times-circle-regular-colored.svg');
+        //         display: block;
+        //         width: 50px;
+        //         height: 50px;
+        //         filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
+        //         animation: .8s ease-in-out fade-in;
+        //     }
+        // }
+    }
+}

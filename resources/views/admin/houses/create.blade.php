@@ -1,4 +1,9 @@
 @extends('layouts.app')
+
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/upload_preview.css') }}">
+@endsection
+
 @section('content')
 <div class="container create-form">    
 
@@ -168,9 +173,12 @@
         
         {{-- Foto --}}
         <div class="form-group mb-4">
-            <label for="photos">Foto della struttura (max 15)</label>
-            <input type="file" name="photos[]" id="photos" 
-                    class="form-control-file @error('photos') is-invalid @enderror" multiple>
+            <label id="upload-label" for="photos">Foto della struttura (max 15)
+                <input type="file" name="photos[]" id="photos" 
+                        class="form-control-file @error('photos') is-invalid @enderror" multiple>
+                <div id="preview-photos"></div>
+            </label>
+            <button class="bnb-btn bnb-btn-brand mt-4" id="reset-upload">RESET</button>
 
             @foreach ($errors->get('photos.*') as $index => $error)
                 @foreach($error as $message)
@@ -224,4 +232,8 @@
         <a class="bnb-a bnb-btn-r5 bnb-btn-white ml-2" href="{{ route('admin.houses.index') }}">ELENCO STRUTTURE</a>
     </form>
 </div>
+@endsection
+
+@section('script')
+    <script src="{{ asset('js/upload_preview.js') }}"></script>
 @endsection
