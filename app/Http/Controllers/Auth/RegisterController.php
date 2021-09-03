@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 class RegisterController extends Controller
 {
@@ -49,10 +50,16 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        // dd($data['profile_pic']);
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['nullable','string', 'max:30'],
+            'last_name' => ['nullable','string', 'max:30'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'birthdate' => ['nullable','date', 'before:today'],
+            'phone' => ['nullable', 'numeric'],
+            'about' => ['nullable','max:3000'],
+            'profile_pic' => ['nullable','image','max:2048']
         ]);
     }
 
@@ -63,11 +70,18 @@ class RegisterController extends Controller
      * @return \App\User
      */
     protected function create(array $data)
-    {
+    {   
         return User::create([
-            'name' => $data['name'],
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'birthdate' => $data['birthdate'],
+            'phone' => $data['phone'],
+            'about' => $data['about'],
+            // $profilePic = Storage::put('users/profile_pics/', $data['profile_pic']),
+            // 'profile_pic' => $profilePic
+            'profile_pic' => $data['profile_pic']
         ]);
     }
 }
