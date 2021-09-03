@@ -15,7 +15,7 @@
 
     <div class="d-flex">
         <h1>{{$house->title}}</h1>
-        <span class="bnb-btn bnb-btn-brand-2 align-self-center mx-4">{{ $houseTypes[$house->house_type_id]['name'] }}</span>
+        <span class="bnb-btn bnb-btn-brand-2 align-self-center mx-4">{{ $house->houseType['name'] }}</span>
     </div>
 
     <div class="show-photos d-flex flex-wrap my-4">
@@ -60,10 +60,15 @@
             </ul>
         </div>
     </div>
-    <div class="control my-4">
-        <a class="bnb-btn bnb-btn-white my-4" href="{{ route('admin.houses.index') }}">ELENCO STRUTTURE</a>
-        <a class="bnb-btn bnb-btn-brand ml-2" href="{{route('admin.houses.edit', $house)}}">MODIFICA</a>
-    </div>
+
+    <div class="row btn-row my-4">
+        <div class="col-12 col-sm-6 col-md-4 my-2">
+            <a class="bnb-a bnb-btn bnb-btn-white bnb-btn-resp" href="{{ route('admin.houses.index') }}">ELENCO STRUTTURE</a>
+        </div>
+        <div class="col-12 col-sm-6 col-md-2 my-2">
+            <a class="bnb-btn bnb-btn-brand bnb-btn-resp" href="{{route('admin.houses.edit', $house)}}">MODIFICA</a>
+        </div>
+    </div> 
 </div>
 
 @endsection

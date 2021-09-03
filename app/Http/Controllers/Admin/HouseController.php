@@ -48,8 +48,7 @@ class HouseController extends Controller
 
     public function index() {
         $houses = House::where('user_id', Auth::id())->get();
-        $houseTypes = HouseType::all();
-        return view('admin.houses.index', compact('houses', 'houseTypes'));
+        return view('admin.houses.index', compact('houses'));
     }
 
     /**

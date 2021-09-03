@@ -228,8 +228,14 @@
         </div>
         {{-- /Prezzo --}}
 
-        <button type="submit" class="bnb-btn bnb-btn-brand">CREA</button>
-        <a class="bnb-a bnb-btn-r5 bnb-btn-white ml-2" href="{{ route('admin.houses.index') }}">ELENCO STRUTTURE</a>
+        <div class="row btn-row">
+            <div class="col-12 col-sm-6 col-md-2 my-2">
+                <a class="bnb-a bnb-btn bnb-btn-white bnb-btn-resp" href="{{ route('admin.houses.index') }}">ANNULLA</a>
+            </div>
+            <div class="col-12 col-sm-6 col-md-2 my-2">
+                <button type="submit" class="bnb-a bnb-btn bnb-btn-brand bnb-btn-resp">CREA</button>
+            </div>
+        </div> 
     </form>
 </div>
 @endsection
