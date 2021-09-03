@@ -1,4 +1,9 @@
 @extends('layouts.app')
+
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/upload_preview.css') }}">
+@endsection
+
 @section('content')
 
 <div class="container create-form">
@@ -176,16 +181,29 @@
         </div>
         {{-- /photo gallery --}}
 
-
         {{-- Foto --}}
         <div class="form-group mb-4">
-            <label for="photos">Carica foto (max 15)</label>
-            <input type="file" name="photos[]" class="form-control-file @error('photos') is-invalid @enderror" id="photos" multiple>
+            <label id="upload-label" for="photos">Carica foto (max 15)
+                <input type="file" name="photos[]" id="photos" 
+                        class="form-control-file @error('photos') is-invalid @enderror" multiple>
+                <div id="preview-photos"></div>
+            </label>
+
+            <div class="text-right">
+                <button class="bnb-btn bnb-btn-brand mt-4" id="reset-upload">RESET</button>
+            </div>
+
             @foreach ($errors->get('photos.*') as $index => $error)
                 @foreach($error as $message)
                     <small class="text-danger">{{ $message }}</small><br>
                 @endforeach
             @endforeach
+
+            @error('photos')
+            <div>
+                <small class="text-danger">{{ $message }}</small> 
+            </div>
+            @enderror
         </div>
         {{-- /Foto --}}
 
@@ -235,4 +253,8 @@
         </div> 
     </form>
 </div>
+@endsection
+
+@section('script')
+    <script src="{{ asset('js/upload_preview.js') }}"></script>
 @endsection
