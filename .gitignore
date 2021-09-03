@@ -10,3 +10,5 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+public/js/upload_preview.js
+public/css/upload_preview.css
