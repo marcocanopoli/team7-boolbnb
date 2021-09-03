@@ -131,6 +131,23 @@ button {
   text-align: center;
 }
 
+.bnb-btn-edit,
+.bnb-btn-delete {
+  color: rgba(113, 113, 113, 0.2);
+  transition: 0.3s;
+}
+.bnb-btn-edit:hover,
+.bnb-btn-delete:hover {
+  color: #ff385c;
+}
+
+.bnb-btn-delete label {
+  cursor: pointer;
+}
+.bnb-btn-delete input {
+  display: none;
+}
+
 .house-container {
   padding: 20px 0;
   border-top: 1px solid rgba(113, 113, 113, 0.3);

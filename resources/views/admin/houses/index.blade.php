@@ -14,69 +14,50 @@
         </div>
         <div>
             @foreach ($houses as $house)
-            <a href="{{route('admin.houses.show', $house)}}" class="bnb-a">
-                <div class="house-container row">
-                    <div class="img-container col-12 col-md-4">
-                        <img src="{{ asset('storage/' . $house->photos[0]->path) }}" alt="{{ 'Foto' . $house->photos[0]->id }}">
-                    </div>
-                    <div class="details-container col-12 col-md-8">
-                        <p>{{$house->houseType['name']}} a {{$house->city}}</p>
-                        <h4>{{$house->title}}</h4>
-                        <p>
-                            {{$house->guests}}
-                            @if ($house->guests < 2) ospite @else ospiti @endif
-                            &middot;
-                            {{$house->rooms}}
-                            @if ($house->rooms < 2) camera @else camere @endif da letto
-                            &middot;
-                            {{$house->beds}}
-                            @if ($house->beds < 2) letto @else letti @endif
-                            &middot;
-                            {{$house->bathrooms}}
-                            @if ($house->bathrooms < 2) bagno @else bagni @endif
-                        </p>
-                    </div>
+            <div class="house-container row">
+                <div class="col-12 col-md-10">
+                    <a href="{{route('admin.houses.show', $house)}}" class="bnb-a">
+                        <div class="row">
+                            <div class="img-container col-12 col-md-4">
+                                <img src="{{ asset('storage/' . $house->photos[0]->path) }}" alt="{{ 'Foto' . $house->photos[0]->id }}">
+                            </div>
+                            <div class="details-container col-12 col-md-8">
+                                <p>{{$house->houseType['name']}} a {{$house->city}}</p>
+                                <h4>{{$house->title}}</h4>
+                                <p>
+                                    {{$house->guests}}
+                                    @if ($house->guests < 2) ospite @else ospiti @endif
+                                    &middot;
+                                    {{$house->rooms}}
+                                    @if ($house->rooms < 2) camera @else camere @endif da letto
+                                    &middot;
+                                    {{$house->beds}}
+                                    @if ($house->beds < 2) letto @else letti @endif
+                                    &middot;
+                                    {{$house->bathrooms}}
+                                    @if ($house->bathrooms < 2) bagno @else bagni @endif
+                                </p>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-            </a>
-            @endforeach
-            {{-- <table class="table">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Titolo</th>
-                    <th>Citt&agrave;</th>
-                    <th>Prezzo</th>
-                    <th>Visibile</th>
-                    <th>Tipologia</th>
-                    <th colspan="3">Azioni</th>
-                </tr>
-                </thead>
-                <tbody>
-                    @foreach ($houses as $house)
-                    <tr>
-                        <td>{{ $house->id }}</td>
-                        <td>{{ $house->title }}</td>
-                        <td>{{ $house->city }}</td>
-                        <td>&euro;{{ $house->price }}</td>
-                        <td>{{ $house->visible }}</td>
-                        <td>{{ $houseTypes[$house->house_type_id]['name'] }}</td>
-                        <td>
-                            <a class="btn btn-info" href="{{route('admin.houses.show', $house)}}">MOSTRA</a>
-                        </td>
-                        <td>
-                            <a class="btn btn-warning" href="{{route('admin.houses.edit', $house)}}">MODIFICA</a>
-                        </td>
-                        <td>
+                <div class="col-12 col-md-2 align-self-center">
+                    <div class="d-flex justify-content-around">
+                        <a class="bnb-btn-edit" href="{{route('admin.houses.edit', $house)}}">
+                            <i class="fas fa-pen"></i>
+                        </a>
+                        <div class="bnb-btn-delete">
                             <form action="{{route('admin.houses.show', $house->id)}}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <input class="btn btn-danger" type="submit" onclick="return confirm('Do you want delete this post? this action can\'tn be undone')" value="ELIMINA">
+                                <label for="delete"><i class="fas fa-times"></i></label>
+                                <input type="submit" id="delete" onclick="return confirm('Do you want delete this post? this action can\'tn be undone')" value="ELIMINA">
                             </form>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table> --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
         </div>
     </div>
 @endsection

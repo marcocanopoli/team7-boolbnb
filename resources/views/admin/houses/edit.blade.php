@@ -212,11 +212,13 @@
             <h6>Disponibilita'</h6>
             <div class="edit-visible pl-3">
                 <div class="mr-5">
-                    <input class="form-check-input @error('visible') is-invalid @enderror" type="radio" value="1" checked name="visible">
+                    <input class="form-check-input @error('visible') is-invalid @enderror" type="radio"
+                    value="1" {{ old('visible', $house->visible) == 1 ? 'checked' : '' }} name="visible">
                     <label class="form-check-label mr-2 not-strong" for="visible">Disponibile</label>
                 </div>
                 <div>
-                    <input class="form-check-input @error('visible') is-invalid @enderror" type="radio" value="2" @if(old('visible', 0) == 2) checked @endif name="visible">
+                    <input class="form-check-input @error('visible') is-invalid @enderror" type="radio"
+                    value="2" {{ old('visible', $house->visible) == 2 ? 'checked' : '' }} name="visible">
                     <label class="form-check-label not-strong" for="visible">Attualmente non disponibile</label>
                 </div>
             </div> 

@@ -138,6 +138,27 @@ button {
    }
 }
 
+.bnb-btn-edit,
+.bnb-btn-delete {
+    color: rgba($gray-1, 0.2);
+    transition: 0.3s;
+
+    &:hover {
+        color: $brand;
+    }
+}
+
+.bnb-btn-delete {
+
+    label{
+        cursor: pointer;
+    }
+
+    input {
+        display: none;
+    }
+}
+
 //Index 
 .house-container {
     
