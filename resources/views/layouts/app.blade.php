@@ -49,9 +49,20 @@
                                 </li>
                             @endif
                         @else
+
+                            <li class="pr-2">
+                                <img id="header-avatar" 
+                                src=" 
+                                    @if (Auth::user()->profile_pic)
+                                        {{ asset('storage/'. Auth::user()->profile_pic) }}
+                                    @else
+                                        {{ asset('images/default-user.png') }}
+                                    @endif
+                                " alt="pic">
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->email }}
+                                    {{ Auth::user()->email }}                                    
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

@@ -7,6 +7,7 @@
 
 #upload-label {
     width: 100%;
+    margin: 0;
 }
 
 #empty-preview-text {
@@ -26,6 +27,18 @@
     border: 5px dashed $brand;
     border-radius: 30px;
     
+    //single upload specific
+    &.single-upload{
+        display: flex;
+        min-height: 190px;
+        margin-top: 0;
+
+        .preview-box{
+            width: 130px;
+            margin: 0 auto;
+        }
+    }
+
     & span {
         position: absolute;
         top: 50%;
@@ -33,12 +46,11 @@
         transform: translate(-50%, -50%);        
     }
 
-    .preview-box {
-        display: grid;           
+    .preview-box {           
         position: relative;
         width: 100%;
         border-radius: 15px;
-        overflow: hidden;
+        overflow: hidden;        
 
         &:before {
             content: "";
@@ -82,28 +94,28 @@
 
 @media screen and (min-width: 576px) {
 
-    #preview-photos {        
+    #preview-photos:not(.single-upload) {        
         grid-template-columns: repeat(3, 1fr);        
     }
 }
 
 @media screen and (min-width: 768px) {
 
-    #preview-photos {        
+    #preview-photos:not(.single-upload) {        
         grid-template-columns: repeat(4, 1fr);        
     }
 }
 
 @media screen and (min-width: 992px) {
 
-    #preview-photos {        
+    #preview-photos:not(.single-upload) {        
         grid-template-columns: repeat(6, 1fr);        
     }
 }
 
 @media screen and (min-width: 1200px) {
 
-    #preview-photos {        
+    #preview-photos:not(.single-upload) {        
         grid-template-columns: repeat(8, 1fr);        
     }
 }

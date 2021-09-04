@@ -1,9 +1,4 @@
 @extends('layouts.app')
-
-@section('css')
-    <link rel="stylesheet" href="{{ asset('css/upload_preview.css') }}">
-@endsection
-
 @section('content')
 <div class="container create-form">    
 
