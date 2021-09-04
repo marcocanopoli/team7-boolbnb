@@ -50,10 +50,10 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        // dd($data['profile_pic']);
+        // dd($data);
         return Validator::make($data, [
-            'first_name' => ['nullable','string', 'max:30'],
-            'last_name' => ['nullable','string', 'max:30'],
+            'first_name' => ['nullable','string', 'max:50'],
+            'last_name' => ['nullable','string', 'max:50'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'birthdate' => ['nullable','date', 'before:today'],
@@ -71,17 +71,23 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {   
-        return User::create([
+        $newUser = User::create([         
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'birthdate' => $data['birthdate'],
             'phone' => $data['phone'],
-            'about' => $data['about'],
-            // $profilePic = Storage::put('users/profile_pics/', $data['profile_pic']),
-            // 'profile_pic' => $profilePic
-            'profile_pic' => $data['profile_pic']
+            'about' => $data['about']
         ]);
+        
+        if (array_key_exists('profile_pic', $data)) {
+            $picPath = Storage::put('users/' . $newUser->id . '/profile_pics/', $data['profile_pic']);
+            $user = User::find($newUser->id);
+            $user->profile_pic = $picPath;
+            $user->save();
+        }
+
+        return $newUser;
     }
 }

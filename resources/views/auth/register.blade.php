@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
 
@@ -28,7 +27,7 @@
                             <label for="first_name" class="col-md-4 col-form-label text-md-right">{{ __('First name') }}</label>
                             
                             <div class="col-md-6">
-                                <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" maxlength="30" autocomplete="first_name" autofocus>
+                                <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" maxlength="50" autocomplete="first_name" autofocus>
                                 
                                 @error('first_name')
                                 <span class="invalid-feedback" role="alert">
@@ -44,7 +43,7 @@
                             <label for="last_name" class="col-md-4 col-form-label text-md-right">{{ __('Last name') }}</label>
                             
                             <div class="col-md-6">
-                                <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" maxlength="30" autocomplete="last_name">
+                                <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" maxlength="50" autocomplete="last_name">
                                 
                                 @error('last_name')
                                 <span class="invalid-feedback" role="alert">
@@ -146,18 +145,27 @@
                         {{-- /About --}}  
 
                         {{-- Profile picture --}}
-                        <div class="form-group row">
-                            <label for="profile_pic" class="col-md-4 col-form-label text-md-right">{{ __('Profile picture') }}</label>
-                            
-                            <div class="col-md-6">
-                                <input id="profile_pic" type="file" class="form-control-file @error('profile_pic') is-invalid @enderror" name="profile_pic">
-                                
-                                @error('profile_pic')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                        <div class="form-group row">                            
+                            <div class="col-md-4 col-form-label text-md-right py-0 d-flex align-items-center justify-content-end">
+                                <label class="profile-pic-label">{{ __('Profile picture') }}</label>
                             </div>
+                            <div class="col-md-6">
+                                <label id="upload-label" for="photos">
+                                    <input type="file" name="profile_pic" id="photos" 
+                                            class="form-control-file @error('photos') is-invalid @enderror">
+                                    <div id="preview-photos" class="single-upload"></div>
+                                </label>
+                            </div>
+                            
+                            @error('photos')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-3 offset-md-7 text-right mb-2">
+                            <button class="bnb-btn bnb-btn-brand" id="reset-upload">RESET</button>
                         </div>
                         {{-- /Profile picture --}}                     
 
@@ -174,4 +182,8 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+    <script src="{{ asset('js/upload_preview.js') }}"></script>
 @endsection
