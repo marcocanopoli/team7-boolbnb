@@ -2,6 +2,7 @@
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/upload_preview.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/checkbox_services.css') }}">
 @endsection
 
 @section('content')
@@ -199,7 +200,7 @@
         {{-- /Foto --}}
 
         {{-- Disponibilita' --}}
-        <div class="form-group">
+        {{-- <div class="form-group">
             <h6>Disponibilita'</h6>
             <div class="create-visible pl-3">
                 <div class="mr-5">
@@ -216,8 +217,30 @@
                 <small class="text-danger">{{ $message }}</small> 
             </div>
             @enderror   
-        </div>
+        </div> --}}
         {{-- /Disponibilita' --}}
+
+        {{-- Disponibilita' toggle switch --}}
+        <div class="form-group d-flex flex-wrap justify-content-between">
+            <h6 class="pt-2">Vuoi rendere disponibile la tua struttura?</h6>
+
+            <div class="create-visible switch-field ">
+
+                <input id="visible-no" class="form-check-input @error('visible') is-invalid @enderror" type="radio" value="2" @if(old('visible') == 2) checked @endif name="visible">
+                <label  class="form-check-label not-strong no " for="visible-no">No</label>
+        
+                <input id="visible-si" class="form-check-input @error('visible') is-invalid @enderror" type="radio" value="1" name="visible" checked>
+                <label  class="form-check-label not-strong yes " for="visible-si">Si</label>
+        
+            </div> 
+
+            @error('visible')
+            <div>
+                <small class="text-danger">{{ $message }}</small> 
+            </div>
+            @enderror   
+        </div>
+        {{-- /Disponibilita' toggle switch --}}
 
         {{-- Prezzo --}}
         <div class="row">

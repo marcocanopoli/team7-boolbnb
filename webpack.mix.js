@@ -11,10 +11,12 @@ const mix = require('laravel-mix');
  |
  */
 
+
 mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/upload_preview.js', 'public/js') 
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/upload_preview.scss', 'public/css')
+    .sass('resources/sass/checkbox_services.scss', 'public/css')
     .options({
         processCssUrls: false
     });
