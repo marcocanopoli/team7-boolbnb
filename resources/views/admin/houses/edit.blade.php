@@ -229,7 +229,7 @@
         {{-- /Disponibilita'  toggle switch--}}
 
         {{-- Disponibilita' --}}
-        <div class="form-group">
+        {{-- <div class="form-group">
             <h6>Visibilita'</h6>
             <div class="edit-visible pl-3">
                 <div class="mr-5">
@@ -248,7 +248,7 @@
                 <small class="text-danger">{{ $message }}</small> 
             </div>
             @enderror   
-        </div> --}}
+        </div> --}} 
         {{-- /Disponibilita' --}}
 
         {{-- Prezzo --}}

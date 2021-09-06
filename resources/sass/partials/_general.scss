@@ -273,7 +273,7 @@ button {
     .show-info {
         ul {
             display: flex;
-            height: 250px;
+            max-height: 250px;
             font-size: 14px;
         }
     }
