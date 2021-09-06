@@ -223,7 +223,7 @@ button {
 .edit-services {
     display: flex;
     flex-flow: column wrap;
-    height: 250px;
+    height: 400px;
   }
 
   .create-visible,
@@ -233,6 +233,12 @@ button {
 
   .btn-row {
     flex-direction: row;
+  }
+}
+@media screen and (min-width: 768px) {
+  .create-services,
+.edit-services {
+    height: 300px;
   }
 }
 /*!
