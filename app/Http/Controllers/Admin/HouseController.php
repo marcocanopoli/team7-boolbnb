@@ -123,6 +123,9 @@ class HouseController extends Controller
     {
         $houseTypes = HouseType::all();
         $services = Service::all();
+        if ($house['visible'] == 0) {
+            $house['visible'] = 2;
+        }
         return view('admin.houses.edit', compact('house', 'houseTypes', 'services'));
     }
 
@@ -136,7 +139,9 @@ class HouseController extends Controller
     public function update(Request $request, House $house)
     {
         $data = $request->all();
-
+        if ($data['visible'] == '2') {
+            $data['visible'] = 0;
+        }
         $allEditValidation = array_merge($this->editValidationPhoto, $this->validation);
         $request->validate($allEditValidation);
 

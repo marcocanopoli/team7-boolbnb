@@ -13,6 +13,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     @yield('css')
     
@@ -49,9 +50,20 @@
                                 </li>
                             @endif
                         @else
+
+                            <li class="pr-2">
+                                <img id="header-avatar" 
+                                src=" 
+                                    @if (Auth::user()->profile_pic)
+                                        {{ asset('storage/'. Auth::user()->profile_pic) }}
+                                    @else
+                                        {{ asset('images/default-user.png') }}
+                                    @endif
+                                " alt="pic">
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->email }}
+                                    {{ Auth::user()->email }}                                    
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

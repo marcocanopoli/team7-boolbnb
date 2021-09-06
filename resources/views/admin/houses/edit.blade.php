@@ -176,16 +176,29 @@
         </div>
         {{-- /photo gallery --}}
 
-
         {{-- Foto --}}
         <div class="form-group mb-4">
-            <label for="photos">Carica foto (max 15)</label>
-            <input type="file" name="photos[]" class="form-control-file @error('photos') is-invalid @enderror" id="photos" multiple>
+            <label id="upload-label" for="photos">Carica foto (max 15)
+                <input type="file" name="photos[]" id="photos" 
+                        class="form-control-file @error('photos') is-invalid @enderror" multiple>
+                <div id="preview-photos"></div>
+            </label>
+
+            <div class="text-right">
+                <button class="bnb-btn bnb-btn-brand mt-4" id="reset-upload">RESET</button>
+            </div>
+
             @foreach ($errors->get('photos.*') as $index => $error)
                 @foreach($error as $message)
                     <small class="text-danger">{{ $message }}</small><br>
                 @endforeach
             @endforeach
+
+            @error('photos')
+            <div>
+                <small class="text-danger">{{ $message }}</small> 
+            </div>
+            @enderror
         </div>
         {{-- /Foto --}}
 
@@ -194,11 +207,13 @@
             <h6>Disponibilita'</h6>
             <div class="edit-visible pl-3">
                 <div class="mr-5">
-                    <input class="form-check-input @error('visible') is-invalid @enderror" type="radio" value="1" checked name="visible">
+                    <input class="form-check-input @error('visible') is-invalid @enderror" type="radio"
+                    value="1" {{ old('visible', $house->visible) == 1 ? 'checked' : '' }} name="visible">
                     <label class="form-check-label mr-2 not-strong" for="visible">Disponibile</label>
                 </div>
                 <div>
-                    <input class="form-check-input @error('visible') is-invalid @enderror" type="radio" value="2" @if(old('visible', 0) == 2) checked @endif name="visible">
+                    <input class="form-check-input @error('visible') is-invalid @enderror" type="radio"
+                    value="2" {{ old('visible', $house->visible) == 2 ? 'checked' : '' }} name="visible">
                     <label class="form-check-label not-strong" for="visible">Attualmente non disponibile</label>
                 </div>
             </div> 
@@ -233,4 +248,8 @@
         </div> 
     </form>
 </div>
+@endsection
+
+@section('script')
+    <script src="{{ asset('js/upload_preview.js') }}"></script>
 @endsection

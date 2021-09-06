@@ -1,7 +1,4 @@
 @extends('layouts.app')
-
-
-
 @section('content')
 <div class="container create-form">    
 
@@ -175,24 +172,28 @@
         
         {{-- Foto --}}
         <div class="form-group mb-4">
-            <label id="upload-label" for="photos">Foto della struttura (max 15)
+
+            <label id="upload-label" for="photos">Carica foto (max 15)
                 <input type="file" name="photos[]" id="photos" 
                         class="form-control-file @error('photos') is-invalid @enderror" multiple>
                 <div id="preview-photos"></div>
             </label>
-            <button class="bnb-btn bnb-btn-brand mt-4" id="reset-upload">RESET</button>
+
+            <div class="text-right">
+                <button class="bnb-btn bnb-btn-brand mt-4" id="reset-upload">RESET</button>
+            </div>
 
             @foreach ($errors->get('photos.*') as $index => $error)
                 @foreach($error as $message)
                     <small class="text-danger">{{ $message }}</small><br>
                 @endforeach
             @endforeach
+
             @error('photos')
             <div>
                 <small class="text-danger">{{ $message }}</small> 
             </div>
             @enderror
-
         </div>
         {{-- /Foto --}}
 
