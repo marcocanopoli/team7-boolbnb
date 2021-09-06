@@ -146,7 +146,7 @@
 
                         {{-- Profile picture --}}
                         <div class="form-group row">                            
-                            <div class="col-md-4 col-form-label text-md-right py-0 d-flex align-items-center justify-content-end">
+                            <div class="col-md-4 col-form-label text-md-right py-0">
                                 <label class="profile-pic-label">{{ __('Profile picture') }}</label>
                             </div>
                             <div class="col-md-6">
