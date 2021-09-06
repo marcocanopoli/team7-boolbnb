@@ -36,8 +36,8 @@ class CreateHousesTable extends Migration
             $table->string('city', 60);
             $table->string('address', 100);
             $table->string('zip_code', 10);
-            $table->decimal('latitude', 10, 8);
-            $table->decimal('longitude', 11, 8);
+            $table->double('latitude');
+            $table->double('longitude');
             $table->text('description');
             $table->decimal('price', 6, 2);
             $table->unsignedTinyInteger('guests');

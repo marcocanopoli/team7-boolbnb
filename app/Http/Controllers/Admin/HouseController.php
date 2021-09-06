@@ -6,13 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Http;
 use App\House;
 use App\HouseType;
 use App\Service;
 use App\Photo;
 
 class HouseController extends Controller
-{
+{   
     /**
      * Display a listing of the resource.
      *
@@ -45,6 +46,18 @@ class HouseController extends Controller
         'photos' => 'array|min:1|max:15',
     ];
 
+    private function getCoordinates($data) {
+        $addressQuery = $data['city'] . ' ' . $data['address'] . ' ' . $data['zip_code'];
+        $addressQuery = urlencode($addressQuery);
+        $addressQuery = $addressQuery . ".json";
+        
+        $coordinatesResponse = Http::get('https://api.tomtom.com/search/2/geocode/' . $addressQuery, [
+            'key' => '9klnGNAqb9IZGTnJpPeD3XymW9LUsIDx'
+        ]);
+        
+        $coordinatesResponse->json();        
+        return $coordinatesResponse['results'][0]['position'];
+    }
 
     public function index() {
         $houses = House::where('user_id', Auth::id())->get();
@@ -57,7 +70,7 @@ class HouseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {        
         $houseTypes = HouseType::all();
         $services = Service::all();
 
@@ -82,8 +95,11 @@ class HouseController extends Controller
         $request->validate($allCreateValidation);
 
         $data['user_id'] = Auth::id();
-        $data['longitude'] = 11.1111;
-        $data['latitude'] = 22.2222;        
+        
+        $coordinates = $this->getCoordinates($data);
+        
+        $data['latitude'] = $coordinates['lat'];
+        $data['longitude'] = $coordinates['lon'];
         
         $newHouse = new House();
         $newHouse->fill($data);
@@ -176,6 +192,11 @@ class HouseController extends Controller
                 Storage::deleteDirectory('houses/photos/' . $house->id);
             }
         }
+
+        $coordinates = $this->getCoordinates($data);
+        
+        $data['latitude'] = $coordinates['lat'];
+        $data['longitude'] = $coordinates['lon'];
 
         $house->update($data);
         $house->services()->sync($data['services']);
