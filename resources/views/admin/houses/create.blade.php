@@ -152,10 +152,14 @@
         <h6>Servizi disponibili</h6>
         <div class="create-services form-group">
             @foreach ($services as $service)
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="service-{{ $service->id }}" value="{{ $service->id }}" name="services[]" {{ in_array($service->id, old('services', [])) ? 'checked' : '' }}
-                >
-                <label class="form-check-label not-strong" for="service-{{ $service->id }}">{{ $service->name }}</label>
+            <div class="mb-3">
+                <label class="container-checkbox form-check-label not-strong" for="service-{{ $service->id }}">{{ $service->name }}
+
+                <input class="form-check-input vertical-align-center mx-3" type="checkbox" id="service-{{ $service->id }}" value="{{ $service->id }}" name="services[]" {{ in_array($service->id, old('services', [])) ? 'checked' : '' }}>
+
+                <span class="checkmark"></span>
+
+                </label>
             </div>     
             @endforeach 
             @error('services')
@@ -194,7 +198,7 @@
         {{-- /Foto --}}
 
         {{-- Disponibilita' --}}
-        <div class="form-group">
+        {{-- <div class="form-group">
             <h6>Disponibilita'</h6>
             <div class="create-visible pl-3">
                 <div class="mr-5">
@@ -211,8 +215,30 @@
                 <small class="text-danger">{{ $message }}</small> 
             </div>
             @enderror   
-        </div>
+        </div> --}}
         {{-- /Disponibilita' --}}
+
+        {{-- Disponibilita' toggle switch --}}
+        <div class="form-group d-flex flex-wrap justify-content-between">
+            <h6 class="pt-2">Vuoi rendere disponibile la tua struttura?</h6>
+
+            <div class="create-visible switch-field ">
+
+                <input id="visible-no" class="form-check-input @error('visible') is-invalid @enderror" type="radio" value="2" @if(old('visible') == 2) checked @endif name="visible">
+                <label  class="form-check-label not-strong no " for="visible-no">No</label>
+        
+                <input id="visible-si" class="form-check-input @error('visible') is-invalid @enderror" type="radio" value="1" name="visible" checked>
+                <label  class="form-check-label not-strong yes " for="visible-si">Si</label>
+        
+            </div> 
+
+            @error('visible')
+            <div>
+                <small class="text-danger">{{ $message }}</small> 
+            </div>
+            @enderror   
+        </div>
+        {{-- /Disponibilita' toggle switch --}}
 
         {{-- Prezzo --}}
         <div class="row">
@@ -228,10 +254,10 @@
         {{-- /Prezzo --}}
 
         <div class="row btn-row">
-            <div class="col-12 col-sm-6 col-md-2 my-2">
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 my-2">
                 <a class="bnb-a bnb-btn bnb-btn-white bnb-btn-resp" href="{{ route('admin.houses.index') }}">ANNULLA</a>
             </div>
-            <div class="col-12 col-sm-6 col-md-2 my-2">
+            <div class="col-12 col-sm-6 col-md-6 col-lg-4 my-2">
                 <button type="submit" class="bnb-a bnb-btn bnb-btn-brand bnb-btn-resp">CREA</button>
             </div>
         </div> 
