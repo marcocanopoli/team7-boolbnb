@@ -5,7 +5,9 @@
 @import './partials/variables';
 // General
 @import './partials/general';
-
+//
+@import './partials/checkbox_services.scss';
+@import './partials/upload_preview.scss';
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 

@@ -1,9 +1,6 @@
 @extends('layouts.app')
 
-@section('css')
-    <link rel="stylesheet" href="{{ asset('css/upload_preview.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/checkbox_services.css') }}">
-@endsection
+
 
 @section('content')
 <div class="container create-form">    
