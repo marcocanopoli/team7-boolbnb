@@ -1,6 +1,5 @@
 <template>
     <section>
-        una minchiata
     </section>
 </template>
 

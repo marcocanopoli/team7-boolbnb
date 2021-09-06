@@ -193,7 +193,7 @@ window.onload = function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\patrizio\Desktop\classe34\laravel-boolbnb\team7-boolbnb\resources\js\upload_preview.js */"./resources/js/upload_preview.js");
+module.exports = __webpack_require__(/*! /Users/lucaquacquarelli/Desktop/Classe 34/team7-boolbnb/resources/js/upload_preview.js */"./resources/js/upload_preview.js");
 
 
 /***/ })
