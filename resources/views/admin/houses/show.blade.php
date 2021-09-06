@@ -1,7 +1,7 @@
 @extends('layouts.app')
-
 @section('content')
-<div class="container">
+
+<div class="container show">
 
     @if (session('created'))
         <div class="alert alert-success my-alert">
@@ -18,37 +18,21 @@
         <span class="bnb-btn bnb-btn-brand-2 align-self-center mx-4">{{ $house->houseType['name'] }}</span>
     </div>
 
-    <div class="show-photos d-flex flex-wrap my-4">
+    <div class="show-photos my-4">
         @foreach ($house->photos as $photo)
             <img src="{{ asset('storage/' . $photo->path) }}" alt="{{ 'Foto' . $photo->id }}">
         @endforeach
     </div>
 
-    <div class="d-flex">
-        <div class="show-info">
+    <div class="row">
+        <div class="show-info col-lg-6">
             <strong>Numero ospiti: <span>{{$house->guests}}</span></strong>
             <strong>Numero camere: <span>{{$house->rooms}}</span></strong>
             <strong>Numero letti: <span>{{$house->beds}}</span></strong>
             <strong>Numero bagni: <span>{{$house->bathrooms}}</span></strong>
-            <strong>Mq: <span>{{$house->square_meters}}</span></strong>
-            <strong class="mt-2">Indirizzo: <span>{{$house->address}}, {{$house->zip_code}}, {{$house->city}}</span></strong>
-            <small>LA: {{$house->latitude}}</small>
-            <small>LO: {{$house->longitude}}</small>
-            <strong class="my-2">Descrizione:</strong>
-            <p>{{$house->description}}</p>
-            <strong>Prezzo: <span>{{$house->price}} &euro;</span></strong>
-            <strong class="color-brand mt-2">
-                @if ($house->visible == 1) 
-                    Disponibile
-                @else
-                    Attualmente non disponibile
-                @endif
-            </strong>
-        </div>
-
-        <div class="show-details pl-3 ml-4">
-            <strong>Servizi inclusi:</strong>
-            <ul class="mt-3 list-unstyled d-flex flex-column flex-wrap">
+            <strong>Mq: <span>{{$house->square_meters}}</span></strong>            
+            <strong class="my-2">Servizi inclusi:</strong>
+            <ul class="list-unstyled flex-column flex-wrap">
             @foreach ($house->services as $service)
                 <li>
                     <div class="service-svg mr-2">
@@ -58,17 +42,60 @@
                 </li>
             @endforeach
             </ul>
+            <strong class="my-2">Descrizione:</strong>
+            <p>{{$house->description}}</p>            
         </div>
+
+        <div class="show-details col-lg-6">
+            <strong>Indirizzo: <span>{{$house->address}}, {{$house->zip_code}}, {{$house->city}}</span></strong>
+            {{-- Mappa --}}
+            <div id="map-div" class="pr-3 my-4"></div>            
+            {{-- /Mappa --}}
+        </div>
+    </div>    
+
+    <div>
+        <strong>Prezzo: <span>{{$house->price}} &euro;</span></strong>
+        <strong class="color-brand my-2">
+            @if ($house->visible == 1) 
+                Visibile
+            @else
+                Attualmente non visibile
+            @endif
+        </strong>
     </div>
 
-    <div class="row btn-row my-4">
+    <div class="row btn-row my-2">
+
         <div class="col-12 col-sm-6 col-md-4 my-2">
             <a class="bnb-a bnb-btn bnb-btn-white bnb-btn-resp" href="{{ route('admin.houses.index') }}">ELENCO STRUTTURE</a>
         </div>
-        <div class="col-12 col-sm-6 col-md-2 my-2">
+        <div class="col-12 col-sm-6 col-md-4 my-2">
             <a class="bnb-btn bnb-btn-brand bnb-btn-resp" href="{{route('admin.houses.edit', $house)}}">MODIFICA</a>
         </div>
     </div> 
 </div>
+@endsection
 
+@section('script')
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.5.0/maps/maps-web.min.js"></script>
+    <script>
+        const API_KEY = '9klnGNAqb9IZGTnJpPeD3XymW9LUsIDx';
+        const APPLICATION_NAME = 'BoolBnb';
+        const APPLICATION_VERSION = '1.0';
+        const latitude = {!! json_encode($house->latitude) !!};      
+        const longitude = {!! json_encode($house->longitude) !!};      
+        const coordinates = {lat: latitude, lon: longitude};
+
+        var map = tt.map({
+            key: API_KEY,
+            container: 'map-div',
+            center: coordinates,
+            zoom: 16
+        });
+
+        map.addControl(new tt.FullscreenControl());
+        map.addControl(new tt.NavigationControl());
+        var marker = new tt.Marker().setLngLat(coordinates).addTo(map);
+    </script>
 @endsection
