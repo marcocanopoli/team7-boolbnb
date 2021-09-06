@@ -187,8 +187,10 @@ button {
 }
 
 // Show + create
-.show-details ul{
-    height: 250px;
+.show-info {    
+    ul {        
+        font-size: 12px;
+    }
 }
 
 // Show + edit + index
@@ -201,12 +203,7 @@ button {
 }
 
 //Show
-.show-info,
-.show-details {
-    width: 45%;
-}
-
-.show-info {
+.show {
     strong {
         display: block;
         span {
@@ -215,13 +212,23 @@ button {
     }
 }
 
+#map-div {
+    width: 100%; 
+    height: 300px;
+    border-radius: 12px;
+}
+
 .show-photos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    grid-template-rows: min-content;
+
     img {
-        margin-bottom: 15px;
-        margin-right: 15px;
-        // height: 125px;
-        width: calc(100% / 5 - 15px);
+        height: 150px;
+        width: 100%;
         object-fit: cover;
+        border-radius: 12px;
     }
 }
 
@@ -256,13 +263,20 @@ button {
     visibility: hidden;
 }
 
-
-
-
 //media queries
-
 @media screen and (min-width: 576px) {
+    
+    .show-photos {
+        grid-template-columns: repeat(3, 1fr);
+    }
 
+    .show-info {
+        ul {
+            display: flex;
+            height: 250px;
+            font-size: 14px;
+        }
+    }
     .create-services,
     .edit-services {
         display: flex;
@@ -282,6 +296,10 @@ button {
 
 @media screen and (min-width: 768px) {
 
+    .show-photos {
+        grid-template-columns: repeat(4, 1fr);
+    }
+     
     .create-services,
     .edit-services{
         height: 300px;
@@ -289,5 +307,11 @@ button {
 
     #header-avatar {
         display: inline;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .show-photos {
+        grid-template-columns: repeat(5, 1fr);    
     }
 }

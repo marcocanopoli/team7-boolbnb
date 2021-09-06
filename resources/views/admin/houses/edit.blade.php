@@ -204,17 +204,17 @@
 
         {{-- Disponibilita' --}}
         <div class="form-group">
-            <h6>Disponibilita'</h6>
+            <h6>Visibilita'</h6>
             <div class="edit-visible pl-3">
                 <div class="mr-5">
                     <input class="form-check-input @error('visible') is-invalid @enderror" type="radio"
                     value="1" {{ old('visible', $house->visible) == 1 ? 'checked' : '' }} name="visible">
-                    <label class="form-check-label mr-2 not-strong" for="visible">Disponibile</label>
+                    <label class="form-check-label mr-2 not-strong" for="visible">Visibile</label>
                 </div>
                 <div>
                     <input class="form-check-input @error('visible') is-invalid @enderror" type="radio"
                     value="2" {{ old('visible', $house->visible) == 2 ? 'checked' : '' }} name="visible">
-                    <label class="form-check-label not-strong" for="visible">Attualmente non disponibile</label>
+                    <label class="form-check-label not-strong" for="visible">Attualmente non visibile</label>
                 </div>
             </div> 
             @error('visible')

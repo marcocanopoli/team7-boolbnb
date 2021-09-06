@@ -1,5 +1,6 @@
 @extends('layouts.app')
-@section('content')
+@section('content')    
+
     <div class="container">
 
         @if (session('deleted'))

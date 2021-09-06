@@ -220,7 +220,7 @@
 
         {{-- Disponibilita' toggle switch --}}
         <div class="form-group d-flex flex-wrap justify-content-between">
-            <h6 class="pt-2">Vuoi rendere disponibile la tua struttura?</h6>
+            <h6 class="pt-2">Vuoi rendere visibile la tua struttura?</h6>
 
             <div class="create-visible switch-field ">
 
