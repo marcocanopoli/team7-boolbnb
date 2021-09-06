@@ -102,12 +102,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function addEmptyPreviewText() {
   var preview = document.querySelector('#preview-photos');
   var span = document.createElement("span");
-  span.innerHTML = 'Upload immagine';
+  span.innerHTML = 'Carica foto';
   span.id = 'empty-preview-text';
   preview.appendChild(span);
 }
 
 function deletePhotos() {
+  var upload = document.querySelector('#photos');
   var allPhotos = document.getElementsByClassName('preview-box');
 
   while (allPhotos.length > 0) {
@@ -124,6 +125,8 @@ function deletePhotos() {
     } finally {
       _iterator.f();
     }
+
+    upload.value = "";
   }
 
   addEmptyPreviewText();
@@ -134,6 +137,7 @@ function previewPhotos() {
 
   if (this.files) {
     var span = document.querySelector('#empty-preview-text');
+    var allPhotos = document.getElementsByClassName('preview-box');
 
     if (span) {
       span.remove();
@@ -141,6 +145,11 @@ function previewPhotos() {
 
     fileList = Array.from(this.files);
     fileList.forEach(readAndPreview);
+
+    if (this.files.length > 15 - allPhotos.length) {
+      alert("Puoi caricare massimo 15 foto!");
+      deletePhotos();
+    }
   }
 
   function readAndPreview(file) {
@@ -154,7 +163,6 @@ function previewPhotos() {
       var box = document.createElement("div");
       var photo = new Image();
       var reset = document.querySelector('#reset-upload');
-      var upload = document.querySelector('#photos');
       box.className = 'preview-box';
       photo.className = 'preview-photo';
       photo.title = file.name;
@@ -165,7 +173,6 @@ function previewPhotos() {
       reset.onclick = function (e) {
         e.preventDefault();
         deletePhotos();
-        upload.value = "";
       };
     });
     reader.readAsDataURL(file);
@@ -186,7 +193,7 @@ window.onload = function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/lucaquacquarelli/Desktop/Classe 34/team7-boolbnb/resources/js/upload_preview.js */"./resources/js/upload_preview.js");
+module.exports = __webpack_require__(/*! C:\Users\patrizio\Desktop\classe34\laravel-boolbnb\team7-boolbnb\resources\js\upload_preview.js */"./resources/js/upload_preview.js");
 
 
 /***/ })

@@ -142,13 +142,16 @@
         <h6>Servizi disponibili</h6>
         <div class="edit-services form-group">
             @foreach ($services as $service)
-            <div class="form-check ">
-                <input class="form-check-input" type="checkbox" id="service-{{ $service->id }}" value="{{ $service->id }}" name="services[]"
+            <div class="mb-3">
+                <label class="container-checkbox form-check-label not-strong" for="service-{{ $service->id }}">{{ $service->name }}
+
+                <input class="form-check-input vertical-align-center mx-3" type="checkbox" id="service-{{ $service->id }}" value="{{ $service->id }}" name="services[]"
                 @if (count($house->services->where('id', $service->id)))
                     checked
                 @endif
                 >
-                <label class="form-check-label not-strong" for="service-{{ $service->id }}">{{ $service->name }}</label>
+                <span class="checkmark"></span>
+                </label>
             </div>     
             @endforeach 
             @error('services')
@@ -202,8 +205,31 @@
         </div>
         {{-- /Foto --}}
 
+        {{-- Disponibilita'  toggle switch--}}
+        <div class="form-group d-flex flex-wrap justify-content-between">
+            <h6 class="pt-2">Vuoi rendere disponibile la tua struttura?</h6>
+
+            <div class="edit-visible switch-field ">
+
+                <input id="visible-no" class="form-check-input @error('visible') is-invalid @enderror" type="radio"
+                value="2" {{ old('visible', $house->visible) == 2 ? 'checked' : '' }} name="visible">
+                <label class="form-check-label not-strong no" for="visible-no">No</label>
+                
+                <input id="visible-si" class="form-check-input @error('visible') is-invalid @enderror" type="radio"
+                value="1" {{ old('visible', $house->visible) == 1 ? 'checked' : '' }} name="visible">
+                <label class="form-check-label mr-2 not-strong yes" for="visible-si">Si</label>
+            
+            </div> 
+            @error('visible')
+            <div>
+                <small class="text-danger">{{ $message }}</small> 
+            </div>
+            @enderror   
+        </div>
+        {{-- /Disponibilita'  toggle switch--}}
+
         {{-- Disponibilita' --}}
-        <div class="form-group">
+        {{-- <div class="form-group">
             <h6>Disponibilita'</h6>
             <div class="edit-visible pl-3">
                 <div class="mr-5">
@@ -222,7 +248,7 @@
                 <small class="text-danger">{{ $message }}</small> 
             </div>
             @enderror   
-        </div>
+        </div> --}}
         {{-- /Disponibilita' --}}
 
         {{-- Prezzo --}}
