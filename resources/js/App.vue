@@ -30,7 +30,7 @@ export default {
     },
     name: 'App',
     methods: {
-        performSearch(searchData) {
+        performSearch(searchData, e) {
             if(this.lastSearches.inputSearch == searchData.inputSearch && this.lastSearches.km == searchData.km && this.lastSearches.rooms == searchData.rooms && this.lastSearches.services == searchData.services) {
                 return
             }
@@ -49,6 +49,7 @@ export default {
                 this.lastSearches.rooms = searchData.rooms;
                 this.lastSearches.beds = searchData.beds;
                 this.lastSearches.services = searchData.services;
+                e.preventDefault();
                 console.log('res', this.houses);
             })
             .catch(error => {
