@@ -1,7 +1,9 @@
 <template>
     <div>
         <Header @search="performSearch"/>
-        <router-view :houses="houses" ></router-view>
+        <!-- <keep-alive include="performSearch"> -->
+            <router-view :houses="houses" ></router-view>
+        <!-- </keep-alive> -->
     </div>
 </template>
 
