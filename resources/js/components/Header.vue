@@ -55,32 +55,52 @@ export default {
             inputSearch : "",
             drop: false,
             visibleNav: false,
-            inputNav: false
+            inputNav: false,
+            km: '',
+            rooms: '',
+            beds: '',
+            services: ''
         }
     },
-    methods: {
-        setDrop: function() {
-            this.drop = !this.drop;
-        },
-        setSCroll () {
-            if (window.scrollY > 0 ) {
-                this.visibleNav = true
-            } else if (window.scrollY == 0) {
-                this.visibleNav = false
-            }
-        },
-        setInputNav: function() {
-            this.inputNav = !this.inputNav;
-        }
-    },
-    created () {
-      window.addEventListener('scroll', this.setSCroll);
+    // methods: {
+    //     setDrop: function() {
+    //         this.drop = !this.drop;
+    //     },
+    //     setSCroll () {
+    //         if (window.scrollY > 0 ) {
+    //             this.visibleNav = true
+    //         } else if (window.scrollY == 0) {
+    //             this.visibleNav = false
+    //         }
+    //     },
+    //     setInputNav: function() {
+    //         this.inputNav = !this.inputNav;
+    //     }
+    // },
+    // created () {
+    //   window.addEventListener('scroll', this.setSCroll);
 
-    },
-    destroyed () {
-      window.removeEventListener('scroll', this.setSCroll);
-    } 
-    
+    // },
+    // destroyed () {
+    //   window.removeEventListener('scroll', this.setSCroll);
+    // } 
+    methods: {
+        performSearch() {
+            //movies
+            axios.get('http://127.0.0.1:8000/api/search' , {
+                params: {
+                    query: this.inputSearch,
+                    km: this.km,
+                    rooms: this.rooms,
+                    beds: this.beds,
+                    services: this.services
+                }      
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        }
+    }    
 }
 </script>
 
