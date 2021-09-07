@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         ciao houses
         <ul>
             <li v-for="house in houses" :key="house.id">
