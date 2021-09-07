@@ -16,5 +16,5 @@ $primary-2 :#ae0186;
 $brand-start: #e01b51;
 $brand-end: #dd1a5a;
 
-$brand-h:  linear-gradient(90deg, #{$brand-start}, #{$brand-end});
-$primary-h:  linear-gradient(90deg, #{$primary-1}, #{$primary-2});
+$brand-h:  -webkit-linear-gradient(90deg, #{$brand-start}, #{$brand-end});
+$primary-h:  -webkit-linear-gradient(120deg, #{$primary-1}, #{$primary-2});
