@@ -1,7 +1,7 @@
 <template>
     <header>
         <nav :class="visibleNav ? 'nav-secondary' : '' ">
-            <div class="container d-flex justify-content-between align-items-center">
+            <div class="container-fluid d-flex justify-content-between align-items-center">
                 <div class="logo-container">
                     <a class="bnb-a" href="/">
                     <!-- :fill="visibleNav ? '#ff385c' : '#fff' -->
@@ -21,9 +21,9 @@
                 </div> -->
                 <div class="search d-flex" >
                     <input type="text" placeholder="Dove vuoi andare?" v-model="searchData.inputSearch" @keyup.enter="$emit('search', searchData)">
-                    <input type="number" min="1" name="rooms" id="rooms" v-model="searchData.rooms" placeholder="Aggiungi stanze" @keyup.enter="$emit('search', searchData)" >
+                    <!-- <input type="number" min="1" name="rooms" id="rooms" v-model="searchData.rooms" placeholder="Aggiungi stanze" @keyup.enter="$emit('search', searchData)" >
                     <input type="number" min="1" name="beds" id="beds" v-model="searchData.beds" placeholder="Aggiungi letti" @keyup.enter="$emit('search', searchData)">
-                    <input class="multi-input align-self-center" type="number" min="0" name="km" id="km" v-model="searchData.km" placeholder="Cerca nel raggio di km" @keyup.enter="$emit('search', searchData)">
+                    <input class="multi-input align-self-center" type="number" min="0" name="km" id="km" v-model="searchData.km" placeholder="Cerca nel raggio di km" @keyup.enter="$emit('search', searchData)"> -->
                     <button class="mybtn" @click="$emit('search', searchData)" ><i class="fas fa-search"></i></button>
                 </div>
                 <div class="user-container">
