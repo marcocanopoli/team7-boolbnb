@@ -23,6 +23,10 @@ a.bnb-a {
     color: $brand;
 }
 
+.color-gray-2 {
+    color: $gray-2;
+}
+
 //Headlines
 //Font-Weights
 h1, h2 {
@@ -74,14 +78,6 @@ button {
     border: none;
     background: none;
 };
-
-#header-avatar {
-    display: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-}
 
 .bnb-btn,
 .bnb-btn-r5 {
@@ -164,6 +160,66 @@ button {
 
     input {
         display: none;
+    }
+}
+
+//header
+.my-navbar {
+    min-height: 80px;
+
+    svg {
+        height: 32px;
+        width: 32px;
+    }
+
+    .header-user {
+        background-color: $white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        
+        &.navbar-toggler {
+            font-size: 16px;      
+            padding: 10px 25px;
+            border-radius: 30px;
+        }
+    }
+
+    .header-avatar {
+        margin-left: 16px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 15px;
+
+    .dashboard-card {
+        padding: 24px;
+        color: inherit;
+        transition: .3s ease-in-out;
+        border-radius: 12px;
+
+        &:hover {
+            text-decoration: none;
+            transform: translateY(-3%);
+        }
+
+        i {
+            margin-bottom: 24px;
+            display: block;
+            font-size: 32px;
+            color: $brand;
+        }
+
+        h4 {
+            margin-bottom: 16px;
+        }
     }
 }
 
@@ -296,6 +352,10 @@ button {
 
 @media screen and (min-width: 768px) {
 
+    .dashboard {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     .show-photos {
         grid-template-columns: repeat(4, 1fr);
     }
@@ -304,13 +364,14 @@ button {
     .edit-services{
         height: 300px;
     }
-
-    #header-avatar {
-        display: inline;
-    }
 }
 
 @media screen and (min-width: 1200px) {
+
+    .dashboard {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
     .show-photos {
         grid-template-columns: repeat(5, 1fr);    
     }
