@@ -24,7 +24,7 @@
                     <input type="number" min="1" name="rooms" id="rooms" v-model="searchData.rooms" placeholder="Aggiungi stanze" @keyup.enter="$emit('search', searchData)" >
                     <input type="number" min="1" name="beds" id="beds" v-model="searchData.beds" placeholder="Aggiungi letti" @keyup.enter="$emit('search', searchData)">
                     <input class="multi-input align-self-center" type="number" min="0" name="km" id="km" v-model="searchData.km" placeholder="Cerca nel raggio di km" @keyup.enter="$emit('search', searchData)">
-                    <a href="#" class="mybtn" @click="$emit('search', searchData), gotoApt()" ><i class="fas fa-search"></i></a>
+                    <button class="mybtn" @click="$emit('search', searchData)" ><i class="fas fa-search"></i></button>
                 </div>
                 <div class="user-container">
                     <div class="user" @click="setDrop()">
@@ -61,9 +61,9 @@ export default {
         }
     },
     methods: {
-        gotoApt(){
-            this.$router.push('/appartments');
-        },
+        // gotoApt(){
+        //     this.$router.push('/appartments');
+        // },
         setDrop: function() {
             this.drop = !this.drop;
         },

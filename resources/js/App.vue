@@ -32,8 +32,8 @@ export default {
     },
     name: 'App',
     methods: {
-        performSearch(searchData, e) {
-            if(this.lastSearches.inputSearch == searchData.inputSearch && this.lastSearches.km == searchData.km && this.lastSearches.rooms == searchData.rooms && this.lastSearches.services == searchData.services) {
+        performSearch(searchData) {
+            if(this.lastSearches.inputSearch == searchData.inputSearch && this.lastSearches.km == searchData.km && this.lastSearches.rooms == searchData.rooms && this.lastSearches.services == searchData.services || searchData.inputSearch == '') {
                 return
             }
             axios.get('http://127.0.0.1:8000/api/search' , {
@@ -51,7 +51,7 @@ export default {
                 this.lastSearches.rooms = searchData.rooms;
                 this.lastSearches.beds = searchData.beds;
                 this.lastSearches.services = searchData.services;
-                e.preventDefault();
+                this.$router.push('/appartments').catch(()=>{});
                 console.log('res', this.houses);
             })
             .catch(error => {
