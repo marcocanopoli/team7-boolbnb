@@ -20,7 +20,10 @@
                     </div>
                 </div> -->
                 <div class="search d-flex" >
-                    <input type="text" placeholder="Dove vuoi andare?" v-model="searchData.inputSearch" @keyup.enter="$emit('search', searchData)">
+                    <input type="text" placeholder="Dove vuoi andare?" 
+                        v-model="searchData.inputSearch" 
+                        @keyup.enter="$emit('search', searchData)">
+                        <!-- @keyup="$emit('autocomplete', searchData.inputSearch)" -->
                     <!-- <input type="number" min="1" name="rooms" id="rooms" v-model="searchData.rooms" placeholder="Aggiungi stanze" @keyup.enter="$emit('search', searchData)" >
                     <input type="number" min="1" name="beds" id="beds" v-model="searchData.beds" placeholder="Aggiungi letti" @keyup.enter="$emit('search', searchData)">
                     <input class="multi-input align-self-center" type="number" min="0" name="km" id="km" v-model="searchData.km" placeholder="Cerca nel raggio di km" @keyup.enter="$emit('search', searchData)"> -->
@@ -62,7 +65,7 @@ export default {
     },
     methods: {
         // gotoApt(){
-        //     this.$router.push('/appartments');
+        //     this.$router.push('/apartments');
         // },
         setDrop: function() {
             this.drop = !this.drop;

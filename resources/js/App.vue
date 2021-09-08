@@ -1,63 +1,104 @@
 <template>
     <div>
-        <Header @search="performSearch"/>
-        <router-view :houses="houses" :houseTypes="houseTypes" :search="lastSearches.inputSearch"></router-view>
+        <Header @search="performSearch"
+            />
+            <!-- @autocomplete ="autocomplete" -->
+        <router-view 
+            :houses="houses" 
+            :houseTypes="houseTypes" 
+            :searchCoordinates="searchCoordinates"
+            :lastInputSearch="lastSearch.inputSearch"
+            @search="performSearch">
+        </router-view>
     </div>
 </template>
 
 <script>
 import Header from './components/Header.vue'
 import Home from './pages/Home.vue'
-import Appartments from './pages/Appartments.vue'
+import Apartments from './pages/Apartments.vue'
 
 export default {
   components: { 
         Home,
         Header,
-        Appartments
+        Apartments
     },
     data(){
         return{
             houses: [],
-            lastSearches: {
+            houseTypes: [],
+            searchCoordinates: {},
+            lastSearch: {
                 inputSearch : "",
                 km: '',
                 rooms: '',
                 beds: '',
                 services: ''
             },
-            houseTypes: []
         }
     },
     name: 'App',
     created() {
-        this.getHouseType();
+        this.getHouseTypes();
         
     },
     methods: {
         getCoordinates(){
-            axios.get('https://api.tomtom.com/search/2/geocode/' + this.lastSearches.inputSearch,
+            const currentAxios = axios.create();
+            currentAxios.defaults.headers.common = {};
+            currentAxios.defaults.headers.common.accept = 'application/json';
+
+            currentAxios.get(`https://api.tomtom.com/search/2/geocode/${this.lastSearch.inputSearch}.json`,
             {
                 params: {
-                    key : '9klnGNAqb9IZGTnJpPeD3XymW9LUsIDx' 
+                    key : '9klnGNAqb9IZGTnJpPeD3XymW9LUsIDx',
+                    language: 'it-IT',
+                    countrySet: 'IT',
+                    limit: 10
                 }
-            }).then((result) => {
-                console.log(result);
+            }).then((res) => {
+                this.searchCoordinates = res.data.results[0].position;
             }).catch((err) => {
                 console.log(err);
             });
         },
-        getHouseType(){
+        // autocomplete(inputSearch){
+        //     this.lastSearch.inputSearch = inputSearch;
+
+        //     const currentAxios = axios.create();
+        //     currentAxios.defaults.headers.common = {};
+        //     currentAxios.defaults.headers.common.accept = 'application/json';
+
+        //     currentAxios.get(`https://api.tomtom.com/search/2/autocomplete/${this.lastSearch.inputSearch}.json`,
+        //     {
+        //         params: {
+        //             key : '9klnGNAqb9IZGTnJpPeD3XymW9LUsIDx',
+        //             language: 'it-IT',
+        //             // countrySet: 'IT',
+        //             // limit: 10
+        //         }
+        //     }).then((res) => {
+        //         // this.searchCoordinates = res.data.results[0].position;
+        //         console.log(res);
+        //     }).catch((err) => {
+        //         console.log(err);
+        //     });
+        // },
+        getHouseTypes(){
             axios.get('http://127.0.0.1:8000/api/housetypes')
             .then(res => {
-                console.log(res.data);
                 this.houseTypes = res.data;
             }).catch(err => {
                 console.log('type', err)
             });
         },
         performSearch(searchData) {
-            if(this.lastSearches.inputSearch == searchData.inputSearch && this.lastSearches.km == searchData.km && this.lastSearches.rooms == searchData.rooms && this.lastSearches.services == searchData.services || searchData.inputSearch == '') {
+            if( this.lastSearch.inputSearch == searchData.inputSearch 
+                && this.lastSearch.km == searchData.km 
+                && this.lastSearch.rooms == searchData.rooms 
+                && this.lastSearch.services == searchData.services 
+                || searchData.inputSearch == '') {
                 return
             }
             axios.get('http://127.0.0.1:8000/api/search' , {
@@ -70,14 +111,14 @@ export default {
                 }      
             }).then(res => {
                 this.houses = res.data;
-                this.lastSearches.inputSearch = searchData.inputSearch;
-                this.lastSearches.km = searchData.km;
-                this.lastSearches.rooms = searchData.rooms;
-                this.lastSearches.beds = searchData.beds;
-                this.lastSearches.services = searchData.services;
-                this.$router.push('/appartments').catch(()=>{});
+                this.lastSearch.inputSearch = searchData.inputSearch;
+                this.lastSearch.km = searchData.km;
+                this.lastSearch.rooms = searchData.rooms;
+                this.lastSearch.beds = searchData.beds;
+                this.lastSearch.services = searchData.services;
+                this.$router.push('/apartments').catch(()=>{});
                 this.getCoordinates();
-                console.log('res axios app', this.houses);
+                // console.log('res axios app', this.houses);
 
             })
             .catch(error => {
