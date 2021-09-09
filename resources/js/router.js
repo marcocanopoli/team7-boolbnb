@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 
 import Home from './pages/Home';
 import Apartments from './pages/Apartments';
+import Flat from './pages/Flat';
 
 Vue.use(VueRouter);
 
@@ -20,6 +21,11 @@ const router = new VueRouter({
             path: '/apartments',
             name: 'apartments',
             component: Apartments
+        },
+        {
+            path: '/flat',
+            name: 'flat',
+            component: Flat
         }
         
     ]

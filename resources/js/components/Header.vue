@@ -101,6 +101,7 @@ export default {
 
         &.nav-secondary {
             background-color: $white;
+            z-index: 99;
         }
 
         .search,

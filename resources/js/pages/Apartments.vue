@@ -29,7 +29,7 @@
             <div class="house-container row" v-for="house in filtered" :key="house.id">
                 <div class="col-12 col-md-8">
                     <!-- a = router-link -->
-                    <a href="#" class="bnb-a">
+                    <router-link to="flat" class="bnb-a">
                         <div class="row">
                             <div class="img-container col-12 col-md-4">
                                 <img :src="'storage/' + house.photos[0].path" :alt="'Foto' + house.photos[0].id">
@@ -59,7 +59,7 @@
                                 </p>
                             </div>
                         </div>
-                    </a>
+                    </router-link>
                 </div>
             </div>
         </div>
