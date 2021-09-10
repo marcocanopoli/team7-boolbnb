@@ -1,13 +1,11 @@
 <template>
-    <div>
-         <div class="container-fluid">
-
-
+    <div class="container-fluid">
         <div class="d-flex my-4">
             <h1>Strutture</h1> 
         </div>
         <div class="d-flex filters">
             <!-- @keyup.enter="$emit('search', searchData)" -->
+            <input type="text" placeholder="cerca">
             <div>
                 <label for="rooms">Camere</label>
                 <input type="number" min="1" name="rooms" id="rooms" v-model="filter.rooms" placeholder="Aggiungi camere"  >
@@ -22,7 +20,6 @@
                     <input class=" align-self-center" type="number" min="0" name="km" id="km" v-model="filter.km" placeholder="Cerca nel raggio di km" @keyup.enter="$emit('search', filter)">
                     <button class="mybtn" @click="$emit('search', filter)"><i class="fas fa-arrow-right"></i></button>
                 </div>
-
             </div>
         </div>
         <div>
@@ -63,7 +60,6 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </template>
 

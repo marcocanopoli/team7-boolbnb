@@ -194,12 +194,12 @@ button {
     }
 }
 
-.dashboard {
+.bnb-cards-container {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     gap: 15px;
 
-    .dashboard-card {
+    .bnb-card {
         padding: 24px;
         color: inherit;
         transition: .3s ease-in-out;
@@ -215,12 +215,33 @@ button {
             display: block;
             font-size: 32px;
             color: $brand;
+
+            &.bronze {
+                background: -webkit-linear-gradient(top, #CD7F32 0%, #BE7023 100%);
+            }
+            &.silver {
+                background: -webkit-linear-gradient(top, #C0C0C0 0%, #B1B1B1 100%);
+            }
+            &.gold {
+                background: -webkit-linear-gradient(top, #ECD540 0%, #DDC631 100%);
+            }
+            &.icon {
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
         }
 
         h4 {
             margin-bottom: 16px;
         }
     }
+}
+
+.summary {
+    padding: 5px 10px;
+    border: 1px solid rgba($gray-1, 0.3);
+    border-radius: 12px;
 }
 
 //Index 
@@ -355,7 +376,7 @@ button {
 
 @media screen and (min-width: 768px) {
 
-    .dashboard {
+    .bnb-cards-container {
         grid-template-columns: repeat(2, 1fr);
     }
 
@@ -371,7 +392,7 @@ button {
 
 @media screen and (min-width: 1200px) {
 
-    .dashboard {
+    .bnb-cards-container {
         grid-template-columns: repeat(3, 1fr);
     }
 

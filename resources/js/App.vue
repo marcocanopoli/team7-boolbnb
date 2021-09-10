@@ -1,7 +1,7 @@
 <template>
     <div>
-        <Header @search="performSearch"
-            />
+        <!-- <Header @search="performSearch"
+            /> -->
             <!-- @autocomplete ="autocomplete" -->
         <router-view 
             :houses="houses" 
