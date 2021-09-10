@@ -26,6 +26,13 @@ a.bnb-a {
 .color-gray-2 {
     color: $gray-2;
 }
+.color-white {
+    color: $white;
+}
+
+.bg-white {
+    background-color: $white;
+}
 
 //Headlines
 //Font-Weights
@@ -164,34 +171,40 @@ button {
 }
 
 //header
-.my-navbar {
-    min-height: 80px;
-
+.navbar.my-navbar {
+    min-height: 90px;
+    padding: 8px 24px;
+    
     svg {
         height: 32px;
         width: 32px;
     }
+}
 
-    .header-user {
-        background-color: $white;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        
-        &.navbar-toggler {
-            font-size: 16px;      
-            padding: 10px 25px;
-            border-radius: 30px;
-        }
-    }
+.header-user {
+    background-color: $white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
 
-    .header-avatar {
-        margin-left: 16px;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        object-fit: cover;
+    i {
+        margin: 0 4px;
+        color: $gray-1;
     }
+    
+    &.navbar-toggler {
+        font-size: 16px;      
+        padding: 16px 24px;
+        border-radius: 30px;
+    }
+}
+
+.header-avatar {
+    margin-left: 16px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .bnb-cards-container {

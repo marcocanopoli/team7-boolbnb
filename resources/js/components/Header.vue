@@ -1,223 +1,166 @@
 <template>
     <header>
-        <nav :class="visibleNav ? 'nav-secondary' : '' ">
-            <div class="container-fluid d-flex justify-content-between align-items-center">
-                <div class="logo-container">
-                    <a class="bnb-a" href="/">
-                    <!-- :fill="visibleNav ? '#ff385c' : '#fff' -->
-                        <svg width="102" height="32" fill='#ff385c' style="display: block;"><path d="M29.24 22.68c-.16-.39-.31-.8-.47-1.15l-.74-1.67-.03-.03c-2.2-4.8-4.55-9.68-7.04-14.48l-.1-.2c-.25-.47-.5-.99-.76-1.47-.32-.57-.63-1.18-1.14-1.76a5.3 5.3 0 00-8.2 0c-.47.58-.82 1.19-1.14 1.76-.25.52-.5 1.03-.76 1.5l-.1.2c-2.45 4.8-4.84 9.68-7.04 14.48l-.06.06c-.22.52-.48 1.06-.73 1.64-.16.35-.32.73-.48 1.15a6.8 6.8 0 007.2 9.23 8.38 8.38 0 003.18-1.1c1.3-.73 2.55-1.79 3.95-3.32 1.4 1.53 2.68 2.59 3.95 3.33A8.38 8.38 0 0022.75 32a6.79 6.79 0 006.75-5.83 5.94 5.94 0 00-.26-3.5zm-14.36 1.66c-1.72-2.2-2.84-4.22-3.22-5.95a5.2 5.2 0 01-.1-1.96c.07-.51.26-.96.52-1.34.6-.87 1.65-1.41 2.8-1.41a3.3 3.3 0 012.8 1.4c.26.4.45.84.51 1.35.1.58.06 1.25-.1 1.96-.38 1.7-1.5 3.74-3.21 5.95zm12.74 1.48a4.76 4.76 0 01-2.9 3.75c-.76.32-1.6.41-2.42.32-.8-.1-1.6-.36-2.42-.84a15.64 15.64 0 01-3.63-3.1c2.1-2.6 3.37-4.97 3.85-7.08.23-1 .26-1.9.16-2.73a5.53 5.53 0 00-.86-2.2 5.36 5.36 0 00-4.49-2.28c-1.85 0-3.5.86-4.5 2.27a5.18 5.18 0 00-.85 2.21c-.13.84-.1 1.77.16 2.73.48 2.11 1.78 4.51 3.85 7.1a14.33 14.33 0 01-3.63 3.12c-.83.48-1.62.73-2.42.83a4.76 4.76 0 01-5.32-4.07c-.1-.8-.03-1.6.29-2.5.1-.32.25-.64.41-1.02.22-.52.48-1.06.73-1.6l.04-.07c2.16-4.77 4.52-9.64 6.97-14.41l.1-.2c.25-.48.5-.99.76-1.47.26-.51.54-1 .9-1.4a3.32 3.32 0 015.09 0c.35.4.64.89.9 1.4.25.48.5 1 .76 1.47l.1.2c2.44 4.77 4.8 9.64 7 14.41l.03.03c.26.52.48 1.1.73 1.6.16.39.32.7.42 1.03.19.9.29 1.7.19 2.5zM41.54 24.12a5.02 5.02 0 01-3.95-1.83 6.55 6.55 0 01-1.6-4.48 6.96 6.96 0 011.66-4.58 5.3 5.3 0 014.08-1.86 4.3 4.3 0 013.7 1.92l.1-1.57h2.92V23.8h-2.93l-.1-1.76a4.52 4.52 0 01-3.88 2.08zm.76-2.88c.58 0 1.09-.16 1.57-.45.44-.32.8-.74 1.08-1.25.25-.51.38-1.12.38-1.8a3.42 3.42 0 00-1.47-3.04 2.95 2.95 0 00-3.12 0c-.44.32-.8.74-1.08 1.25a4.01 4.01 0 00-.38 1.8 3.42 3.42 0 001.47 3.04c.47.29.98.45 1.55.45zM53.45 8.46c0 .35-.06.67-.22.93-.16.25-.38.48-.67.64-.29.16-.6.22-.92.22-.32 0-.64-.06-.93-.22a1.84 1.84 0 01-.67-.64 1.82 1.82 0 01-.22-.93c0-.36.07-.68.22-.93.16-.3.39-.48.67-.64.29-.16.6-.23.93-.23a1.84 1.84 0 011.6.86 2 2 0 01.21.94zm-3.4 15.3V11.7h3.18v12.08h-3.19zm11.68-8.9v.04c-.15-.07-.35-.1-.5-.13-.2-.04-.36-.04-.55-.04-.89 0-1.56.26-2 .8-.48.55-.7 1.32-.7 2.31v5.93h-3.19V11.69h2.93l.1 1.83c.32-.64.7-1.12 1.24-1.48a3.1 3.1 0 011.81-.5c.23 0 .45.02.64.06.1.03.16.03.22.06v3.2zm1.28 8.9V6.74h3.18v6.5c.45-.58.96-1.03 1.6-1.38a5.02 5.02 0 016.08 1.31 6.55 6.55 0 011.6 4.49 6.96 6.96 0 01-1.66 4.58 5.3 5.3 0 01-4.08 1.86 4.3 4.3 0 01-3.7-1.92l-.1 1.57-2.92.03zm6.15-2.52c.57 0 1.08-.16 1.56-.45.44-.32.8-.74 1.08-1.25.26-.51.38-1.12.38-1.8 0-.67-.12-1.28-.38-1.79a3.75 3.75 0 00-1.08-1.25 2.95 2.95 0 00-3.12 0c-.45.32-.8.74-1.09 1.25a4.01 4.01 0 00-.38 1.8 3.42 3.42 0 001.47 3.04c.47.29.98.45 1.56.45zm7.51 2.53V11.69h2.93l.1 1.57a3.96 3.96 0 013.54-1.89 4.1 4.1 0 013.82 2.44c.35.76.54 1.7.54 2.75v7.24h-3.19v-6.82c0-.84-.19-1.5-.57-1.99-.38-.48-.9-.74-1.56-.74-.48 0-.9.1-1.27.32-.35.23-.64.52-.86.93a2.7 2.7 0 00-.32 1.35v6.92h-3.16zm12.52 0V6.73h3.19v6.5a4.67 4.67 0 013.73-1.89 5.02 5.02 0 013.95 1.83 6.57 6.57 0 011.59 4.48 6.95 6.95 0 01-1.66 4.58 5.3 5.3 0 01-4.08 1.86 4.3 4.3 0 01-3.7-1.92l-.09 1.57-2.93.03zm6.18-2.53c.58 0 1.09-.16 1.56-.45.45-.32.8-.74 1.09-1.25.25-.51.38-1.12.38-1.8a3.42 3.42 0 00-1.47-3.04 2.95 2.95 0 00-3.12 0c-.44.32-.8.74-1.08 1.25a3.63 3.63 0 00-.38 1.8 3.42 3.42 0 001.47 3.04c.47.29.95.45 1.55.45z"></path></svg>
-                    </a>
-                </div>
-                <!-- <div class="search-container" v-if="visibleNav" @click="setInputNav()">
-                    Inizia la ricerca
-                    <span v-if="!inputNav"><i class="fas fa-search"></i></span>
-                    <div class="search search-secondary d-flex" v-if="inputNav">
-                        <input type="text" placeholder="Dove vuoi andare?" v-model="inputSearch" @keyup.enter="performSearch()">
-                        <input type="text" placeholder="Check-in" onfocus="(this.type ='date')">
-                        <input type="text" placeholder="Check-out" onfocus="(this.type ='date')">
-                        <div class="multi-input align-self-center">Ospiti</div>
-                        <span @click="performSearch()"><i class="fas fa-search"></i></span>
+        <nav class="my-header"
+            :class="!visibleFullSearch || $route.name != 'home' ? 'bg-white shadow-sm' : '' ">
+
+            <!-- Logo -->
+            <router-link class="logo-box d-flex align-items-center" :to="{ path: 'home'}">                    
+                <svg width="256px" height="276px" viewBox="0 0 256 276" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
+                    <g>
+                        <path d="M238.04054,223.122821 C236.10911,237.466648 226.457473,249.879044 212.942976,255.395053 C206.322113,258.150302 199.152955,258.979632 191.981042,258.150302 C185.087409,257.323727 178.19102,255.116773 171.021862,250.983899 C161.091945,245.46238 151.162028,236.915598 139.578961,224.227676 C157.782891,201.888117 168.812153,181.477232 172.950537,163.278812 C174.881966,154.726519 175.157491,147.003556 174.330917,139.831643 C173.228817,132.93801 170.746338,126.592672 166.883478,121.076663 C158.333941,108.667021 143.99287,101.495108 127.995894,101.495108 C111.998918,101.495108 97.6578467,108.942546 89.108309,121.076663 C85.2454499,126.592672 82.7657258,132.93801 81.6608709,139.831643 C80.5587713,147.003556 80.8342962,155.002044 83.0412507,163.278812 C87.1768794,181.477232 98.4844214,202.163642 116.412827,224.500446 C105.105285,237.191123 94.8998425,245.74066 84.969925,251.256669 C77.800767,255.395053 70.9043787,257.602007 64.0107457,258.425827 C56.5633076,259.255157 49.3913943,258.150302 43.0488111,255.670578 C29.5343146,250.154569 19.8826773,237.739417 17.9512477,223.398346 C17.124673,216.504713 17.6757228,209.61108 20.4337271,201.888117 C21.2603018,199.127357 22.6406816,196.374864 24.0183061,193.063054 C25.9497357,188.651901 28.1566901,183.959712 30.3608893,179.270278 L30.6391695,178.721983 C49.6669192,137.624689 70.077804,95.7035748 91.3152635,54.8873158 L92.1418382,53.2286559 C94.3487927,49.0957823 96.5529919,44.6846287 98.7627016,40.5462446 C100.966901,36.1323357 103.44938,31.9939517 106.482909,28.4066174 C112.274443,21.785754 119.997406,18.201175 128.546944,18.201175 C137.096481,18.201175 144.819444,21.785754 150.610978,28.4066174 C153.644507,31.9939517 156.126986,36.1323357 158.333941,40.5462446 C160.540895,44.6846287 162.745094,49.0957823 164.952049,53.2286559 L165.781379,54.8873158 C186.740558,95.9790997 207.151443,137.900214 226.181948,178.997508 L226.181948,179.270278 C228.388902,183.684187 230.317577,188.651901 232.524531,193.063054 C233.904911,196.374864 235.282535,199.127357 236.10911,201.888117 C238.316065,209.057275 239.142639,215.956418 238.04054,223.122821 L238.04054,223.122821 Z M127.995894,210.159374 C113.103773,191.40715 103.44938,173.754269 100.140326,158.864903 C98.7627016,152.519565 98.4844214,147.003556 99.3137514,142.038598 C99.8648012,137.624689 101.520706,133.76183 103.724905,130.45002 C108.965389,123.010848 117.790451,118.313148 127.995894,118.313148 C138.201336,118.313148 147.301924,122.729812 152.266882,130.45002 C154.471082,133.76183 156.126986,137.624689 156.678036,142.038598 C157.504611,147.003556 157.229086,152.79509 155.851461,158.864903 C152.542407,173.481499 142.888015,191.131625 127.995894,210.159374 L127.995894,210.159374 Z M252.381611,195.818303 C251.003986,192.509249 249.623607,188.92467 248.245982,185.891141 C246.039028,180.928938 243.832073,176.236749 241.900644,171.82284 L241.625119,171.55007 C222.597369,130.177251 202.186484,88.2561367 180.6735,46.8915831 L179.846925,45.2329232 C177.639971,41.0945392 175.433016,36.6806302 173.228817,32.2694766 C170.468057,27.3017626 167.710053,22.0667894 163.298899,17.0990754 C154.471082,6.06705835 141.785915,0 128.271419,0 C114.481397,0 102.071756,6.06705835 92.9684129,16.5507809 C88.8327841,21.5129844 85.7992549,26.753468 83.0412507,31.721182 C80.8342962,36.1323357 78.6273417,40.5462446 76.4203873,44.6846287 L75.5938126,46.3350228 C54.3591083,87.7050869 33.6726987,129.628956 14.6421937,170.99902 L14.3666688,171.55007 C12.4352392,175.961224 10.2282847,180.647902 8.02133027,185.615616 C6.64370576,188.651901 5.263326,191.960955 3.88570148,195.545534 C0.298367256,205.748221 -0.803732353,215.402613 0.573892159,225.329776 C3.61017658,246.016185 17.4001979,263.393541 36.4307029,271.113749 C43.5998609,274.150033 51.047299,275.527658 58.770262,275.527658 C60.9772165,275.527658 63.7352208,275.252133 65.9421752,274.973852 C75.0427628,273.868998 84.4188752,270.840979 93.5194627,265.59774 C104.82976,259.255157 115.586252,250.154569 127.720369,236.915598 C139.854486,250.154569 150.886503,259.255157 161.91852,265.59774 C171.021862,270.840979 180.397975,273.868998 189.498562,274.973852 C191.705517,275.252133 194.463521,275.527658 196.670476,275.527658 C204.393439,275.527658 212.113646,274.150033 219.010035,271.113749 C238.316065,263.393541 251.830561,245.74066 254.86409,225.329776 C257.071045,215.675383 255.96619,206.026501 252.381611,195.818303 L252.381611,195.818303 Z" :fill="$route.name == 'home' && visibleFullSearch ? '#fff' :'#ff385c'">
+                        </path>
+                    </g>
+                </svg>                    
+                <strong class="ml-2" :class="$route.name == 'home' && visibleFullSearch ? 'color-white' : 'color-brand' ">boolbnb</strong>                    
+            </router-link>
+            <!-- Logo -->
+            
+            <!-- Search -->            
+            <!-- <div v-if="$route.name != 'apartments'" > -->
+            <div>
+
+                <!-- Full search box -->
+                <v-search
+                    v-on="$listeners" 
+                    v-if="visibleFullSearch"/>                
+                <!-- /Full search box -->
+
+                <!-- Light search box -->
+                <v-light-search
+                    v-on="$listeners" 
+                    v-else/>
+                <!-- /Light search box -->
+
+            </div>
+            <!-- /Search -->
+            
+            <!-- User -->
+                <div class="header-user navbar-toggler" @click="setDrop()">
+                    <i class="fas fa-bars"></i>
+                    <i class="far fa-user"></i>
+                    <div v-if="activeDrop" class="bnb-dropdown">
+                        <a href="/register">Registrati</a>
+                        <a href="/login">Accedi</a>
                     </div>
-                </div> -->
-                <div class="search d-flex" >
-                    <input type="text" placeholder="Dove vuoi andare?" 
-                        v-model="searchData.inputSearch" 
-                        @keyup.enter="$emit('search', searchData)">
-                        <!-- @keyup="$emit('autocomplete', searchData.inputSearch)" -->
-                    <!-- <input type="number" min="1" name="rooms" id="rooms" v-model="searchData.rooms" placeholder="Aggiungi stanze" @keyup.enter="$emit('search', searchData)" >
-                    <input type="number" min="1" name="beds" id="beds" v-model="searchData.beds" placeholder="Aggiungi letti" @keyup.enter="$emit('search', searchData)">
-                    <input class="multi-input align-self-center" type="number" min="0" name="km" id="km" v-model="searchData.km" placeholder="Cerca nel raggio di km" @keyup.enter="$emit('search', searchData)"> -->
-                    <button class="mybtn" @click="$emit('search', searchData)" ><i class="fas fa-search"></i></button>
                 </div>
-                <div class="user-container">
-                    <div class="user" @click="setDrop()">
-                        <i class="fas fa-bars"></i>
-                        <i class="far fa-user"></i>
-                        <div v-if="drop" class="bnb-dropdown">
-                            <a href="/register">Registrati</a>
-                            <a href="/login">Accedi</a>
-                        </div>
-                    </div>
-                </div>
-            </div>  <!-- felx container -->
+            <!-- /User -->  
+
         </nav>
     </header>
 </template>
 
 <script>
+import VSearch from './VSearch.vue';
+import VLightSearch from './VLightSearch.vue';
 export default {
     name: 'Header',
+    components: {        
+        VSearch,
+        VLightSearch
+    },
     data: function() {
         return {
-            drop: false,
-            visibleNav: false,
-            inputNav: false,
-            searchData: {
-                inputSearch : "",
-                km: '',
-                rooms: '',
-                beds: '',
-                services: ''
-            }
-            
-            
+            activeDrop: false,
+            visibleFullSearch: true,
+            // lastSearch: {
+            //     inputSearch: "",
+            //     rooms: '',
+            //     beds: '',
+            //     services: '',
+            //     km: ''
+            // }
         }
     },
     methods: {
-        // gotoApt(){
-        //     this.$router.push('/apartments');
-        // },
         setDrop: function() {
-            this.drop = !this.drop;
+            this.activeDrop = !this.activeDrop;
         },
-        setSCroll () {
+        setScroll () {
             if (window.scrollY > 0 ) {
-                this.visibleNav = true
+                this.visibleFullSearch = false
             } else if (window.scrollY == 0) {
-                this.visibleNav = false
+                this.visibleFullSearch = true
             }
-        },
-        setInputNav: function() {
-            this.inputNav = !this.inputNav;
         }
     },
     created () {
-      window.addEventListener('scroll', this.setSCroll);
+      window.addEventListener('scroll', this.setScroll);
 
     },
     destroyed () {
-      window.removeEventListener('scroll', this.setSCroll);
+      window.removeEventListener('scroll', this.setScroll);
     } 
 }
 </script>
 
-<style lang='scss' scoped>
-@import '../../sass/partials/variables.scss';
-    nav {
-        width: 100%;
+<style lang='scss'>
+
+    @import '../../sass/partials/variables.scss';
+
+    .my-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         position: fixed;
         top: 0;
-        padding: 20px;
+        width: 100%;
+        padding: 0 24px;
+        transition: .1s ease-out;
+        min-height: 90px;
 
-        &.nav-secondary {
-            background-color: $white;
+        .logo-box {
+            font-size: 20px;
+            font-weight: 700;
+
+            svg {
+                height: 32px;
+                width: 32px;
+            }
+
+            &:hover { 
+                text-decoration: none;
+            }
         }
 
-        .search,
-        .search-container,
-        .user {
-            border-radius: 45px;
-            border: 1px solid rgba($gray-1, 0.3);
-            transition: 0.2s;
+        .header-user {
+            position: relative;
+            border: 1px solid rgba($gray-1, 0.2);
 
             &:hover {
                 box-shadow: 0 0 5px 2px rgba($gray-1, 0.2);
             }
-        }
 
-        .search-container {
-            position: relative;
-            padding: 12px 150px 12px 16px;
-            font-size: 14px;
-
-            .search-secondary {
+            .bnb-dropdown {
+                width: 200px;
                 position: absolute;
-                top: 50px;
-                left: -65%;
-            }
-        }
-
-        .search {
-            position: relative;
-            font-size: 12px;
-            background-color: $white;
-            
-
-            input,
-            .multi-input {
-                padding: 12px 16px;
-                border: 0;
-                border-radius: 45px;
-                outline: none;
-
-                &:hover {
-                    background-color: rgba($gray-1, 0.2);
-                }
-                
-            }
-            .multi-input {
-                padding-right: 50px;
-                color: rgba($gray-1, 0.9);
-            }
-
-        }
-        span,
-        .mybtn {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 36px;
-            height: 36px;
-            position: absolute;
-            top: 50%;
-            right: 5px;
-            transform: translateY(-50%);
-            background-color: $brand;
-            color: $white;
-            border-radius: 50%;
-            cursor: pointer;
-            
-            i {
-                font-size: 14px;
-            }
-        }
-
-        .user-container {
-            display: flex;
-            align-items: center;
-
-            .user {
-                position: relative;
-                margin: 0 10px;
-                padding: 10px 25px;
+                top: 120%;
+                right: 0;
                 background-color: $white;
-                cursor: pointer;
-
-                i {
-                    margin: 0 2.5px;
-                    color: $gray-1;
+                border: 1px solid rgba($gray-1, 0.3);
+                border-radius: 12px;
+                transition: 0.2s;
+                
+                &:hover {
+                    box-shadow: 0 0 5px 2px rgba($gray-1, 0.2);
                 }
 
-                .bnb-dropdown {
-                    width: 200px;
-                    position: absolute;
-                    top: 120%;
-                    right: 0;
-                    background-color: $white;
-                    border: 1px solid rgba($gray-1, 0.3);
-                    border-radius: 12px;
-                    transition: 0.2s;
-                    
+                a {
+                    display: block;
+                    text-align: center;
+                    margin: 10px 0;
+                    padding: 10px;
+                    transition: .2s;
+
                     &:hover {
-                        box-shadow: 0 0 5px 2px rgba($gray-1, 0.2);
-                    }
-
-                    a {
-                        display: block;
-                        text-align: center;
-                        margin: 10px 5px;
-                        padding: 5px 0;
-
-                        &:hover {
-                            text-decoration: none;
-                            background-color: rgba($gray-1, 0.1);
-                        }
+                        text-decoration: none;
+                        background-color: rgba($gray-1, 0.1);
                     }
                 }
             }
+
             a {
                 margin: 0 10px;
-                color: $black;
+                color: $black;                
             }
         }
     }
