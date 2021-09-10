@@ -1,16 +1,14 @@
 <template>
-    <div class="top-distance">
-        <!-- Mappa -->
-        
-        <div id="map-div" class="py-5"></div>
-        
-        <!-- Mappa  -->
-        <div class="container">
+    <div>
+        <div class="container-fluid top-distance">
+            <!-- Mappa -->
+            <div id="map-div" class="pr-3 my-4"></div>
+            <p><strong>Indirizzo: </strong>{{house.address}}, {{house.zip_code}}, {{house.city}}</p>
+            <!-- Mappa  -->
             <div class="d-flex">
-                <h1 class="h1 py-5">{{ house.title }}</h1>
+                <h1 class="h1">{{ house.title }}</h1>
                 <span class="bnb-btn bnb-btn-brand-2 align-self-center mx-4"> {{ getHouseType(house.house_type_id) }}</span>
             </div>
-            <p><strong>Indirizzo: </strong>{{house.address}}, {{house.zip_code}}, {{house.city}}</p>
 
             <div class="show-photos my-4">
                 <div v-for="photo, index in house.photos" :key="index">
@@ -41,7 +39,6 @@
 
                 <div class="show-details col-lg-6">
                     <!-- //box form -->
-                    <Message :house_id='house.id'/>
                 </div> 
             </div>
 
@@ -59,11 +56,11 @@
 </template>
 
 <script>
-import Message from '../components/Message.vue';
+import From from '../components/Form.vue';
 export default {
     name: 'Flat',
     components: {
-        Message
+        From
     },
     props: {
         houseTypes: Array,
@@ -109,7 +106,10 @@ export default {
              }).catch(err => {
                  console.log(err);
              })
-        }
+        },
+
+
+        
     }
 }
 
@@ -125,7 +125,7 @@ export default {
     .show-details {
         height: 300px;
         width: 150px;
-        
+        border: 1px solid red($color: #000000);
     }
     #map-div {
         height: 400px;
