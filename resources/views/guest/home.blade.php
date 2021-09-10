@@ -12,6 +12,17 @@
     </head>
     <body>
         <div id="root"></div>
+
+        {{-- @if(Auth::check())
+            <script>
+                top.user = Auth::check->user();
+            </script>
+        @else 
+            <script>
+                top.loggedIn = false;
+            </script>
+        @endif --}}
+
         <script src="{{asset('js/front.js')}}"></script>
     </body>
 </html>

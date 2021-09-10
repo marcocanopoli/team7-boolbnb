@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\HouseType;
+use App\Service;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +23,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::namespace('Api')
     ->group(function() {
         
-        Route::get('houses', 'HouseController@index');
-        Route::get('houses/{id}', 'HouseController@show');
-        Route::get('search', 'HouseController@search');
-        Route::get('housetypes', 'HouseTypeController@index');
+        Route::get('/houses', 'HouseController@index');
+        Route::get('/houses/{id}', 'HouseController@show');
+        Route::get('/search', 'HouseController@search');
 
+        Route::get('/housetypes', function() {
+            $house_types = HouseType::all();
+            return response()->json($house_types);
+        });
+
+        Route::get('/services', function() {
+            $services = Service::all();
+            return response()->json($services);
+        });
     });
