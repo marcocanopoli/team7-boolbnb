@@ -3,8 +3,9 @@
 //grays
 $white: #FFF;
 $black: #181818;
-// $gray-1: #F0F0F0; 
-$gray-1: rgb(113, 113, 113); 
+
+$gray-hover: #f0f0f0;
+$gray-1: #717171; 
 $gray-2: #484848; 
 
 //colors
@@ -16,5 +17,5 @@ $primary-2 :#ae0186;
 $brand-start: #e01b51;
 $brand-end: #dd1a5a;
 
-$brand-h:  -webkit-linear-gradient(90deg, #{$brand-start}, #{$brand-end});
-$primary-h:  -webkit-linear-gradient(120deg, #{$primary-1}, #{$primary-2});
+$brand-h:  linear-gradient(90deg, #{$brand-start}, #{$brand-end});
+$primary-h:  linear-gradient(120deg, #{$primary-1}, #{$primary-2});

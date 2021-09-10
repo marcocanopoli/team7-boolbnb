@@ -1,14 +1,13 @@
 <template>
     <div>
-        <Header @search="performSearch"
-            />
-            <!-- @autocomplete ="autocomplete" -->
-        <router-view 
+        <Header 
+            @search="performSearch"/>
+        <router-view
+            @search="performSearch"
             :houses="houses" 
-            :houseTypes="houseTypes" 
-            :searchCoordinates="searchCoordinates"
-            :lastInputSearch="lastSearch.inputSearch"
-            @search="performSearch">
+            :lastSearch="lastSearch"
+            :houseTypes="houseTypes"
+            :allServices="allServices">
         </router-view>
     </div>
 </template>
@@ -20,67 +19,60 @@ import Apartments from './pages/Apartments.vue'
 
 export default {
   components: { 
-        Home,
         Header,
+        Home,
         Apartments
     },
     data(){
         return{
             houses: [],
             houseTypes: [],
-            searchCoordinates: {},
+            allServices: [],
+            // searchCoordinates: {},
             lastSearch: {
                 inputSearch : "",
-                km: '',
                 rooms: '',
                 beds: '',
-                services: ''
+                services: '',
+                km: ''
             },
+            user: ''
         }
     },
     name: 'App',
     created() {
         this.getHouseTypes();
-        
+        this.getServices();
     },
     methods: {
-        getCoordinates(){
-            const currentAxios = axios.create();
-            currentAxios.defaults.headers.common = {};
-            currentAxios.defaults.headers.common.accept = 'application/json';
-
-            currentAxios.get(`https://api.tomtom.com/search/2/geocode/${this.lastSearch.inputSearch}.json`,
-            {
-                params: {
-                    key : '9klnGNAqb9IZGTnJpPeD3XymW9LUsIDx',
-                    language: 'it-IT',
-                    countrySet: 'IT',
-                    limit: 10
-                }
-            }).then((res) => {
-                this.searchCoordinates = res.data.results[0].position;
-            }).catch((err) => {
-                console.log(err);
-            });
-        },
-        // autocomplete(inputSearch){
-        //     this.lastSearch.inputSearch = inputSearch;
-
+        // getUser() {
+        //     axios.get('http://127.0.0.1:8000/api/user')
+        //     .then(res => {
+        //         this.user = res.data;
+        //     })
+        //     .catch(error => {
+        //         if (error.response.status == 401) {
+        //             this.user = '';
+        //         }else {
+        //             console.error('Error retrieving user:', error);
+        //         }
+        //     });
+        // },
+        // getCoordinates(){
         //     const currentAxios = axios.create();
         //     currentAxios.defaults.headers.common = {};
         //     currentAxios.defaults.headers.common.accept = 'application/json';
 
-        //     currentAxios.get(`https://api.tomtom.com/search/2/autocomplete/${this.lastSearch.inputSearch}.json`,
+        //     currentAxios.get(`https://api.tomtom.com/search/2/geocode/${this.lastSearch.inputSearch}.json`,
         //     {
         //         params: {
         //             key : '9klnGNAqb9IZGTnJpPeD3XymW9LUsIDx',
         //             language: 'it-IT',
-        //             // countrySet: 'IT',
-        //             // limit: 10
+        //             countrySet: 'IT',
+        //             limit: 10
         //         }
         //     }).then((res) => {
-        //         // this.searchCoordinates = res.data.results[0].position;
-        //         console.log(res);
+        //         this.searchCoordinates = res.data.results[0].position;
         //     }).catch((err) => {
         //         console.log(err);
         //     });
@@ -90,18 +82,38 @@ export default {
             .then(res => {
                 this.houseTypes = res.data;
             }).catch(err => {
-                console.log('type', err)
+                console.log('HouseType error: ', err)
+            });
+        },
+        getServices(){
+            axios.get('http://127.0.0.1:8000/api/services')
+            .then(res => {
+                this.allServices = res.data;
+            }).catch(err => {
+                console.log('Service error: ', err)
             });
         },
         performSearch(searchData) {
-            if( this.lastSearch.inputSearch == searchData.inputSearch 
-                && this.lastSearch.km == searchData.km 
-                && this.lastSearch.rooms == searchData.rooms 
-                && this.lastSearch.services == searchData.services 
+
+            // light search
+            if(searchData.length == 1) { //if single search input
+                searchData.inputSearch = searchData[0]; //assign to inputSearch
+                searchData.km = '';
+                searchData.rooms= '';
+                searchData.services = '';
+            }
+
+            if( 
+                // this.lastSearch.inputSearch == searchData.inputSearch 
+                // && this.lastSearch.km == searchData.km 
+                // && this.lastSearch.rooms == searchData.rooms 
+                // && this.lastSearch.services == searchData.services
+                JSON.stringify(this.lastSearch) === JSON.stringify(this.searchData)  
                 || searchData.inputSearch == '') {
                 return
             }
-            axios.get('http://127.0.0.1:8000/api/search' , {
+
+            axios.get('http://127.0.0.1:8000/api/search', {
                 params: {
                     query: searchData.inputSearch,
                     ...(searchData.km ? {km: searchData.km } : {} ),
@@ -110,26 +122,32 @@ export default {
                     ...(searchData.services ? {services: searchData.services } : {} )
                 }      
             }).then(res => {
+                // console.log('Chiamata API ricerca')
                 this.houses = res.data;
+
                 this.lastSearch.inputSearch = searchData.inputSearch;
                 this.lastSearch.km = searchData.km;
                 this.lastSearch.rooms = searchData.rooms;
                 this.lastSearch.beds = searchData.beds;
                 this.lastSearch.services = searchData.services;
+
                 this.$router.push('/apartments').catch(()=>{});
-                this.getCoordinates();
-                // console.log('res axios app', this.houses);
+                // this.getCoordinates();
 
             })
             .catch(error => {
-                console.log(error);
+                console.error('Errore:', error);
             });
         }
-    }    
+    },
+    // mounted() {
+    //     this.getUser();
+    // }    
 }
-
 </script>
 
 <style lang='scss'>
+
     @import '../sass/partials/general.scss';
+
 </style>

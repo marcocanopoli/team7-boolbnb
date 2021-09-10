@@ -62,24 +62,30 @@ class HouseController extends Controller
         //filter by selected parameters
         $filteredByParameters = House::where([
                     ['rooms', '>=', $rooms],
-                    ['beds', '>=', $beds]
+                    ['beds', '>=', $beds],
+                    ['visible', 1]
                 ])->get();
         
         //filter by services
         if ($services) {
             foreach ($filteredByParameters as $house) {
-                $valid = false; 
+                $valid = false;
 
-                foreach ($services as $service) {
+                foreach ($services as $service_id) {
                     $valid = false;
 
                     foreach($house->services as $houseService) {
-                        if ($service == strtolower($houseService->name)) {
-                            $valid = true;
+
+                        if ($service_id == $houseService->id) {
+                            $valid = true;                            
+                            // print_r($service_id);
+                            // print_r('-');
+                            // print_r($houseService->id);
+                            // print_r(',');                            
                         }
                     }
-                }
 
+                }
                 if ($valid) {
                     $filteredByServices[] = $house;
                 }

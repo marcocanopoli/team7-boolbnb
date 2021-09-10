@@ -29,11 +29,6 @@
             <p>Visualizza, crea e modifica le tue strutture</p>
         </a>
         <a href="#" class="dashboard-card shadow">
-            <i class="fas fa-handshake"></i>
-            <h4>Sponsorizza &rsaquo;</h4>
-            <p>Scegli uno dei nostri piani per mettere in evidenza la tua struttura</p>
-        </a>
-        <a href="#" class="dashboard-card shadow">
             <i class="fas fa-chart-pie"></i>
             <h4>Statistiche &rsaquo;</h4>
             <p>Visualizza statistiche riguardanti le tue strutture</p>
