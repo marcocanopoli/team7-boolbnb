@@ -39,6 +39,7 @@
 
                 <div class="show-details col-lg-6">
                     <!-- //box form -->
+                    <Message :house_id="house.id"/>
                 </div> 
             </div>
 
@@ -56,11 +57,11 @@
 </template>
 
 <script>
-import From from '../components/Form.vue';
+import Message from '../components/Message.vue';
 export default {
     name: 'Flat',
     components: {
-        From
+        Message
     },
     props: {
         houseTypes: Array,

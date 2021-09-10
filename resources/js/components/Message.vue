@@ -1,7 +1,7 @@
 <template>
   <div class="box-message">
       <h3 class="h3"> <i> Inviaci in messaggio </i> </h3>
-      <form class="form-group" method="POST" action="sendForm">
+      <form class="form-group" method="POST" @submit.prevent="sendForm">
         <div>
           <label for="guest_name">Nome:*</label>
           <input v-model="name" id="guest_name"  class="form-control" type="text" placeholder="Inserisci il tuo nome" name="guest_name"
