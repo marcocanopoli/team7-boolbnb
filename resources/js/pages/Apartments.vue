@@ -29,7 +29,7 @@
             <div class="house-container row" v-for="house in filtered" :key="house.id">
                 <div class="col-12 col-md-8">
                     <!-- a = router-link -->
-                    <router-link to="flat" class="bnb-a">
+                    <router-link :to="{ name: 'flat', params: { house_id : house.id  } }" class="bnb-a">
                         <div class="row">
                             <div class="img-container col-12 col-md-4">
                                 <img :src="'storage/' + house.photos[0].path" :alt="'Foto' + house.photos[0].id">

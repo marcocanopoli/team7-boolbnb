@@ -23,7 +23,7 @@ const router = new VueRouter({
             component: Apartments
         },
         {
-            path: '/flat',
+            path: '/flat/:house_id',
             name: 'flat',
             component: Flat
         }
