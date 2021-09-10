@@ -63,11 +63,7 @@ export default {
     },
     data(){
         return{
-            house: {},
-        //     coordinates: {
-        //        lat: this.house.latitude,
-        //        lng: this.house.longitude
-        //    }
+            house: {}
         }
     },
     mounted() {
@@ -75,9 +71,7 @@ export default {
     },
     methods: {
         getTomTomMap() {
-            const API_KEY = '9klnGNAqb9IZGTnJpPeD3XymW9LUsIDx';
-            // const latitude = this.house.latitude;      
-            // const longitude = this.house.longitude;      
+            const API_KEY = '9klnGNAqb9IZGTnJpPeD3XymW9LUsIDx';   
             const coordinates =  {lat: this.house.latitude, lon: this.house.longitude};
 
             var map = tt.map({
@@ -103,8 +97,7 @@ export default {
         getFlat(id) {
              axios.get(`http://127.0.0.1:8000/api/houses/${id}`)
              .then(res => {
-                 this.house = res.data; 
-                 console.log(res.data);
+                 this.house = res.data;
                  this.getTomTomMap();
              }).catch(err => {
                  console.log(err);

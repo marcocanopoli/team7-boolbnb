@@ -1,6 +1,5 @@
 <template>
-    <div>
-        <div class="container-fluid apartments mx-2">
+    <div class="container-fluid apartments mx-2">
         <h1 class="my-4">Strutture</h1>
 
         <div class="services">
@@ -101,7 +100,6 @@ export default {
                 this.checkedServices.push(service_id);
             }
             this.filter.services = this.checkedServices;
-            console.log(this.checkedServices);
             this.$emit('search', this.filter);
         },
         toggleService(service_id) {

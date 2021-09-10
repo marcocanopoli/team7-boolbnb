@@ -28,7 +28,7 @@
             <h4>Le mie strutture &rsaquo;</h4>
             <p>Visualizza, crea e modifica le tue strutture</p>
         </a>
-        <a href="#" class="dashboard-card shadow">
+        <a href="#" class="bnb-card shadow">
             <i class="fas fa-chart-pie"></i>
             <h4>Statistiche &rsaquo;</h4>
             <p>Visualizza statistiche riguardanti le tue strutture</p>
