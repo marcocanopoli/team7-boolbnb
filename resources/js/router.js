@@ -3,6 +3,8 @@ import VueRouter from "vue-router";
 
 import Home from './pages/Home';
 import Apartments from './pages/Apartments';
+import Auto from './pages/Auto';
+import NotFound from './pages/NotFound.vue';
 
 Vue.use(VueRouter);
 
@@ -20,6 +22,16 @@ const router = new VueRouter({
             path: '/apartments',
             name: 'apartments',
             component: Apartments
+        },
+        {
+            path: '/auto',
+            name: 'auto',
+            component: Auto
+        },
+        {
+            path: '*',
+            name: 'not-found',
+            component: NotFound
         }
         
     ]

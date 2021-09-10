@@ -22,6 +22,10 @@ Route::middleware('auth') //autenticazione
     ->group(function() {
     Route::get('/', 'HomeController@index')->name('home');
     Route::resource('houses', 'HouseController');	
+    Route::post('houses/{house_id}/payments/{promotion_name}/success', 'HouseController@payments')->name('success');
+    Route::get('houses/{house_id}/payments/{promotion_name}', 'PaymentsController@make')->name('payment');
+    Route::get('houses/{house_id}/promotions', 'PromotionsController@promote')->name('promotions');
+    Route::get("{any?}", "HomeController@index")->where("any", ".*");
 
 });
 

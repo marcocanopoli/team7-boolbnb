@@ -1,5 +1,6 @@
 <template>
     <div>
+
         <Header 
             @search="performSearch"/>
         <router-view
