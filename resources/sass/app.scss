@@ -3,14 +3,10 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Manrope:wght@200,300,400,500,600,700&display=swap');
 
-// Variables
 @import './partials/variables';
-// General
 @import './partials/general';
-// Bootstrap
 @import '~bootstrap/scss/bootstrap';
-
 @import './partials/upload_preview';
-
 @import './partials/checkbox_services.scss';
+@import './partials/searchbar';
 

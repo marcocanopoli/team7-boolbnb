@@ -11,6 +11,8 @@ use App\House;
 use App\HouseType;
 use App\Service;
 use App\Photo;
+use App\Promotion;
+use DateInterval;
 
 class HouseController extends Controller
 {   
@@ -19,7 +21,21 @@ class HouseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function payments(Request $request, $house_id, $promotion_name) {
+        $payment = $request->all();
 
+        $house = House::find($house_id);
+        $promotion = Promotion::where('name', $promotion_name)->get();
+        
+        $duration = new DateInterval('P' . $promotion[0]->duration .'D');
+        
+        $start_date = date('Y-m-d H:i:s');
+        $end_date = $start_date->add($duration);
+        dump($start_date);
+        dd($end_date);
+        $house->promotions()->attach($promotion);
+        
+    }
     private $validation = [
         'title' => 'required|max:100',
         'rooms' => 'required|numeric|min:1|max:255',
@@ -86,7 +102,6 @@ class HouseController extends Controller
     public function store(Request $request)
     {   
         $data = $request->all();
-
         if ($data['visible'] == '2') {
             $data['visible'] = 0;
         }
@@ -111,7 +126,6 @@ class HouseController extends Controller
             $path = Storage::put('houses/photos/' . $newHouse->id, $photo);
             Photo::create(['house_id' => $newHouse->id, 'path' => $path]);
         }
-
         return redirect()
             ->route('admin.houses.show', $newHouse->id)
             ->with('created', $newHouse->title);

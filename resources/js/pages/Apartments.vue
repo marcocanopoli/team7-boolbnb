@@ -1,32 +1,21 @@
 <template>
     <div>
-         <div class="container-fluid">
+        <div class="container-fluid apartments mx-2">
+        <h1 class="my-4">Strutture</h1>
 
-
-        <div class="d-flex my-4">
-            <h1>Strutture</h1> 
-        </div>
-        <div class="d-flex filters">
-            <!-- @keyup.enter="$emit('search', searchData)" -->
-            <div>
-                <label for="rooms">Camere</label>
-                <input type="number" min="1" name="rooms" id="rooms" v-model="filter.rooms" placeholder="Aggiungi camere"  >
-            </div>
-            <div>
-                <label for="beds">Letti</label>
-                <input type="number" min="1" name="beds" id="beds" v-model="filter.beds" placeholder="Aggiungi letti" >
-            </div>
-            <div>
-                <label for="km">Km</label>
-                <div class="position-relative km-box">
-                    <input class=" align-self-center" type="number" min="0" name="km" id="km" v-model="filter.km" placeholder="Cerca nel raggio di km" @keyup.enter="$emit('search', filter)">
-                    <button class="mybtn" @click="$emit('search', filter)"><i class="fas fa-arrow-right"></i></button>
+        <div class="services">
+            <div class="service-pill"
+                v-for="service in allServices" :key="service.id"
+                @click="checkService(service.id)" :id="'service-' + service.id">
+                <div class="service-svg">
+                    <img :src="'images/services_icons/'+ service.icon" alt="icon">
                 </div>
-
+                {{service.name}}
             </div>
         </div>
+
         <div>
-            <div class="house-container row" v-for="house in filtered" :key="house.id">
+            <div class="house-container row" v-for="house in houses" :key="house.id">
                 <div class="col-12 col-md-8">
                     <!-- a = router-link -->
                     <router-link :to="{ name: 'flat', params: { house_id : house.id  } }" class="bnb-a">
@@ -64,31 +53,35 @@
             </div>
         </div>
     </div>
-    </div>
 </template>
 
 <script>
+import VSearch from '../components/VSearch.vue';
 export default {    
     name: 'Apartments',
+    components: {
+        VSearch
+    },
     data() {
         return{
             filter: {
                 inputSearch: '',
-                km: '20',
                 rooms: '',
                 beds: '',
-                services: ''
-            }
+                services: [],
+                km: '20'
+            },
+            checkedServices: []
         }
     },
     props: {
         houses: Array,
         houseTypes: Array,
-        searchCoordinates: Object,
-        lastInputSearch: String
+        lastSearch: Object,
+        allServices: Array
+        // searchCoordinates: Object,
     },
-    methods: {
-
+    methods: {        
         getHouseType(houseTypeId) {
             let name = '';
             this.houseTypes.forEach(element => {
@@ -98,98 +91,91 @@ export default {
             });
             return name
         },
-        getDistance(lat1, lon1, lat2, lon2) {
-            var p = 0.017453292519943295;    // Math.PI / 180
-            var c = Math.cos;
-            var a = 0.5 - c((lat2 - lat1) * p)/2 + 
-                    c(lat1 * p) * c(lat2 * p) * 
-                    (1 - c((lon2 - lon1) * p))/2;
+        checkService(service_id) {
+            this.toggleService(service_id);
+            if(this.checkedServices.includes(service_id)) {
+                const index = this.checkedServices.indexOf(service_id);
+                this.checkedServices.splice(index, 1);
 
-            return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
+            }else {
+                this.checkedServices.push(service_id);
+            }
+            this.filter.services = this.checkedServices;
+            console.log(this.checkedServices);
+            this.$emit('search', this.filter);
+        },
+        toggleService(service_id) {
+           const service = document.getElementById('service-' + service_id);
+           if (service.classList.contains('pill-toggle')) {
+               service.classList.remove("pill-toggle");
+           }else {
+               service.classList.add("pill-toggle");
+           }
         }
+        // getDistance(lat1, lon1, lat2, lon2) {
+        //     var p = 0.017453292519943295;    // Math.PI / 180
+        //     var c = Math.cos;
+        //     var a = 0.5 - c((lat2 - lat1) * p)/2 + 
+        //             c(lat1 * p) * c(lat2 * p) * 
+        //             (1 - c((lon2 - lon1) * p))/2;
+
+        //     return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
+        // }
+        // },
     },
-    computed: {
-        filtered() {
-            let filterArr = this.houses.filter( house => house.rooms >= this.filter.rooms );
-            filterArr = filterArr.filter( house => house.beds >= this.filter.beds );
-            filterArr = filterArr.filter( house => 
-                this.getDistance(house.latitude, house.longitude, this.searchCoordinates.lat, this.searchCoordinates.lon <= this.filter.km));
-            return filterArr
-        }
-    },
-    updated() {
-        this.filter.inputSearch = this.lastInputSearch;
+    // computed: {
+    //     filtered() {
+    //         // filterArr = this.houses.filter( house => house.rooms >= this.filter.rooms );
+    //         // filterArr = filterArr.filter( house => house.beds >= this.filter.beds );
+    //         // filterArr = filterArr.filter( house => 
+    //         //     this.getDistance(house.latitude, house.longitude, this.searchCoordinates.lat, this.searchCoordinates.lon <= this.filter.km));
+    //         // return filterArr
+    //     }
+    // },
+    mounted() {
+        this.filter = this.lastSearch;
     }
 
 }
 </script>
 
-<style lang='scss' scoped>
-@import '../../sass/partials/variables.scss';
-    .container-fluid {
+<style lang='scss'>
+    @import '../../sass/partials/variables.scss';
+
+    .apartments {
         padding-top: 90px;
+
         h1 {
             font-size: 2.5rem;
         }
-    }
 
-    .km-box {
-        padding: 12px 16px;
-        border: 1px solid rgba(113, 113, 113, 0.2);
-        border-radius: 45px;
-        outline: none;
-        &:hover {
-            background-color: rgba(113, 113, 113, 0.2);
-        }
-
-        &:hover #km {
-            background-color: transparent
-        }
-    }
-
-    #km {
-        padding: 0;
-        outline: none;
-        border: transparent;
-        width: calc(100% - 36px);
-    }
-
-    input {
-        padding: 12px 16px;
-        border: 1px solid rgba($gray-1, 0.2);
-        border-radius: 45px;
-        outline: none;
-
-        &:hover {
-        background-color: rgba($gray-1, 0.2);
-        }
-    }
-
-    .filters{
-        & > div {
+        .services {
             display: flex;
-            flex-direction: column;
+            flex-wrap: wrap;
+            width: 50%;
             padding-right: 16px;
-        }
-    }
 
-    .mybtn {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 36px;
-        height: 36px;
-        position: absolute;
-        top: 50%;
-        right: 5px;
-        transform: translateY(-50%);
-        background-color: $brand;
-        color: $white;
-        border-radius: 50%;
-        cursor: pointer;
-        
-        i {
-            font-size: 14px;
+            .service-pill {
+                margin: 8px 0;
+                margin-right: 16px;   
+                padding: 8px 16px;
+                border-radius: 30px;
+                border: 1px solid rgba($gray-1, 0.3);
+                font-size: 14px;                
+                background-color: $white;
+                cursor: pointer;
+                user-select: none;
+            }
+            
+            .pill-toggle{
+                background-color: $brand;
+                border-color: $brand;
+                color: $white;
+
+                img {
+                    filter: invert(1);
+                }
+            }
         }
     }
 

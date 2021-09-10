@@ -26,6 +26,13 @@ a.bnb-a {
 .color-gray-2 {
     color: $gray-2;
 }
+.color-white {
+    color: $white;
+}
+
+.bg-white {
+    background-color: $white;
+}
 
 //Headlines
 //Font-Weights
@@ -164,42 +171,48 @@ button {
 }
 
 //header
-.my-navbar {
-    min-height: 80px;
-
+.navbar.my-navbar {
+    min-height: 90px;
+    padding: 8px 24px;
+    
     svg {
         height: 32px;
         width: 32px;
     }
+}
 
-    .header-user {
-        background-color: $white;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        
-        &.navbar-toggler {
-            font-size: 16px;      
-            padding: 10px 25px;
-            border-radius: 30px;
-        }
+.header-user {
+    background-color: $white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+
+    i {
+        margin: 0 4px;
+        color: $gray-1;
     }
-
-    .header-avatar {
-        margin-left: 16px;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        object-fit: cover;
+    
+    &.navbar-toggler {
+        font-size: 16px;      
+        padding: 16px 24px;
+        border-radius: 30px;
     }
 }
 
-.dashboard {
+.header-avatar {
+    margin-left: 16px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.bnb-cards-container {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     gap: 15px;
 
-    .dashboard-card {
+    .bnb-card {
         padding: 24px;
         color: inherit;
         transition: .3s ease-in-out;
@@ -215,12 +228,33 @@ button {
             display: block;
             font-size: 32px;
             color: $brand;
+
+            &.bronze {
+                background: -webkit-linear-gradient(top, #CD7F32 0%, #BE7023 100%);
+            }
+            &.silver {
+                background: -webkit-linear-gradient(top, #C0C0C0 0%, #B1B1B1 100%);
+            }
+            &.gold {
+                background: -webkit-linear-gradient(top, #ECD540 0%, #DDC631 100%);
+            }
+            &.icon {
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
         }
 
         h4 {
             margin-bottom: 16px;
         }
     }
+}
+
+.summary {
+    padding: 5px 10px;
+    border: 1px solid rgba($gray-1, 0.3);
+    border-radius: 12px;
 }
 
 //Index 
@@ -355,7 +389,7 @@ button {
 
 @media screen and (min-width: 768px) {
 
-    .dashboard {
+    .bnb-cards-container {
         grid-template-columns: repeat(2, 1fr);
     }
 
@@ -371,7 +405,7 @@ button {
 
 @media screen and (min-width: 1200px) {
 
-    .dashboard {
+    .bnb-cards-container {
         grid-template-columns: repeat(3, 1fr);
     }
 

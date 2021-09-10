@@ -44,6 +44,7 @@
                 </div>
                 <div class="col-12 col-md-2 align-self-center">
                     <div class="d-flex justify-content-around">
+                        <a href="{{route('admin.promotions', $house->id)}}"><i class="fas fa-gem"></i></a>
                         <a class="bnb-btn-edit" href="{{route('admin.houses.edit', $house)}}">
                             <i class="fas fa-pen"></i>
                         </a>
