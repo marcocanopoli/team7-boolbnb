@@ -124,6 +124,7 @@ export default {
                 }      
             }).then(res => {
                 // console.log('Chiamata API ricerca')
+                console.log(res)
                 this.houses = res.data;
 
                 this.lastSearch.inputSearch = searchData.inputSearch;

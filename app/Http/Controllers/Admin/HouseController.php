@@ -13,6 +13,7 @@ use App\Service;
 use App\Photo;
 use App\Promotion;
 use DateInterval;
+use DateTime;
 
 class HouseController extends Controller
 {   
@@ -21,21 +22,28 @@ class HouseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function payments(Request $request, $house_id, $promotion_name) {
-        $payment = $request->all();
+    public function payments($house_id, $promotion_name) {
 
         $house = House::find($house_id);
-        $promotion = Promotion::where('name', $promotion_name)->get();
+        $promotion = Promotion::where('name', $promotion_name)->first();
         
-        $duration = new DateInterval('P' . $promotion[0]->duration .'D');
+        $start_date = new DateTime();
+        $end_date = new DateTime();
+        $duration = new DateInterval('P'.$promotion->duration.'D'); 
+        $end_date->add($duration);
+
+        $house->promotions()->attach($promotion, 
+        [
+            'start_date' => $start_date->format('Y-m-d H:i:s'),
+            'end_date' => $end_date->format('Y-m-d H:i:s')
+        ]);
         
-        $start_date = date('Y-m-d H:i:s');
-        $end_date = $start_date->add($duration);
-        dump($start_date);
-        dd($end_date);
-        $house->promotions()->attach($promotion);
-        
+        return redirect()
+            ->route('admin.houses.index')
+            ->with('sponsored', $house->title)
+            ->with('promotion', $promotion->duration);
     }
+
     private $validation = [
         'title' => 'required|max:100',
         'rooms' => 'required|numeric|min:1|max:255',
@@ -75,9 +83,27 @@ class HouseController extends Controller
         return $coordinatesResponse['results'][0]['position'];
     }
 
+    private function isSponsored($house) {
+        $activeSponsor = false;
+        if(count($house->promotions) > 0) {
+            $lastPromotionDate = $house->promotions->last()->pivot->end_date;
+            $now = new DateTime();
+
+            if ($lastPromotionDate > $now->format('Y-m-d H:i:s')) {
+                $activeSponsor = true;
+            }
+        }
+        return $activeSponsor;
+    }
+
     public function index() {
         $houses = House::where('user_id', Auth::id())->get();
-        return view('admin.houses.index', compact('houses'));
+        $activeSponsors = [];
+        foreach($houses as $house) {
+            $activeSponsor = $this->isSponsored($house);
+            $activeSponsors[$house->id] = $activeSponsor;
+        }
+        return view('admin.houses.index', compact('houses', 'activeSponsors'));
     }
 
     /**
@@ -138,9 +164,10 @@ class HouseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(House $house)
-    {
+    {   
+        $activeSponsor = $this->isSponsored($house);
         $houseTypes = HouseType::all();
-        return view('admin.houses.show', compact('house', 'houseTypes'));
+        return view('admin.houses.show', compact('house', 'houseTypes', 'activeSponsor'));
     }
 
     /**

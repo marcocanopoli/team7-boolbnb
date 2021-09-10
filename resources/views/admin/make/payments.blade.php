@@ -1,20 +1,19 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container w-50">
     <div class="summary">
         <h2 class="mb-4">Riepilogo acquisto:</h2>
-        <p><strong>Sponsorizzazzione</strong>: pacchetto <span>{{$promotion[0]->name}}</span></p>
-        <p><strong>Durata</strong>: {{$promotion[0]->duration}}gg</p>
+        <p><strong>Sponsorizzazzione</strong>: pacchetto <span>{{$promotion->name}}</span></p>
+        <p><strong>Durata</strong>: {{$promotion->duration}}gg</p>
         <p><strong>Struttura</strong>: {{$house->title}}</p>
         <p><strong>Luogo</strong>: {{$house->address}} {{$house->city}} {{$house->zip_code}}</p>
         <hr>
         <div class="text-right">
-            <strong>Totale: {{$promotion[0]->price}} &euro;</strong>
+            <strong>Totale: {{$promotion->price}} &euro;</strong>
         </div>
     </div>
 
-    <form method="POST" id="payment-form" action="{{route('admin.success', [$house->id ,$promotion[0]->name])}}">
+    <form method="POST" id="payment-form" action="{{route('admin.success', [$house->id , strtolower($promotion->name)])}}">
         
         @csrf
         @method('POST')
