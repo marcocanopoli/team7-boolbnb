@@ -2,7 +2,7 @@
     <div>
         <div class="container-fluid top-distance">
             <!-- Mappa -->
-            <div id="map-div" class="pr-3 my-4"></div>
+            <div scroll="no" id="map-div" class="pr-3 my-4"></div>
             <p><strong>Indirizzo: </strong>{{house.address}}, {{house.zip_code}}, {{house.city}}</p>
             <!-- Mappa  -->
             <div class="d-flex">
@@ -85,7 +85,7 @@ export default {
                 center: coordinates,
                 zoom: 16
             });
-
+            map.scrollZoom.disable();//disattiva scroll x zoom in/out usare bottoni
             map.addControl(new tt.FullscreenControl());
             map.addControl(new tt.NavigationControl());
             new tt.Marker().setLngLat(coordinates).addTo(map);
