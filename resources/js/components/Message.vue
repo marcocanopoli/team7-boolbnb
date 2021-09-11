@@ -1,7 +1,7 @@
 <template>
   <div class="box-message">
       <h3 class="h3"> <i> Inviaci in messaggio </i> </h3>
-      <div class="alert alert-succes" v-show="succes">
+      <div class="alert alert-success" v-show="success">
         <h5 class="h5">Messaggio inviato correttamente</h5>
       </div>
       <form class="form-group" method="POST" @submit.prevent="sendForm">
@@ -24,7 +24,9 @@
           <textarea v-model="content" id="content" class="form-control" cols="30" rows="10" placeholder="Scrivi il tuo messaggio" name="content" :class="{ 'is-invalid' : errors.content }"></textarea>
           <small class="text-danger" v-for="err_content, index in errors.content" :key="`err-content${index}`">{{err_content}}</small>
         </div>
-        <button class="bnb-btn bnb-btn-brand bnb-btn-resp">INVIA</button>
+        <button class="bnb-btn bnb-btn-brand bnb-btn-resp" type="submit" :disabled="sending">
+          {{ sending ? 'Invio in corso' : 'INVIA' }}
+          </button>
       </form>
   </div>
 </template>
@@ -39,11 +41,14 @@ export default {
         email:'',
         content:'',
         errors: {},
-        success: false
+        success: false,
+        sending: false,
       }
     },
     methods: {
       sendForm: function(){
+         //dati inviati pulsante bloccato
+        this.sending = true;
         //axios.post api/messages
         axios.post('http://127.0.0.1:8000/api/messages', {
           house_id: this.house_id,
@@ -51,8 +56,8 @@ export default {
           guest_email: this.email,
           content: this.content
         }).then((result) => {
-          console.log(result)//ok house_id;
-          console.log(result.data);
+          //dati inviati pulsante sbloccato
+          this.sending = false;
           if(result.data.errors){
             //errore in validazione
             this.errors = result.data.errors;
