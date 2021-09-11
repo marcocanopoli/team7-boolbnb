@@ -4,7 +4,6 @@
         <Header 
             @search="performSearch"/>
         <router-view
-            @search="performSearch"
             :houses="houses" 
             :lastSearch="lastSearch"
             :houseTypes="houseTypes"
@@ -124,7 +123,6 @@ export default {
                 }      
             }).then(res => {
                 // console.log('Chiamata API ricerca')
-                console.log(res)
                 this.houses = res.data;
 
                 this.lastSearch.inputSearch = searchData.inputSearch;

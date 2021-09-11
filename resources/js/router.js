@@ -4,7 +4,6 @@ import VueRouter from "vue-router";
 import Home from './pages/Home';
 import Apartments from './pages/Apartments';
 import Flat from './pages/Flat';
-import Auto from './pages/Auto';
 import NotFound from './pages/NotFound.vue';
 
 Vue.use(VueRouter);
@@ -28,11 +27,6 @@ const router = new VueRouter({
             path: '/flat/:house_id',
             name: 'flat',
             component: Flat
-        },
-        {
-            path: '/auto',
-            name: 'auto',
-            component: Auto
         },
         {
             path: '*',

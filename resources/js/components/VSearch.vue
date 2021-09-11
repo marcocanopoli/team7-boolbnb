@@ -91,16 +91,16 @@ export default {
             this.cities = []
         },
         nextItem () {
-    	if (event.keyCode == 38 && this.active > 0) {
-      	    this.active--
-        } else if (event.keyCode == 40 && this.active < this.cities.length -1) {
-      	    this.active++
+    	    if (event.keyCode == 38 && this.active > 0) {
+      	        this.active--
+            } else if (event.keyCode == 40 && this.active < this.cities.length -1) {
+      	        this.active++
+            }
         }
-    }
     },
     mounted () {
         document.addEventListener("keyup", this.nextItem);
-    },
+    }
 }
 </script>
 
