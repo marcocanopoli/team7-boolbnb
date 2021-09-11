@@ -49,11 +49,7 @@
             </div>
 
             <div>
-                <strong>Prezzo: <span>{{house.price}} &euro;</span></strong>
-                <strong class="color-brand">
-                    <p v-if="house.visibile == 1" >Visibile</p>
-                    <p v-else>Attualmente non visibile</p>    
-                </strong>
+                <strong>Prezzo: <span>{{house.price}} &euro;</span></strong>                
             </div>
 
 
