@@ -6,13 +6,14 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use App\Message;
 
 class ContactMessage extends Mailable
 {
     use Queueable, SerializesModels;
 
-    //alternativa public e visibile in contact.blade
-    private $message;
+    //alternativa public e' visibile in contact.blade
+    protected $message;
 
     /**
      * Create a new message instance.
@@ -31,10 +32,12 @@ class ContactMessage extends Mailable
      */
     public function build()
     {
-        
         return $this->view('mail.contact')
         ->with([
-            'message' => $this->message
-        ]);
+            'myname' => $this->message->guest_name,
+            'myemail' => $this->message->guest_email,
+            'content' => $this->message->content
+        ])
+        ;
     }
 }

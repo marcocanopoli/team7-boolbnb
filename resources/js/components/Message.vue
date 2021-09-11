@@ -61,7 +61,6 @@ export default {
           if(result.data.errors){
             //errore in validazione
             this.errors = result.data.errors;
-            this.success = true
           } else {
             //dati inviati 
             this.errors = {};

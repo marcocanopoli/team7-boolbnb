@@ -7,13 +7,13 @@
     <title>Contact Message</title>
 </head>
 <body>
-    @dd($message)
+    
     {{-- con il dd inva dati in ispeziona->network senza dd sa errore su $guest_name --}}
-    <h1>Hai ricevuto un messaggio da: </h1>
+    <h1>Hai ricevuto un messaggio</h1>
     <div>
-        <p><strong>Nome: </strong></p> {{ $message->guest_name }}
-        <p><strong>email: </strong></p> {{ $newMessage->guest_email }}
-        <p><strong>Messaggio: </strong></p> {{ $newMessage->content }}
+        <p><strong>Nome: </strong>{{ $myname }}</p> 
+        <p><strong>email: </strong> {{ $myemail }}</p> 
+        <p><strong>Messaggio: </strong>{{ $content }}</p>
     </div>
 </body>
 </html>

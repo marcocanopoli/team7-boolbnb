@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Mail\ContactMessage;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\ContactMessage;
 use App\Message;
 
 class MessageController extends Controller
@@ -36,12 +36,13 @@ class MessageController extends Controller
         $message->fill($data);
         $message->save();
 
-        //invio mail ad admin
-        Mail::to('admin@sito.com')->send(new ContactMessage($message));
+        //invio mail ad admia
 
+        Mail::to('admin@sito.com')->send(new ContactMessage($message));
 
         return response()->json([
             'success' => true
+            //per debug $data senza []
         ]);
     }
 }
