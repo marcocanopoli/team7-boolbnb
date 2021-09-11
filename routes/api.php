@@ -36,4 +36,7 @@ Route::namespace('Api')
             $services = Service::all();
             return response()->json($services);
         });
+
+        //form send message la rotta è api/messages
+        Route::post('messages', 'MessageController@store')->name('message');
     });
