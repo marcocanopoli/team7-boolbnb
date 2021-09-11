@@ -54,6 +54,13 @@ class HouseController extends Controller
         $beds = $request->query('beds', '');
         $services = $request->query('services', '');
 
+        // arsort($services);
+        // $sortedServices = [];
+
+        // foreach($services as $service) {
+        //     $sortedServices[] = $service;
+        // }
+        
         $results = [];
         $filteredByServices = [];
         
@@ -77,15 +84,12 @@ class HouseController extends Controller
                     foreach($house->services as $houseService) {
 
                         if ($service_id == $houseService->id) {
-                            $valid = true;                            
-                            // print_r($service_id);
-                            // print_r('-');
-                            // print_r($houseService->id);
-                            // print_r(',');                            
+                            $valid = true;                         
                         }
                     }
-
+                    
                 }
+                
                 if ($valid) {
                     $filteredByServices[] = $house;
                 }

@@ -25,7 +25,7 @@ class House extends Model
         'visible'
     ];
 
-    protected $with = [ 'photos', 'services'];
+    protected $with = [ 'photos', 'services'];    
 
     //one to many->side many
     public function user() {
@@ -51,7 +51,7 @@ class House extends Model
 		return $this->belongsToMany('App\Service');
 	}
     public function promotions() {
-		return $this->belongsToMany('App\Promotion');
+		return $this->belongsToMany('App\Promotion')->withPivot('end_date');
 	}
 
 }

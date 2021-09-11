@@ -1,11 +1,15 @@
 @extends('layouts.app')
-@section('content')    
+@section('content') 
 
     <div class="container">
 
         @if (session('deleted'))
             <div class="alert alert-success my-alert">
                 La struttura <strong>'{{ session('deleted') }}'</strong> è stata eliminata con successo!
+            </div>
+        @elseif (session('sponsored'))
+            <div class="alert alert-success my-alert">
+                La struttura <strong>'{{ session('sponsored') }}'</strong> è stata sponsorizzata per <strong>{{ intval(session('promotion')) * 24 }} ore</strong>!
             </div>
         @endif
 
@@ -21,6 +25,13 @@
                         <div class="row">
                             <div class="img-container col-12 col-md-4">
                                 <img src="{{ asset('storage/' . $house->photos[0]->path) }}" alt="{{ 'Foto' . $house->photos[0]->id }}">
+
+                                @if($activeSponsors[$house->id])
+                                    <div class="index-sponsor-box">
+                                        <i class="fas fa-gem index-sponsor-icon"></i>
+                                    </div>
+                                @endif
+
                             </div>
                             <div class="details-container col-12 col-md-8">
                                 <p>{{$house->houseType['name']}} a {{$house->city}}</p>

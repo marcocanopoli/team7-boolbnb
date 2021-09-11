@@ -13,9 +13,14 @@
         </div>
     @endif
 
-    <div class="d-flex">
+    <div class="d-flex align-items-center">
         <h1>{{$house->title}}</h1>
-        <span class="bnb-btn bnb-btn-brand-2 align-self-center mx-4">{{ $house->houseType['name'] }}</span>
+        
+        @if($activeSponsor)
+            <i class="fas fa-gem show-sponsor-icon"></i>              
+        @endif
+
+        <span class="bnb-btn bnb-btn-brand-2">{{ $house->houseType['name'] }}</span>
     </div>
 
     <div class="show-photos my-4">
