@@ -1,14 +1,19 @@
 <template>
-    <div>
-        <div class="container-fluid top-distance">
-            <!-- Mappa -->
-            <div scroll="no" id="map-div" class="pr-3 my-4"></div>
-            <p><strong>Indirizzo: </strong>{{house.address}}, {{house.zip_code}}, {{house.city}}</p>
-            <!-- Mappa  -->
-            <div class="d-flex">
+    <div class=" top-distance">
+
+        <!-- Mappa -->
+        <div id="map-div" class=""></div>
+        <!-- /Mappa  -->
+        <div class="container">
+
+            <!-- titolo -->
+            <div class="d-flex mt-4 mb-2">
                 <h1 class="h1">{{ house.title }}</h1>
                 <span class="bnb-btn bnb-btn-brand-2 align-self-center mx-4"> {{ getHouseType(house.house_type_id) }}</span>
             </div>
+            <!-- /titolo -->
+            
+            <p><strong>Indirizzo: </strong>{{house.address}}, {{house.zip_code}}, {{house.city}}</p>
 
             <div class="show-photos my-4">
                 <div v-for="photo, index in house.photos" :key="index">

@@ -1,6 +1,9 @@
 <template>
   <div class="box-message">
       <h3 class="h3"> <i> Inviaci in messaggio </i> </h3>
+      <div class="alert alert-succes" v-show="succes">
+        <h5 class="h5">Messaggio inviato correttamente</h5>
+      </div>
       <form class="form-group" method="POST" @submit.prevent="sendForm">
         <div>
           <label for="guest_name">Nome:*</label>
@@ -11,9 +14,9 @@
 
         <div>
           <label for="guest_mail">E-mail:*</label>
-          <input v-model="mail" id="guest_mail" class="form-control" type="text" placeholder="Inserisci la tua Mail" name="guest_mail"
-          :class="{ 'is-invalid' : errors.guest_mail }">
-          <small class="text-danger" v-for="err_mail, index in errors.guest_mail" :key="`err-mail${index}`">{{err_mail}}</small>
+          <input v-model="email" id="guest_email" class="form-control" type="text" placeholder="Inserisci la tua Mail" name="guest_email"
+          :class="{ 'is-invalid' : errors.guest_email }">
+          <small class="text-danger" v-for="err_email, index in errors.guest_email" :key="`err-mail${index}`">{{err_email}}</small>
         </div>
 
         <div>
@@ -33,9 +36,10 @@ export default {
     data(){
       return{
         name:'',
-        mail:'',
+        email:'',
         content:'',
-        errors: {}
+        errors: {},
+        success: false
       }
     },
     methods: {
@@ -44,13 +48,22 @@ export default {
         axios.post('http://127.0.0.1:8000/api/messages', {
           house_id: this.house_id,
           guest_name : this.name,
-          guest_mail: this.mail,
+          guest_email: this.email,
           content: this.content
         }).then((result) => {
           console.log(result)//ok house_id;
           console.log(result.data);
           if(result.data.errors){
-            this.errors = result.data.errors
+            //errore in validazione
+            this.errors = result.data.errors;
+            this.success = true
+          } else {
+            //dati inviati 
+            this.errors = {};
+            this.name = '',
+            this.email = '',
+            this.content = '',
+            this.success = true
           }
 
         }).catch((err) => {
