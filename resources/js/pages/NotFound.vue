@@ -1,7 +1,10 @@
 <template>
-    <section class="text-center">
-        <img src="https://cdn.iconscout.com/icon/free/png-256/404-page-not-found-456876.png" alt="not found">
-        <h1>Page not Found</h1>
+    <section class="d-flex justify-content-center align-items-center flex-column text-center">
+        <h3>Ops . . .</h3>
+        <img src="https://static.vecteezy.com/ti/vettori-gratis/p1/2377862-felice-vacanza-illustrazione-di-donna-che-prende-il-sole-sulla-spiaggia-con-ombrellone-ancora-facendo-il-lavoro-libero-professionista-vacanza-disegno-puo-essere-usato-per-poster-banner-annuncio-sito-web-web-mobile-vettoriale.jpg" alt="404">
+        <h3>Non è questo il posto migliore per una vacanza . . .</h3>
+        <span>404</span>
+        <span>Not found</span>
     </section>
 </template>
 
@@ -12,7 +15,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    h1 {
-        color: #834392;
+@import '../../sass/partials/variables.scss';
+section {
+    margin-top: 90px;
+    padding: 20px;
+    color: $brand;
+    img {
+        width: 30%;
     }
+}
 </style>
