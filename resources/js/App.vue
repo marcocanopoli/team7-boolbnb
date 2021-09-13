@@ -5,7 +5,6 @@
             @search="performSearch"
             :currentSearch="lastSearch"/>
         <router-view
-            @search="performSearch"
             :houses="houses" 
             :lastSearch="lastSearch"
             :houseTypes="houseTypes"

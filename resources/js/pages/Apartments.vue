@@ -5,7 +5,6 @@
                 <h1>Strutture</h1>
                 <button class="bnb-btn bnb-btn-brand ml-4" @click="toggleModal">Pi&ugrave; filtri</button>
             </div>
-
             <v-modal 
                 v-show="visibleModal"            
                 @close="toggleModal"
@@ -22,6 +21,7 @@
                             @click="checkService(service.id)" :id="'service-' + service.id">
                             <div class="service-svg">
                                 <img :src="'images/services_icons/'+ service.icon" alt="icon">
+
                             </div>
                             {{service.name}}
                         </div>
@@ -92,19 +92,22 @@
             </div>
 
             <h2 v-else class="no-results text-center">Nessun risultato da mostrare!</h2>
+            <FlatLoader v-if="loading"/>
         </div>
         
     </section>
 </template>
 
 <script>
+import FlatLoader from '../components/FlatLoader.vue';
 import VSearch from '../components/VSearch.vue';
 import VModal from '../components/VModal.vue';
 export default {    
     name: 'Apartments',
     components: {
         VSearch,
-        VModal
+        VModal,
+        FlatLoader
     },
     data() {
         return{
@@ -116,7 +119,8 @@ export default {
                 km: '20'
             },
             checkedServices: [],
-            visibleModal: false
+            visibleModal: false,
+            loading: true
         }
     },
     props: {
@@ -126,7 +130,12 @@ export default {
         allServices: Array
         // searchCoordinates: Object,
     },
-    methods: {        
+    methods: {  
+        setLoading() {
+            setTimeout(()=>{
+                this.loading = false
+            }, 1000);
+        },      
         getHouseType(houseTypeId) {
             let name = '';
             this.houseTypes.forEach(element => {
@@ -196,6 +205,9 @@ export default {
     // },
     mounted() {
         this.filter = this.lastSearch;
+    },
+    created() {
+        this.setLoading()
     }
 
 }

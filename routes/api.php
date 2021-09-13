@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\HouseType;
 use App\Service;
+use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,11 @@ Route::namespace('Api')
         Route::get('/services', function() {
             $services = Service::all();
             return response()->json($services);
+        });
+
+        Route::get('/authuser', function() {
+            $authuser = User::all();
+            return response()->json($authuser);
         });
 
         //form send message la rotta è api/messages
