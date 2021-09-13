@@ -50,7 +50,7 @@
             <div v-if="houses.length > 0">
                 <div class="house-container row" v-for="house in houses" :key="house.id">
                     <div class="col-12">
-                        <router-link :to="{ name: 'flat', params: { house_id : house.id  } }" class="bnb-a">
+                        <router-link :to="{ name: 'flat', params: { house_slug : house.slug } }" class="bnb-a">
                             <div class="row">
 
                                 <div class="col-12 col-md-3">

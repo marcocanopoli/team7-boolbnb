@@ -76,7 +76,7 @@
             <a class="bnb-a bnb-btn bnb-btn-white bnb-btn-resp" href="{{ route('admin.houses.index') }}">ELENCO STRUTTURE</a>
         </div>
         <div class="col-12 col-sm-6 col-md-4 my-2">
-            <a class="bnb-btn bnb-btn-brand bnb-btn-resp" href="{{route('admin.houses.edit', $house)}}">MODIFICA</a>
+            <a class="bnb-btn bnb-btn-brand bnb-btn-resp" href="{{route('admin.houses.edit', $house->slug)}}">MODIFICA</a>
         </div>
     </div> 
 </div>

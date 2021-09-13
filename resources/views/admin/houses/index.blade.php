@@ -21,7 +21,7 @@
             @foreach ($houses as $house)
             <div class="house-container row">
                 <div class="col-12 col-md-10">
-                    <a href="{{route('admin.houses.show', $house)}}" class="bnb-a">
+                    <a href="{{route('admin.houses.show', $house->slug)}}" class="bnb-a">
                         <div class="row">
                             <div class="col-12 col-md-4">
                                 <div class="img-container shadow @if($activeSponsors[$house->id]) triangle @endif">
@@ -59,11 +59,11 @@
                         <a class="bnb-btn-index" href="{{route('admin.promotions', $house->id)}}">
                             <i class="fas fa-gem"></i>
                         </a>
-                        <a class="bnb-btn-index" href="{{route('admin.houses.edit', $house)}}">
+                        <a class="bnb-btn-index" href="{{route('admin.houses.edit', $house->slug)}}">
                             <i class="fas fa-pen"></i>
                         </a>
                         <div class="bnb-btn-delete">
-                            <form action="{{route('admin.houses.show', $house->id)}}" method="POST">
+                            <form action="{{route('admin.houses.show', $house->slug)}}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <label for="delete"><i class="fas fa-times"></i></label>

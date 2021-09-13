@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 use App\House;
 use App\HouseType;
 use App\Service;
@@ -48,6 +49,23 @@ class HouseController extends Controller
             ->route('admin.houses.index')
             ->with('sponsored', $house->title)
             ->with('promotion', $promotion->duration);
+    }
+    
+    private function generateSlug($data) {
+        $slug = Str::slug($data["title"], '-');
+
+        $existingSlug = House::where('slug', $slug)->first();
+
+        $slugBase = $slug;
+        $counter = 1;
+
+        while($existingSlug) {
+            $slug = $slugBase . "-" . $counter;
+            $existingSlug = House::where('slug', $slug)->first();
+            $counter++;
+        }
+
+        return $slug;
     }
 
     private $validation = [
@@ -134,6 +152,10 @@ class HouseController extends Controller
     public function store(Request $request)
     {   
         $data = $request->all();
+
+        $slug = $this->generateSlug($data);
+        $data['slug'] = $slug;
+
         if ($data['visible'] == '2') {
             $data['visible'] = 0;
         }
@@ -159,7 +181,7 @@ class HouseController extends Controller
             Photo::create(['house_id' => $newHouse->id, 'path' => $path]);
         }
         return redirect()
-            ->route('admin.houses.show', $newHouse->id)
+            ->route('admin.houses.show', $newHouse->slug)
             ->with('created', $newHouse->title);
     }
 
@@ -169,10 +191,11 @@ class HouseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(House $house)
+    public function show($slug)
     {   
-        $activeSponsor = $this->isSponsored($house);
+        $house = House::where('slug', $slug)->first();
         $houseTypes = HouseType::all();
+        $activeSponsor = $this->isSponsored($house);
         return view('admin.houses.show', compact('house', 'houseTypes', 'activeSponsor'));
     }
 
@@ -182,8 +205,9 @@ class HouseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(House $house)
+    public function edit($slug)
     {
+        $house = House::where('slug', $slug)->first();
         $houseTypes = HouseType::all();
         $services = Service::all();
         if ($house['visible'] == 0) {
@@ -202,6 +226,13 @@ class HouseController extends Controller
     public function update(Request $request, House $house)
     {
         $data = $request->all();
+
+        if($house->title != $data["title"]) {
+            $slug = $this->generateSlug($data);
+
+            $data["slug"] = $slug;
+        }
+
         if ($data['visible'] == '2') {
             $data['visible'] = 0;
         }
@@ -249,7 +280,7 @@ class HouseController extends Controller
         $house->services()->sync($data['services']);
 
         return redirect()
-        ->route('admin.houses.show', $house->id)
+        ->route('admin.houses.show', $house->slug)
         ->with('updated', $house->title);
     }
 
@@ -259,8 +290,9 @@ class HouseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(House $house)
+    public function destroy($slug)
     {
+        $house = House::where('slug', $slug)->first();
         $house->delete();
 
         foreach ($house->photos as $photo) {
