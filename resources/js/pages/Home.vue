@@ -7,34 +7,51 @@
             </a>
         </div>
         <div class="container py-4">
-            <h2 class="mb-4">In evidenza</h2>
-            <div class="sponsored bnb-cards-container mb-4">
-                <flat-card 
-                    v-for="house in houses" 
-                    :key="house.id"
-                    :house="house"/>
+            <!-- sponsored -->
+            <div>                
+                <h2 class="mb-4">In evidenza</h2>
+
+                <div class="sponsored bnb-cards-container mb-4">
+                    <flat-card 
+                        v-for="house in houses" 
+                        :key="house.id"
+                        :house="house"/>
+                </div>
+
+                <v-pagination
+                    @getSponsored="getSponsored"
+                    :last_page="last_page"
+                    :current_page="current_page"
+                    />
             </div>
+            <!-- /sponsored -->
         </div>
     </section>
 </template>
 
 <script>
+import VPagination from '../components/VPagination.vue';
 import FlatCard from '../components/FlatCard.vue'
 export default {
     name: 'Home',
     components: {
-        FlatCard
+        FlatCard,
+        VPagination
     },
     data() {
         return {
-            houses: ''
+            houses: '',            
+            current_page: 1,
+            last_page: 1,
         }
     },
     methods: {        
-        getSponsored() {
-            axios.get('api/sponsored')
+        getSponsored(page = 1) {
+            axios.get(`api/sponsored?page=${page}`)
             .then(res => {
-                this.houses = res.data;
+                this.houses = res.data.data;
+                this.current_page = res.data.current_page; 
+                this.last_page = res.data.last_page;
             })
             .catch(error => {
                 console.error('Errore:', error);
@@ -47,7 +64,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped> 
+<style lang="scss"> 
     @import '../../sass/partials/variables.scss';
 
     .home {

@@ -171,6 +171,47 @@ button {
     }
 }
 
+.bnb-pagination {
+    width: 100%;
+    text-align: center;
+
+    .bnb-pag-button {
+        cursor: pointer;
+        background-color: $brand;
+        color: #fff;
+        padding: 5px 10px;
+        margin: 0 5px;
+        border-radius: 5px;
+        font-size: 18px;
+        font-weight: 500;
+        box-shadow: 0px 5px 5px rgba(0, 0 , 0, 0.5);
+        transition: .2s;
+
+        &:hover {
+            text-decoration: none;
+            background-color: $brand-end;
+        }
+
+        &.disabled-button {
+            background-color: grey;
+            color: hsl(0, 0%, 70%);                
+            cursor: default;
+    
+            &:hover {
+                background-color: grey;
+            }
+        }
+    
+        &.focus-button {
+            background-color: $primary-2;
+
+            &:hover {
+                background-color: $primary-1;
+            }
+        }
+    }
+}
+
 //header
 .navbar.my-navbar {
     min-height: 90px;
@@ -327,12 +368,12 @@ button {
 
 .img-container {
     position: relative;
-    overflow: hidden;
-    border-radius: 12px;
+    overflow: hidden;    
     
     img {        
         height: 200px;
         width: 100%;
+        border-radius: 12px;
     }
 }
 

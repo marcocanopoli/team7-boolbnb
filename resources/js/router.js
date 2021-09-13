@@ -19,7 +19,7 @@ const router = new VueRouter({
             component: Home
         },
         {
-            path: '/apartments',
+            path: '/apartments?:query_string',
             name: 'apartments',
             component: Apartments
         },
