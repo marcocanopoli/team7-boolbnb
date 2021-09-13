@@ -2,7 +2,8 @@
     <div>
 
         <Header 
-            @search="performSearch"/>
+            @search="performSearch"
+            :currentSearch="lastSearch"/>
         <router-view
             @search="performSearch"
             :houses="houses" 
@@ -41,24 +42,26 @@ export default {
         }
     },
     name: 'App',
-    created() {
-        this.getHouseTypes();
-        this.getServices();
-    },
     methods: {
-        // getUser() {
-        //     axios.get('http://127.0.0.1:8000/api/user')
-        //     .then(res => {
-        //         this.user = res.data;
-        //     })
-        //     .catch(error => {
-        //         if (error.response.status == 401) {
-        //             this.user = '';
-        //         }else {
-        //             console.error('Error retrieving user:', error);
-        //         }
-        //     });
-        // },
+        getUser() {
+            axios.get('api/user')
+            .then(res => {
+                this.user = res.data;
+            })
+             .catch(error => {
+                if (error.response) {
+                    if(error.response.status == 401) {
+                        console.log('Unauthorized user');
+                    }else {
+                        console.log(error.response);
+                    }
+                } else if (error.request) {
+                    console.log(error.request);
+                } else {
+                    console.log('Error', error.message);
+                }
+            });  
+        },
         // getCoordinates(){
         //     const currentAxios = axios.create();
         //     currentAxios.defaults.headers.common = {};
@@ -104,11 +107,7 @@ export default {
                 searchData.services = '';
             }
 
-            if( 
-                // this.lastSearch.inputSearch == searchData.inputSearch 
-                // && this.lastSearch.km == searchData.km 
-                // && this.lastSearch.rooms == searchData.rooms 
-                // && this.lastSearch.services == searchData.services
+            if(
                 JSON.stringify(this.lastSearch) === JSON.stringify(this.searchData)  
                 || searchData.inputSearch == '') {
                 return
@@ -123,8 +122,7 @@ export default {
                     ...(searchData.services ? {services: searchData.services } : {} )
                 }      
             }).then(res => {
-                // console.log('Chiamata API ricerca')
-                console.log(res)
+                console.log('Chiamata API ricerca', res)
                 this.houses = res.data;
 
                 this.lastSearch.inputSearch = searchData.inputSearch;
@@ -140,11 +138,13 @@ export default {
             .catch(error => {
                 console.error('Errore:', error);
             });
+        },
+        created() {
+            this.getUser();
+            this.getHouseTypes();
+            this.getServices();
         }
-    },
-    // mounted() {
-    //     this.getUser();
-    // }    
+    }   
 }
 </script>
 

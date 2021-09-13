@@ -26,9 +26,15 @@ class HouseController extends Controller
 
         $house = House::find($house_id);
         $promotion = Promotion::where('name', $promotion_name)->first();
-        
-        $start_date = new DateTime();
-        $end_date = new DateTime();
+
+        if($this->isSponsored($house)) {
+            $lastPromotionDate = $house->promotions->last()->pivot->end_date;
+            $start_date = new DateTime($lastPromotionDate);
+        }else {
+            $start_date = new DateTime();
+        }
+
+        $end_date = clone $start_date;
         $duration = new DateInterval('P'.$promotion->duration.'D'); 
         $end_date->add($duration);
 

@@ -1,65 +1,110 @@
 <template>
-    <div class="container-fluid apartments mx-2">
-        <h1 class="my-4">Strutture</h1>
-
-        <div class="services">
-            <div class="service-pill"
-                v-for="service in allServices" :key="service.id"
-                @click="checkService(service.id)" :id="'service-' + service.id">
-                <div class="service-svg">
-                    <img :src="'images/services_icons/'+ service.icon" alt="icon">
-                </div>
-                {{service.name}}
+    <section class=" apartments ">
+        <div class="container-fluid mx-2">
+            <div class="d-flex my-4 align-items-center">
+                <h1>Strutture</h1>
+                <button class="bnb-btn bnb-btn-brand ml-4" @click="toggleModal">Pi&ugrave; filtri</button>
             </div>
-        </div>
 
-        <div>
-            <div class="house-container row" v-for="house in houses" :key="house.id">
-                <div class="col-12 col-md-8">
-                    <!-- a = router-link -->
-                    <router-link :to="{ name: 'flat', params: { house_id : house.id  } }" class="bnb-a">
-                        <div class="row">
-                            <div class="img-container col-12 col-md-4">
-                                <img :src="'storage/' + house.photos[0].path" :alt="'Foto' + house.photos[0].id">
+            <v-modal 
+                v-show="visibleModal"            
+                @close="toggleModal"
+                @closeClear="closeClear">
+                <!-- <v-login @close="closeModal()" />  -->
+                <div slot="header">
+                    <h4>Servizi inclusi</h4>
+                </div>
+
+                <div slot="body">
+                    <div class="services pt-2 pb-4">
+                        <div class="service-pill"
+                            v-for="service in allServices" :key="service.id"
+                            @click="checkService(service.id)" :id="'service-' + service.id">
+                            <div class="service-svg">
+                                <img :src="'images/services_icons/'+ service.icon" alt="icon">
                             </div>
-                            <div class="details-container col-12 col-md-8">
-                                <p>{{ getHouseType(house.house_type_id) }} a {{house.city}}</p>
-                                <h4>{{house.title}}</h4>
-                                <p>
-                                    {{house.guests}}
-                                    <span v-if="house.guests < 2"> ospite </span>
-                                    <span v-else> ospiti </span>
-                                    &middot;
-
-                                    {{house.rooms}}
-                                    <span v-if="house.rooms < 2"> camera da letto </span>
-                                    <span v-else> camere da letto </span> 
-                                    &middot;
-
-                                    {{house.beds}}
-                                    <span v-if="house.beds < 2"> letto </span>
-                                    <span v-else> letti </span>
-                                    &middot;
-                                    
-                                    {{house.bathrooms}}
-                                    <span v-if="house.bathrooms < 2"> bagno </span>
-                                    <span v-else> bagni </span>
-                                </p>
-                            </div>
+                            {{service.name}}
                         </div>
-                    </router-link>
+                    </div>
+                </div>
+
+                <div slot="footer"
+                    class="text-right">
+                    <button
+                        type="button"
+                        class="bnb-btn bnb-btn-brand"
+                        @click="toggleModal">
+                            Mostra {{ houses.length }} 
+                            <span v-if="houses.length == 1">risultato</span>                
+                            <span v-else>risultati</span>                
+                    </button>
+
+                    <button
+                        type="button"
+                        class="bnb-btn bnb-btn-brand ml-2"
+                        @click="clear">Deseleziona tutti             
+                    </button>
+                </div>
+            </v-modal>
+
+            <div v-if="houses.length > 0">
+                <div class="house-container row" v-for="house in houses" :key="house.id">
+                    <div class="col-12">
+                        <router-link :to="{ name: 'flat', params: { house_id : house.id  } }" class="bnb-a">
+                            <div class="row">
+
+                                <div class="col-12 col-md-3">
+                                    <div class="img-container">
+                                        <img :src="'storage/' + house.photos[0].path" :alt="'Foto' + house.photos[0].id">
+                                    </div>
+                                </div>
+
+                                <div class="details-container col-12 col-md-8">
+                                    <p>{{ getHouseType(house.house_type_id) }} a {{house.city}}</p>
+                                    <h4>{{house.title}}</h4>
+                                    <p>
+                                        {{house.guests}}
+                                        <span v-if="house.guests < 2"> ospite </span>
+                                        <span v-else> ospiti </span>
+                                        &middot;
+
+                                        {{house.rooms}}
+                                        <span v-if="house.rooms < 2"> camera da letto </span>
+                                        <span v-else> camere da letto </span> 
+                                        &middot;
+
+                                        {{house.beds}}
+                                        <span v-if="house.beds < 2"> letto </span>
+                                        <span v-else> letti </span>
+                                        &middot;
+                                        
+                                        {{house.bathrooms}}
+                                        <span v-if="house.bathrooms < 2"> bagno </span>
+                                        <span v-else> bagni </span>
+                                    </p>
+                                </div>
+
+                            </div>
+                        </router-link>
+
+                    </div>
                 </div>
             </div>
+
+            <h2 v-else class="no-results text-center">Nessun risultato da mostrare!</h2>
         </div>
-    </div>
+        
+    </section>
 </template>
 
 <script>
 import VSearch from '../components/VSearch.vue';
+import VModal from '../components/VModal.vue';
 export default {    
     name: 'Apartments',
     components: {
-        VSearch
+        VSearch,
+        VModal
     },
     data() {
         return{
@@ -70,7 +115,8 @@ export default {
                 services: [],
                 km: '20'
             },
-            checkedServices: []
+            checkedServices: [],
+            visibleModal: false
         }
     },
     props: {
@@ -109,6 +155,24 @@ export default {
            }else {
                service.classList.add("pill-toggle");
            }
+        },
+        toggleModal() {
+            this.visibleModal = !this.visibleModal;
+        },
+        clear() {
+            this.filter.services = [];
+            this.checkedServices = [];
+            let activePills = document.querySelectorAll(".pill-toggle");
+
+            activePills.forEach( pill => {
+                pill.classList.remove("pill-toggle");
+            });
+
+            this.$emit('search', this.filter);
+        },
+        closeClear() {
+            this.toggleModal();
+            this.clear();
         }
         // getDistance(lat1, lon1, lat2, lon2) {
         //     var p = 0.017453292519943295;    // Math.PI / 180
@@ -141,16 +205,24 @@ export default {
     @import '../../sass/partials/variables.scss';
 
     .apartments {
-        padding-top: 90px;
+        padding-top: 90px ;
 
         h1 {
             font-size: 2.5rem;
         }
 
+        .no-results {
+            padding-top: 170px;
+        }
+
+        .house-container {
+            width: 50%;
+        }
+
         .services {
             display: flex;
             flex-wrap: wrap;
-            width: 50%;
+            // width: 50%;
             padding-right: 16px;
 
             .service-pill {

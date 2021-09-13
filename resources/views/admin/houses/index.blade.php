@@ -23,15 +23,16 @@
                 <div class="col-12 col-md-10">
                     <a href="{{route('admin.houses.show', $house)}}" class="bnb-a">
                         <div class="row">
-                            <div class="img-container col-12 col-md-4">
-                                <img src="{{ asset('storage/' . $house->photos[0]->path) }}" alt="{{ 'Foto' . $house->photos[0]->id }}">
+                            <div class="col-12 col-md-4">
+                                <div class="img-container shadow @if($activeSponsors[$house->id]) triangle @endif">
+                                    <img src="{{ asset('storage/' . $house->photos[0]->path) }}" alt="{{ 'Foto' . $house->photos[0]->id }}">
 
-                                @if($activeSponsors[$house->id])
-                                    <div class="index-sponsor-box">
-                                        <i class="fas fa-gem index-sponsor-icon"></i>
-                                    </div>
-                                @endif
-
+                                    @if($activeSponsors[$house->id])
+                                        <div class="index-sponsor-box">
+                                            <i class="fas fa-gem index-sponsor-icon"></i>
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
                             <div class="details-container col-12 col-md-8">
                                 <p>{{$house->houseType['name']}} a {{$house->city}}</p>
@@ -55,8 +56,10 @@
                 </div>
                 <div class="col-12 col-md-2 align-self-center">
                     <div class="d-flex justify-content-around">
-                        <a href="{{route('admin.promotions', $house->id)}}"><i class="fas fa-gem"></i></a>
-                        <a class="bnb-btn-edit" href="{{route('admin.houses.edit', $house)}}">
+                        <a class="bnb-btn-index" href="{{route('admin.promotions', $house->id)}}">
+                            <i class="fas fa-gem"></i>
+                        </a>
+                        <a class="bnb-btn-index" href="{{route('admin.houses.edit', $house)}}">
                             <i class="fas fa-pen"></i>
                         </a>
                         <div class="bnb-btn-delete">

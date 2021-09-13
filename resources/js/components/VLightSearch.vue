@@ -33,6 +33,12 @@ export default {
                 this.searchData[key] = '';
             }
         },
+    },
+    props: {
+        lastSearch: Object
+    },
+    mounted() {
+        this.searchData = this.lastSearch;
     }
 }
 </script>

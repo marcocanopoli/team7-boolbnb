@@ -4,7 +4,7 @@
     <div class="summary">
         <h2 class="mb-4">Riepilogo acquisto:</h2>
         <p><strong>Sponsorizzazzione</strong>: pacchetto <span>{{$promotion->name}}</span></p>
-        <p><strong>Durata</strong>: {{$promotion->duration}}gg</p>
+        <p><strong>Durata</strong>: {{$promotion->duration * 24 }} ore</p>
         <p><strong>Struttura</strong>: {{$house->title}}</p>
         <p><strong>Luogo</strong>: {{$house->address}} {{$house->city}} {{$house->zip_code}}</p>
         <hr>
