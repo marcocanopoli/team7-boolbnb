@@ -1,10 +1,41 @@
 @import './_variables';
 
-* {
-    font-family: 'Manrope', sans-serif;
+/* width */
+::-webkit-scrollbar {
+    width: 0px;
 }
 
-body, html {    
+#geo-address {
+
+    ul {
+        position: absolute;
+        top: 65px;
+        left: 0;
+        list-style: none;
+        padding: 0;
+        border: 1px solid rgba($gray-1, 0.3);
+        border-radius: 12px;
+        overflow: hidden;
+        background-color: $white;
+        z-index: 2;
+    
+        li {
+            padding: 5px 10px;
+            cursor: pointer;
+    
+            &:hover,
+            &.active {
+                background-color: rgba($gray-1, 0.1);
+            }
+        }
+    }
+}
+* {
+      font-family: 'Manrope', sans-serif;
+    }
+    
+    body, html {    
+    scrollbar-width: none;
     font-size: 16px;
     font-weight: 400;
     letter-spacing: 0.5px;

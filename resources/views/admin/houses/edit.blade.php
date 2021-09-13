@@ -7,7 +7,7 @@
         <h1>Modifica: <span class="text-info">{{$house->title}}</span></h1>
     </div>
     
-    <form action="{{ route('admin.houses.update', $house->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.houses.update', $house->id) }}" method="POST" enctype="multipart/form-data" autocomplete="off">
         @csrf
         @method('PATCH')
 
@@ -105,10 +105,11 @@
         <div class="form-group row d-flex">
 
             {{-- Indirizzo --}}
-            <div class="col-12 col-md-4 mb-2">
+            <div class="col-12 col-md-4 mb-2" id="geo-address">
                 <label for="address">Indirizzo</label>
                 <input type="text" name="address" value="{{ old('address', $house->address) }}" class="form-control @error('address') is-invalid @enderror" id="address"
                 placeholder="Indirizzo della struttura">
+                <ul id="finded" class="d-none"></ul>
                 @error('address')
                 <small class="text-danger">{{ $message }}</small>
                 @enderror
@@ -278,4 +279,48 @@
 
 @section('script')
     <script src="{{ asset('js/upload_preview.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js" integrity="sha512-lTLt+W7MrmDfKam+r3D2LURu0F47a3QaW5nF0c6Hl0JDZ57ruei+ovbg7BrZ+0bjVJ5YgzsAWE+RreERbpPE1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        const address = document.getElementById('address')
+        address.addEventListener('keyup', getLocation)
+
+        var cities = []
+        var resAddress = ''
+        var resCity = ''
+
+        function getLocation() {
+
+                var search = address.value.replace(/\s/g, '%20')
+                if (search.length > 2) {
+                    axios
+                        .get(`https://api.tomtom.com/search/2/geocode/${search}.json?limit=10&countrySet=it&language=it-IT&key=MAy8CruNqMtQAbImXBd9FqGR76Ch0nGA&language=it-IT`)
+                        .then(
+                            res => {
+                                cities = res.data.results;
+                                document.getElementById('finded').classList.add('d-block')
+                                cities.forEach(
+                                    city => {
+                                        document.getElementById('finded').innerHTML = `<li id="set-city">${city.address.freeformAddress}, ${city.address.countrySubdivision}</li>`;
+                                        resAddress = city.address.freeformAddress
+                                        resCity = city.address.countrySecondarySubdivision
+                                    }
+                                );
+
+                                document.getElementById('set-city').addEventListener('click', setCity)
+    
+                                function setCity() {
+                                document.getElementById('address').value = resAddress
+                                document.getElementById('city').value = resCity
+                                document.getElementById('finded').classList.remove('d-block')
+
+                                }
+
+                            }
+                        )
+                } else if (search.length < 2)  {
+                    document.getElementById('finded').classList.remove('d-block')
+                }
+                
+            }
+    </script>
 @endsection

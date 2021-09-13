@@ -100,7 +100,7 @@ class HouseController extends Controller
         $addressQuery = $addressQuery . ".json";
         
         $coordinatesResponse = Http::get('https://api.tomtom.com/search/2/geocode/' . $addressQuery, [
-            'key' => '9klnGNAqb9IZGTnJpPeD3XymW9LUsIDx'
+            'key' => 'MAy8CruNqMtQAbImXBd9FqGR76Ch0nGA'
         ]);
         
         $coordinatesResponse->json();        
