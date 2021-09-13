@@ -39,6 +39,9 @@ export default {
             active: 0
         }
     },
+    props: {
+        lastSearch: Object
+    },
     methods: {
         lightSearch() {
             this.$emit('search', [this.searchData.inputSearch]);
@@ -46,11 +49,6 @@ export default {
                 this.searchData[key] = '';
             }
         },
-
-    },
-    props: {
-        lastSearch: Object
-    },
         getLocation() {
             const currentAxios = axios.create();
             currentAxios.defaults.headers.common = {};
@@ -85,7 +83,7 @@ export default {
       	        this.active++
             }
         }
-    },
+    },    
     mounted () {
         document.addEventListener("keyup", this.nextItem);
         this.searchData = this.lastSearch;
