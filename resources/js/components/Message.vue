@@ -15,9 +15,15 @@
         <div>
           <label for="guest_mail">E-mail:*</label>
           <input v-model="email" id="guest_email" class="form-control" type="text" placeholder="Inserisci la tua Mail" name="guest_email"
-          :class="{ 'is-invalid' : errors.guest_email }">
+          :class="{ 'is-invalid' : errors.guest_email }"
+          @change="findMail()">
           <small class="text-danger" v-for="err_email, index in errors.guest_email" :key="`err-mail${index}`">{{err_email}}</small>
         </div>
+        <ul v-if="matchMail.length > 0" id="sizelist">
+            <li v-for="(mail, index) in mails" :key="index">
+                {{mail}}
+            </li>
+        </ul>
 
         <div>
           <label for="content">Message:*</label>
@@ -43,11 +49,17 @@ export default {
         errors: {},
         success: false,
         sending: false,
+        users: [],
+        mails: [],
+        matchMail: []
       }
+    },
+    mounted() { 
+      this.getUsers();
     },
     methods: {
       sendForm: function(){
-         //dati inviati pulsante bloccato
+        //dati inviati pulsante bloccato
         this.sending = true;
         //axios.post api/messages
         axios.post('http://127.0.0.1:8000/api/messages', {
@@ -73,6 +85,30 @@ export default {
         }).catch((err) => {
           console.log(err);
         });
+      },
+      getUsers(){
+        axios.get('http://127.0.0.1:8000/api/authuser')
+        .then((result) => {
+          console.log('axios get all users data',result.data); // get array of obj of users  
+          this.users = result.data;
+          this.getMails();
+        }).catch((err) => {
+          console.log('error get registred user mail', err);
+        });
+      },
+      getMails(){
+        this.users.forEach( el => {
+          return this.mails.push(el.email); //ok email in array
+        });
+      },
+      findMail() {
+        this.mails.filter(el => {
+          el.toLowerCase().includes(this.email.toLowerCase());
+          return this.matchMail.push(el);
+        });
+       if(this.email.length == 0 ) {
+          this.matchMail = []
+        }
       }
     }
 }
@@ -96,6 +132,29 @@ export default {
       }
       & > div{
         margin-bottom: 16px;
+      }
+      //from luca
+      ul {
+      width: 30%;
+      position: absolute;
+      top: 65px;
+      left: 0;
+      list-style: none;
+      padding: 0;
+      border: 1px solid rgba($gray-1, 0.3);
+      border-radius: 12px;
+      overflow: hidden;
+      background-color: $white;
+
+      li {
+          padding: 5px 10px;
+          cursor: pointer;
+
+          &:hover,
+          &.active {
+              background-color: rgba($gray-1, 0.1);
+          }
+        }
       }
     }
   }

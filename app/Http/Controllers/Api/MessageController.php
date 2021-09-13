@@ -22,9 +22,9 @@ class MessageController extends Controller
             'content' => 'required'
         ],
         [
-            'guest_name.required' => 'tua mamma',
-            'guest_email.required' => 'tua zia',
-            'content.required' => 'riempi sto container'
+            'guest_name.required' => 'inserisci nome',
+            'guest_email.required' => 'inserisci mail',
+            'content.required' => 'scrivi un messaggio'
         ]);
         if($validator->fails()) {
             return response()->json([
