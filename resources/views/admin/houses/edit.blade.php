@@ -171,7 +171,7 @@
                 @if (count($house->photos) > 1 )
                 <div class="form-check form-check-inline d-flex"> 
                     <input class="form-check-input me-2" type="checkbox" id="delete-img-{{ $photo->id }}" name="delete-imgs[]" value="{{ $photo->id }}">
-                    <label class="form-check-label" for="delete-img-{{ $photo->id }}">Delete</label>
+                    <label class="form-check-label" for="delete-img-{{ $photo->id }}">Rimuovi</label>
                 </div>
                 @endif
             </div>

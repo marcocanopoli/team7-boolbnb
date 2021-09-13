@@ -314,7 +314,9 @@ button {
 .edit-photos,
 .img-container {
     position: relative;
+    overflow: hidden;
     img {
+        border-radius: 12px;
         object-fit: cover;
     }
 }
