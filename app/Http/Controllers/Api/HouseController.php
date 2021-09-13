@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\House;
 use App\Http\Controllers\Controller;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Database\Eloquent\Builder;
@@ -31,6 +32,14 @@ class HouseController extends Controller
         return 12742 * asin(sqrt($a)); // 2 * R; R = 6371 km
     }
 
+    public function sponsored() {
+        $houses = House::whereHas('promotions', function (Builder $query) {
+            $now = new DateTime();
+            $query->where('end_date', '>=', $now->format('Y-m-d H:i:s'),);
+        })->get();
+        return response()->json($houses);
+    }
+
     public function index() {
 
         $houses = House::all();
@@ -53,13 +62,6 @@ class HouseController extends Controller
         $rooms = $request->query('rooms', '');
         $beds = $request->query('beds', '');
         $services = $request->query('services', '');
-
-        // arsort($services);
-        // $sortedServices = [];
-
-        // foreach($services as $service) {
-        //     $sortedServices[] = $service;
-        // }
         
         $results = [];
         $filteredByServices = [];

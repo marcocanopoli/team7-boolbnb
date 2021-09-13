@@ -17,10 +17,10 @@
         <h1>{{$house->title}}</h1>
         
         @if($activeSponsor)
-            <i class="fas fa-gem show-sponsor-icon"></i>              
+            <i class="fas fa-gem show-sponsor-icon ml-3"></i>              
         @endif
 
-        <span class="bnb-btn bnb-btn-brand-2">{{ $house->houseType['name'] }}</span>
+        <span class="bnb-btn bnb-btn-brand-2 ml-3">{{ $house->houseType['name'] }}</span>
     </div>
 
     <div class="show-photos my-4">

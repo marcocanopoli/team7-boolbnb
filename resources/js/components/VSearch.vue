@@ -6,22 +6,24 @@
                     <span class="search-label">Dove</span>
                     <input type="text" placeholder="Dove vuoi andare?"
                         v-model="searchData.inputSearch"
-                        @keyup.enter="$emit('search', searchData); closeAutoComplete()"
-                        @keyup="getLocation">
+                        @keyup.enter="$emit('search', searchData)">
+                        <!-- closeAutoComplete()"                        
+                        @keyup="getLocation">  -->
+
                 </div>
 
                 <div class="search-element">
                     <span class="search-label">Camere</span>
                     <input type="number" min="1" name="rooms" placeholder="Quante camere?" 
                         v-model="searchData.rooms"
-                        @keyup.enter="$emit('search', searchData)">
+                        @change="$emit('search', searchData)">
                 </div>
 
                 <div class="search-element">
                     <span class="search-label">Letti</span>
                     <input type="number" min="1" name="beds" placeholder="Quanti letti?" 
                         v-model="searchData.beds"
-                        @keyup.enter="$emit('search', searchData)">
+                        @change="$emit('search', searchData)">
                 </div>
 
                 <div class="search-element">
@@ -62,6 +64,9 @@ export default {
             active: 0
         }
     },
+    props: {
+        lastSearch: Object
+    },
     methods: {
         getLocation() {
             const currentAxios = axios.create();
@@ -100,6 +105,7 @@ export default {
     },
     mounted () {
         document.addEventListener("keyup", this.nextItem);
+        this.searchData = this.lastSearch;
     }
 }
 </script>

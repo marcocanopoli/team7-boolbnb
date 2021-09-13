@@ -6,14 +6,13 @@
                 <span>Sono flessibile</span>
             </a>
         </div>
-        <div class="w-75 m-auto py-4">
+        <div class="container py-4">
             <h2 class="mb-4">In evidenza</h2>
-            <div class="sponsored bnb-cards-container">
-                <!-- <flat-card :flat="house"/> -->
-                <flat-card />
-                <flat-card />
-                <flat-card />
-                <flat-card />
+            <div class="sponsored bnb-cards-container mb-4">
+                <flat-card 
+                    v-for="house in houses" 
+                    :key="house.id"
+                    :house="house"/>
             </div>
         </div>
     </section>
@@ -25,6 +24,25 @@ export default {
     name: 'Home',
     components: {
         FlatCard
+    },
+    data() {
+        return {
+            houses: ''
+        }
+    },
+    methods: {        
+        getSponsored() {
+            axios.get('api/sponsored')
+            .then(res => {
+                this.houses = res.data;
+            })
+            .catch(error => {
+                console.error('Errore:', error);
+            });
+        }
+    },
+    created() {
+        this.getSponsored();
     }
 }
 </script>
@@ -67,9 +85,9 @@ export default {
         }
 
         .sponsored {
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             grid-template-rows: auto;
-            gap: 30px;            
+            gap: 60px;            
         }
     }
 

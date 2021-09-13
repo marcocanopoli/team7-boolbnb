@@ -46,6 +46,11 @@ export default {
                 this.searchData[key] = '';
             }
         },
+
+    },
+    props: {
+        lastSearch: Object
+    },
         getLocation() {
             const currentAxios = axios.create();
             currentAxios.defaults.headers.common = {};
@@ -83,6 +88,7 @@ export default {
     },
     mounted () {
         document.addEventListener("keyup", this.nextItem);
+        this.searchData = this.lastSearch;
     }
 }
 </script>

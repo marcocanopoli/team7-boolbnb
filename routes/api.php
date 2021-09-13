@@ -17,7 +17,7 @@ use App\User;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
@@ -25,6 +25,7 @@ Route::namespace('Api')
     ->group(function() {
         
         Route::get('/houses', 'HouseController@index');
+        Route::get('/sponsored', 'HouseController@sponsored');
         Route::get('/houses/{id}', 'HouseController@show');
         Route::get('/search', 'HouseController@search');
 
