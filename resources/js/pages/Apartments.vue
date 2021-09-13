@@ -14,7 +14,7 @@
         </div>
 
         <div>
-            <div class="house-container row" v-for="house in houses" :key="house.id">
+            <div class="house-container row" v-for="house in houses" :key="house.id" v-show="!loading">
                 <div class="col-12 col-md-8">
                     <!-- a = router-link -->
                     <router-link :to="{ name: 'flat', params: { house_id : house.id  } }" class="bnb-a">
@@ -50,16 +50,19 @@
                     </router-link>
                 </div>
             </div>
+            <FlatLoader v-if="loading"/>
         </div>
     </div>
 </template>
 
 <script>
+import FlatLoader from '../components/FlatLoader.vue';
 import VSearch from '../components/VSearch.vue';
 export default {    
     name: 'Apartments',
     components: {
-        VSearch
+        VSearch,
+        FlatLoader
     },
     data() {
         return{
@@ -70,7 +73,8 @@ export default {
                 services: [],
                 km: '20'
             },
-            checkedServices: []
+            checkedServices: [],
+            loading: true
         }
     },
     props: {
@@ -80,7 +84,12 @@ export default {
         allServices: Array
         // searchCoordinates: Object,
     },
-    methods: {        
+    methods: {  
+        setLoading() {
+            setTimeout(()=>{
+                this.loading = false
+            }, 1000);
+        },      
         getHouseType(houseTypeId) {
             let name = '';
             this.houseTypes.forEach(element => {
@@ -132,6 +141,9 @@ export default {
     // },
     mounted() {
         this.filter = this.lastSearch;
+    },
+    created() {
+        this.setLoading()
     }
 
 }
