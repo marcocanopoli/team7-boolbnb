@@ -58,7 +58,7 @@ class HouseController extends Controller
     public function search(Request $request) {
         
         //get query parameters with defaults
-        $address = $request->query('query', '');
+        $search = $request->query('search', '');
         $km = $request->query('km', 20);
         $rooms = $request->query('rooms', '');
         $beds = $request->query('beds', '');
@@ -67,7 +67,7 @@ class HouseController extends Controller
         $results = [];
         $filteredByServices = [];
         
-        $coordinates = $this->getCoordinates($address);
+        $coordinates = $this->getCoordinates($search);
 
         //filter by selected parameters
         $filteredByParameters = House::where([

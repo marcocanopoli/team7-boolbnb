@@ -21,14 +21,14 @@
 
                 <!-- Full search box -->
                 <v-search
-                    :lastSearch="lastSearch"
+                    :currentSearch="currentSearch"
                     v-on="$listeners" 
                     v-if="visibleFullSearch && $route.name != 'home'"/>                
                 <!-- /Full search box -->
 
                 <!-- Light search box -->
                 <v-light-search
-                    :lastSearch="lastSearch"
+                    :currentSearch="currentSearch"
                     v-on="$listeners" 
                     v-else/>
                 <!-- /Light search box -->
@@ -76,13 +76,13 @@ export default {
         return {
             activeDrop: false,
             visibleFullSearch: true,
-            lastSearch: {
-                inputSearch: "",
-                rooms: '',
-                beds: '',
-                services: '',
-                km: ''
-            }
+            // currentSearch: {
+            //     inputSearch: "",
+            //     rooms: '',
+            //     beds: '',
+            //     services: '',
+            //     km: ''
+            // }
         }
     },
     props: {
@@ -105,7 +105,7 @@ export default {
       window.addEventListener('scroll', this.setScroll);
     },
     updated() {
-        this.lastSearch = this.currentSearch;
+        this.currentSearch = this.currentSearch;
     },
     destroyed () {
       window.removeEventListener('scroll', this.setScroll);

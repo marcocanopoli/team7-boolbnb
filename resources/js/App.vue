@@ -3,12 +3,12 @@
         <Header 
             @search="performSearch"
             @handleLogout="logout"
-            :currentSearch="lastSearch"
+            :currentSearch="currentSearch"
             :user="user"/>
         <router-view class="main"
             @search="performSearch"
             :houses="houses" 
-            :lastSearch="lastSearch"
+            :currentSearch="currentSearch"
             :houseTypes="houseTypes"
             :allServices="allServices"
             :loading="loading"
@@ -33,7 +33,7 @@ export default {
             houses: [],
             houseTypes: [],
             allServices: [],
-            lastSearch: {
+            currentSearch: {
                 inputSearch : "",
                 rooms: '',
                 beds: '',
@@ -41,8 +41,7 @@ export default {
                 km: ''
             },
             user: {},
-            queryString: '',
-            loading:  true,
+            loading:  false,
             searchCoordinates: {}
         }
     },
@@ -56,7 +55,7 @@ export default {
              .catch(error => {
                 if (error.response) {
                     if(error.response.status == 401) {
-                        console.log('Unauthorized user');
+                        // console.log('Unauthorized user');
                         this.user = null;     
                     }else {
                         console.log(error.response);
@@ -88,46 +87,62 @@ export default {
 
             this.loading = true;
             // light search
-            if(searchData.length == 1) { //if single search input
-                searchData.inputSearch = searchData[0]; //assign to inputSearch
+                      
+            if(searchData.length == 1) {
+                let search = searchData[0]
+                searchData = {};  //if single search input
+                searchData.inputSearch = search ; //assign to inputSearch
                 searchData.km = '';
-                searchData.rooms= '';
+                searchData.rooms = '';
+                searchData.beds = '';
                 searchData.services = '';
             }
 
-            if(
-                JSON.stringify(this.lastSearch) === JSON.stringify(this.searchData)  
-                || searchData.inputSearch == '') {
-                return
-            }
+            // if(
+            //     JSON.stringify(this.currentSearch) === JSON.stringify(searchData)  
+            //     || searchData.inputSearch == '') {
+            //     console.log(JSON.stringify(this.currentSearch));
+            //     console.log(JSON.stringify(searchData));
+            //         // alert('Stai già visualizzando questa ricerca!');
+            //     return
+            // }
+
+            let queryObj = {
+                search: searchData.inputSearch,
+                ...(searchData.km ? {km: searchData.km } : {} ),
+                ...(searchData.rooms ? {rooms: searchData.rooms } : {} ),
+                ...(searchData.beds ? {beds: searchData.beds } : {} ),
+                ...(searchData.services ? {services: searchData.services } : {} )
+            };
 
             axios.get('api/search', {
-                params: {
-                    query: searchData.inputSearch,
-                    ...(searchData.km ? {km: searchData.km } : {} ),
-                    ...(searchData.rooms ? {rooms: searchData.rooms } : {} ),
-                    ...(searchData.beds ? {beds: searchData.beds } : {} ),
-                    ...(searchData.services ? {services: searchData.services } : {} )
-                }      
+                params: queryObj
+                // params: {
+                //     search: searchData.inputSearch,
+                //     ...(searchData.km ? {km: searchData.km } : {} ),
+                //     ...(searchData.rooms ? {rooms: searchData.rooms } : {} ),
+                //     ...(searchData.beds ? {beds: searchData.beds } : {} ),
+                //     ...(searchData.services ? {services: searchData.services } : {} )
+                // }      
             }).then(res => {
                 console.log('Chiamata API ricerca', res)
-                this.houses = res.data;                
+                this.houses = res.data;
+                this.currentSearch = searchData;
 
-                this.lastSearch.inputSearch = searchData.inputSearch;
-                this.lastSearch.km = searchData.km;
-                this.lastSearch.rooms = searchData.rooms;
-                this.lastSearch.beds = searchData.beds;
-                this.lastSearch.services = searchData.services;
+                this.$router.push(
+                    {
+                        name: 'apartments',
+                        query: queryObj
+                    }
+                    ).catch(()=>{});
 
-                this.queryString = res.request.responseURL.split('?')[1];
-
-                this.$router.push({name: 'apartments', params: { query_string: this.queryString}}).catch(()=>{});
                 this.loading = false;
                 this.getCoordinates();
 
             })
             .catch(error => {
                 console.error('Errore:', error);
+                this.loading = false;
             });
         },
         getCoordinates(){
@@ -135,7 +150,7 @@ export default {
             currentAxios.defaults.headers.common = {};
             currentAxios.defaults.headers.common.accept = 'application/json';
 
-            currentAxios.get(`https://api.tomtom.com/search/2/geocode/${this.lastSearch.inputSearch}.json`,
+            currentAxios.get(`https://api.tomtom.com/search/2/geocode/${this.currentSearch.inputSearch}.json`,
             {
                 params: {
                     key : 'MAy8CruNqMtQAbImXBd9FqGR76Ch0nGA',
