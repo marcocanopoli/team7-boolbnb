@@ -40,7 +40,7 @@ export default {
         }
     },
     props: {
-        lastSearch: Object
+        currentSearch: Object
     },
     methods: {
         lightSearch() {
@@ -86,7 +86,7 @@ export default {
     },    
     mounted () {
         document.addEventListener("keyup", this.nextItem);
-        this.searchData = this.lastSearch;
+        this.searchData = this.currentSearch;
     }
 }
 </script>

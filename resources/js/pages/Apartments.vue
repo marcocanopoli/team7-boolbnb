@@ -30,14 +30,11 @@
 
                 <div slot="footer"
                     class="text-right">
-                    <button
-                        type="button"
-                        class="bnb-btn bnb-btn-brand"
-                        @click="toggleModal">
-                            Mostra {{ houses.length }} 
-                            <span v-if="houses.length == 1">risultato</span>                
-                            <span v-else>risultati</span>                
-                    </button>
+                    <strong class="color-brand ">
+                        {{ houses.length }} 
+                        <span v-if="houses.length == 1">risultato</span>                
+                        <span v-else>risultati</span>
+                    </strong>
 
                     <button
                         type="button"
@@ -128,12 +125,13 @@ export default {
             },
             checkedServices: [],
             visibleModal: false,
+            URLquery: {}
         }
     },
     props: {
         houses: Array,
         houseTypes: Array,
-        lastSearch: Object,
+        currentSearch: Object,
         allServices: Array,
         loading: Boolean,
         searchCoordinates: Object
@@ -189,7 +187,6 @@ export default {
         },
         closeClear() {
             this.toggleModal();
-            this.clear();
         }, 
         getTomTomMap() {
             const API_KEY = 'MAy8CruNqMtQAbImXBd9FqGR76Ch0nGA'; 
@@ -219,6 +216,13 @@ export default {
                     new tt.Marker().setLngLat(houseCoordinates).addTo(map);
                 })
             }
+        },
+        searchURL() {
+            this.URLquery = this.$route.query;
+            if(this.URLquery.search) {
+                this.URLquery.inputSearch = this.$route.query.search;
+                this.$emit('search', this.URLquery);
+            }
         }
     },
     computed: {
@@ -239,8 +243,10 @@ export default {
         }
     },
     mounted() {
-        this.filter = this.lastSearch;
-        
+        this.filter = this.currentSearch;
+
+        this.searchURL();
+
         // this.loading = this.isLoading;
     }
 
