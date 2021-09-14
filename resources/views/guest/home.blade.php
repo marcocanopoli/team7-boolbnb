@@ -11,8 +11,13 @@
         {{-- mappe tomtom --}}
         <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.5.0/maps/maps-web.min.js"></script>
         <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.5.0/services/services-web.min.js"></script>
-
         {{-- mappe tomtom --}}
+        
+        {{-- chat cdn --}}
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+        {{-- /chat cdn --}}
 
     </head>
     <body>
