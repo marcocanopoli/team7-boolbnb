@@ -14,17 +14,20 @@
             :loading="loading"
             :searchCoordinates="searchCoordinates">
         </router-view>
+        <Footer />
     </div>
 </template>
 
 <script>
 import Header from './components/Header.vue'
+import Footer from './components/Footer.vue'
 import Home from './pages/Home.vue'
 import Apartments from './pages/Apartments.vue'
 
 export default {
   components: { 
         Header,
+        Footer,
         Home,
         Apartments
     },
@@ -194,7 +197,9 @@ export default {
 <style lang='scss'>
 
     @import '../sass/partials/general.scss';
+    @import '../sass/partials/variables.scss';
+
     .main {
-        min-height: 100%;
+        min-height: calc(100vh - #{$footerHeight});
     }
 </style>

@@ -126,7 +126,7 @@ export default {
         width: 100%;
         padding: 0 24px;
         transition: .1s ease-out;
-        min-height: 90px;
+        min-height: $headerHeight;
         z-index: 99;
 
         .logo-box {

@@ -6,9 +6,9 @@
                 <span>Sono flessibile</span>
             </a>
         </div>
-        <div class="container py-4">
+        <div class="home-content">
             <!-- sponsored -->
-            <div>                
+            <div class="container">                
                 <h2 class="mb-4">In evidenza</h2>
 
                 <div class="sponsored bnb-cards-container mb-4">
@@ -100,11 +100,32 @@ export default {
                }
            }
         }
+        .home-content {
+            position: relative;
+            padding: 36px 0 56px 0;
 
-        .sponsored {
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: auto;
-            gap: 60px;            
+            &::before {
+                content: ' ';
+                display: block;
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0.2;
+                background-image: url('/images/bg-travels.jpg');
+                background-size: 25%;
+                background-color: rgba($white, .2);
+            }
+            .container {
+                position: relative;
+
+                .sponsored {
+                    grid-template-columns: repeat(3, 1fr);
+                    grid-template-rows: auto;
+                    gap: 60px;            
+                }
+            }
         }
     }
 
