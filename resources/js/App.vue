@@ -7,9 +7,9 @@
             :user="user"/>
         <router-view class="main"
             @search="performSearch"
+            @getServices="getServices"            
             :houses="houses" 
-            :currentSearch="currentSearch"
-            :houseTypes="houseTypes"
+            :currentSearch="currentSearch"            
             :allServices="allServices"
             :loading="loading"
             :searchCoordinates="searchCoordinates">
@@ -34,8 +34,11 @@ export default {
     data(){
         return{
             houses: [],
-            houseTypes: [],
-            allServices: [],
+            allServices: new Array(),
+            user: {},
+            searchCoordinates: {},
+            loading:  false,
+
             currentSearch: {
                 inputSearch : "",
                 rooms: '',
@@ -43,9 +46,6 @@ export default {
                 services: '',
                 km: ''
             },
-            user: {},
-            loading:  false,
-            searchCoordinates: {}
         }
     },
     name: 'App',
@@ -69,15 +69,7 @@ export default {
                     console.log('Error', error.message);
                 }
             });  
-        },
-        getHouseTypes() {
-            axios.get('api/housetypes')
-            .then(res => {
-                this.houseTypes = res.data;
-            }).catch(err => {
-                console.log('HouseType error: ', err)
-            });
-        },
+        },       
         getServices() {
             axios.get('api/services')
             .then(res => {
@@ -186,9 +178,8 @@ export default {
             }
         },       
     },
-    mounted() {
+    created() {
         this.getUser();
-        this.getHouseTypes();
         this.getServices();
     }  
 }

@@ -33,7 +33,7 @@ class House extends Model
         return $this->belongsTo('App\User');
     }
     public function houseType() {
-        return $this->belongsTo('App\HouseType');
+        return $this->belongsTo('App\HouseType', 'house_type_id');
     }
     
     //one to many->side one

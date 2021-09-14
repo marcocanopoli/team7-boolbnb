@@ -78,10 +78,8 @@ export default {
             visibleFullSearch: true,
         }
     },
-    props: {
-        currentSearch: Object,
-        user: Object
-    },
+    props: [ 'currentSearch', 'user']
+    ,
     methods: {
         setDrop: function() {
             this.activeDrop = !this.activeDrop;
@@ -194,6 +192,9 @@ export default {
         .my-header {
             flex-direction: row;
 
+            .logo-box {
+                align-self: center;
+            }
             .search {
                 margin: 0;
             }
