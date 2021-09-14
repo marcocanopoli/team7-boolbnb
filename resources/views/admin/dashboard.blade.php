@@ -18,11 +18,11 @@
     <span class="color-gray-2">, {{ Auth::user()->email }}</span>
 
     <div class="bnb-cards-container mt-5 mb-4 color-gray-2">
-        <a href="#" class="bnb-card shadow">
+        {{-- <a href="#" class="bnb-card shadow">
             <i class="fas fa-id-card"></i>
             <h4>Profilo &rsaquo;</h4>
             <p>Visualizza e modifica i tuoi dati personali</p>
-        </a>
+        </a> --}}
         <a href="{{ route('admin.houses.index') }}" class="bnb-card shadow">
             <i class="fas fa-home"></i>
             <h4>Le mie strutture &rsaquo;</h4>
