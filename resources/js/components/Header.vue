@@ -39,10 +39,22 @@
             <!-- User -->
                 <div class="header-user navbar-toggler" @click="setDrop()">
                     <i class="fas fa-bars"></i>
+
                     <i class="far fa-user"></i>
+                         
+                    <!-- <img v-else
+                        class="header-avatar"
+                        :src="'storage/' + user.profile_pic" alt=""> -->
+
                     <div v-if="activeDrop" class="bnb-dropdown">
-                        <a href="/register">Registrati</a>
-                        <a href="/login">Accedi</a>
+                        <div v-if="!user">
+                            <a href="/register">Registrati</a>
+                            <a href="/login">Accedi</a>
+                        </div>
+                        <div v-else>
+                            <a href="/admin">Dashboard</a>
+                            <a @click="$emit('handleLogout')">Logout</a>
+                        </div>
                     </div>
                 </div>
             <!-- /User -->  
@@ -74,7 +86,8 @@ export default {
         }
     },
     props: {
-        currentSearch: Object
+        currentSearch: Object,
+        user: Object
     },
     methods: {
         setDrop: function() {
@@ -86,7 +99,7 @@ export default {
             } else if (window.scrollY == 0) {
                 this.visibleFullSearch = true
             }
-        }
+        } 
     },
     created () {
       window.addEventListener('scroll', this.setScroll);

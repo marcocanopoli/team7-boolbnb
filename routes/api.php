@@ -39,11 +39,8 @@ Route::namespace('Api')
             return response()->json($services);
         });
 
-        Route::get('/authuser', function() {
-            $authuser = User::all();
-            return response()->json($authuser);
-        });
-
         //form send message la rotta è api/messages
         Route::post('messages', 'MessageController@store')->name('message');
+        
+       
     });

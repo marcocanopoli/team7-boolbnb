@@ -1,6 +1,6 @@
 <template>
-    <section class=" apartments ">
-        <div class="container-fluid mx-2">
+    <section class="apartments ">
+        <div class="container-fluid">
             <div class="d-flex my-4 align-items-center">
                 <h1>Strutture</h1>
                 <button class="bnb-btn bnb-btn-brand ml-4" @click="toggleModal">Pi&ugrave; filtri</button>
@@ -9,7 +9,7 @@
                 v-show="visibleModal"            
                 @close="toggleModal"
                 @closeClear="closeClear">
-                <!-- <v-login @close="closeModal()" />  -->
+                
                 <div slot="header">
                     <h4>Servizi inclusi</h4>
                 </div>
@@ -47,52 +47,60 @@
                 </div>
             </v-modal>
 
-            <div v-if="houses.length > 0">
-                <div class="house-container row" v-for="house in houses" :key="house.id">
-                    <div class="col-12">
-                        <router-link :to="{ name: 'flat', params: { house_id : house.id  } }" class="bnb-a">
-                            <div class="row">
+            <div class="row">
+                <div class="col-md-6" v-if="loading">
+                    <FlatLoader/>
+                </div>
 
-                                <div class="col-12 col-md-3">
-                                    <div class="img-container">
-                                        <img :src="'storage/' + house.photos[0].path" :alt="'Foto' + house.photos[0].id">
-                                    </div>
-                                </div>
+                <div class="col-md-6" v-if="houses.length == 0 && !loading">
+                    <h2 class="no-results text-center">Nessun risultato da mostrare!</h2>
+                </div>
+                
+                <div class="houses col-md-6 py-4" v-if="houses.length > 0 && !loading">                    
+                    <router-link                         
+                        v-for="house in houses" :key="house.id"
+                        :to="{ name: 'flat', params: { house_id : house.id  } }"
+                        class="single-house bnb-a row">                    
 
-                                <div class="details-container col-12 col-md-8">
-                                    <p>{{ getHouseType(house.house_type_id) }} a {{house.city}}</p>
-                                    <h4>{{house.title}}</h4>
-                                    <p>
-                                        {{house.guests}}
-                                        <span v-if="house.guests < 2"> ospite </span>
-                                        <span v-else> ospiti </span>
-                                        &middot;
+                        <div class="img-container col-md-4">
+                            <img :src="'storage/' + house.photos[0].path" :alt="'Foto' + house.photos[0].id">
+                        </div>
 
-                                        {{house.rooms}}
-                                        <span v-if="house.rooms < 2"> camera da letto </span>
-                                        <span v-else> camere da letto </span> 
-                                        &middot;
+                        <div class="details-container col-md-8">
+                            <p>{{ getHouseType(house.house_type_id) }} a {{house.city}}</p>
+                            <h4>{{house.title}}</h4>
+                            <p>
+                                {{house.guests}}
+                                <span v-if="house.guests < 2"> ospite </span>
+                                <span v-else> ospiti </span>
+                                &middot;
 
-                                        {{house.beds}}
-                                        <span v-if="house.beds < 2"> letto </span>
-                                        <span v-else> letti </span>
-                                        &middot;
-                                        
-                                        {{house.bathrooms}}
-                                        <span v-if="house.bathrooms < 2"> bagno </span>
-                                        <span v-else> bagni </span>
-                                    </p>
-                                </div>
+                                {{house.rooms}}
+                                <span v-if="house.rooms < 2"> camera da letto </span>
+                                <span v-else> camere da letto </span> 
+                                &middot;
 
-                            </div>
-                        </router-link>
+                                {{house.beds}}
+                                <span v-if="house.beds < 2"> letto </span>
+                                <span v-else> letti </span>
+                                &middot;
+                                
+                                {{house.bathrooms}}
+                                <span v-if="house.bathrooms < 2"> bagno </span>
+                                <span v-else> bagni </span>
+                            </p>
+                        </div>
+                    </router-link>
+                </div>
 
+                <div class="col-md-6">
+                    <div class="row">
+                        <div id="map-div" class="apartments-map col-md-10 offset-md-1"></div>
                     </div>
                 </div>
+
             </div>
 
-            <h2 v-else class="no-results text-center">Nessun risultato da mostrare!</h2>
-            <FlatLoader v-if="loading"/>
         </div>
         
     </section>
@@ -120,22 +128,22 @@ export default {
             },
             checkedServices: [],
             visibleModal: false,
-            loading: true
         }
     },
     props: {
         houses: Array,
         houseTypes: Array,
         lastSearch: Object,
-        allServices: Array
-        // searchCoordinates: Object,
+        allServices: Array,
+        loading: Boolean,
+        searchCoordinates: Object
     },
     methods: {  
-        setLoading() {
-            setTimeout(()=>{
-                this.loading = false
-            }, 1000);
-        },      
+        // setLoading() {
+        //     setTimeout(()=>{
+        //         this.loading = false
+        //     }, 1000);
+        // },      
         getHouseType(houseTypeId) {
             let name = '';
             this.houseTypes.forEach(element => {
@@ -182,32 +190,58 @@ export default {
         closeClear() {
             this.toggleModal();
             this.clear();
-        }
-        // getDistance(lat1, lon1, lat2, lon2) {
-        //     var p = 0.017453292519943295;    // Math.PI / 180
-        //     var c = Math.cos;
-        //     var a = 0.5 - c((lat2 - lat1) * p)/2 + 
-        //             c(lat1 * p) * c(lat2 * p) * 
-        //             (1 - c((lon2 - lon1) * p))/2;
+        }, 
+        getTomTomMap() {
+            const API_KEY = 'MAy8CruNqMtQAbImXBd9FqGR76Ch0nGA'; 
+            let coordinates; 
 
-        //     return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
-        // }
-        // },
+            if(this.houses.length > 0) {
+                coordinates = {lat: this.houses[0].latitude, lon: this.houses[0].longitude};
+            } else {
+                coordinates =  this.searchCoordinates;
+            }
+
+            var map = tt.map({
+                key: API_KEY,
+                container: 'map-div',
+                center: coordinates,
+                zoom: 14
+            });
+            map.scrollZoom.disable();//disattiva scroll x zoom in/out usare bottoni
+            map.addControl(new tt.FullscreenControl());
+            map.addControl(new tt.NavigationControl());
+
+            new tt.Marker().setLngLat(coordinates).addTo(map);
+
+            if(this.houses.length > 0) {
+                this.houses.forEach(house => {
+                    let houseCoordinates = {lat: house.latitude, lon: house.longitude};
+                    new tt.Marker().setLngLat(houseCoordinates).addTo(map);
+                })
+            }
+        }
     },
-    // computed: {
-    //     filtered() {
-    //         // filterArr = this.houses.filter( house => house.rooms >= this.filter.rooms );
-    //         // filterArr = filterArr.filter( house => house.beds >= this.filter.beds );
-    //         // filterArr = filterArr.filter( house => 
-    //         //     this.getDistance(house.latitude, house.longitude, this.searchCoordinates.lat, this.searchCoordinates.lon <= this.filter.km));
-    //         // return filterArr
-    //     }
-    // },
+    computed: {
+        // filtered() {
+            // filterArr = this.houses.filter( house => house.rooms >= this.filter.rooms );
+            // filterArr = filterArr.filter( house => house.beds >= this.filter.beds );
+            // filterArr = filterArr.filter( house => 
+            //     this.getDistance(house.latitude, house.longitude, this.searchCoordinates.lat, this.searchCoordinates.lon <= this.filter.km));
+            // return filterArr
+        // }
+    },
+    watch: {
+        searchCoordinates: {
+            deep: true,
+            handler: function() {
+                this.getTomTomMap();
+            }
+        }
+    },
     mounted() {
         this.filter = this.lastSearch;
-    },
-    created() {
-        this.setLoading()
+        
+        // this.loading = this.isLoading;
     }
 
 }
@@ -234,7 +268,6 @@ export default {
         .services {
             display: flex;
             flex-wrap: wrap;
-            // width: 50%;
             padding-right: 16px;
 
             .service-pill {
@@ -259,6 +292,30 @@ export default {
                 }
             }
         }
+
+        .houses {
+            display: flex;
+            flex-direction: column;
+
+            .single-house {
+                padding: 20px 0;
+
+                &:not(:first-of-type) { 
+                    border-top: 1px solid rgba($gray-1, 0.3);
+                }
+
+                .details-container {
+                    p {
+                        color: $gray-1;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+
+    #map-div.apartments-map {
+        height: calc(100vh - 204px);
     }
 
 </style>
