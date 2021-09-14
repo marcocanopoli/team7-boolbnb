@@ -58,13 +58,15 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
+                        
+                            @if (Route::currentRouteName() == 'login' )
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
+                                    <a class="bnb-a bnb-btn bnb-btn-white bnb-btn-resp" href="{{ route('register') }}">{{ __('Registrati') }}</a>
+                                </li> 
+                            @else
+                                <li class="nav-item">
+                                    <a class="bnb-btn bnb-btn-brand bnb-btn-resp" href="{{ route('login') }}">{{ __('Accedi') }}</a>
+                                </li> 
                             @endif
                         @else
 
@@ -85,10 +87,10 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a class="log-out bnb-a" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Esci dal tuo account') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
