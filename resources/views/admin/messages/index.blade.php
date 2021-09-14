@@ -72,7 +72,7 @@
                             <a href="{{$houseMessages->previousPageUrl()}}">
                                 <i class="fas fa-chevron-left"></i>
                             </a>
-                            @for($i=0;$i<=$houseMessages->lastPage();$i++)
+                            @for($i=1;$i<=$houseMessages->lastPage();$i++)
                                 <!-- a Tag for another page -->
                                 <a href="{{$houseMessages->url($i)}}">{{$i}}</a>
                             @endfor

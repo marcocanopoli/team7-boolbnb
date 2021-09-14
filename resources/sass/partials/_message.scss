@@ -46,6 +46,10 @@
     }
     //my-pagination
     .my-pagination{
+        width: 100%;
+        margin: auto;
+        display: flex;
+        justify-content: center;
         a {
             padding: 4px;
             color: $black;
