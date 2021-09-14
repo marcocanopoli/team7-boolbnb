@@ -1,10 +1,14 @@
 <template>
     <section class="home">
-        <div class="jbt">
-            <strong>Non sai dove andare? Nessun problema!</strong>
+        <div class="jbt">            
+            <!-- <strong>Non sai dove andare? Nessun problema!</strong>
             <a class="bnb-a" href="">
                 <span>Sono flessibile</span>
-            </a>
+            </a> -->
+            <v-light-search                
+                :currentSearch="currentSearch"
+                v-on="$listeners" 
+                v-if="scrollZero"/>
         </div>
         <div class="home-content">
             <!-- sponsored -->
@@ -31,19 +35,25 @@
 
 <script>
 import VPagination from '../components/VPagination.vue';
+import VLightSearch from '../components/VLightSearch.vue';
 import FlatCard from '../components/FlatCard.vue'
 export default {
     name: 'Home',
     components: {
         FlatCard,
-        VPagination
+        VPagination,
+        VLightSearch
     },
     data() {
         return {
             houses: '',            
             current_page: 1,
             last_page: 1,
+            scrollZero: true
         }
+    },
+    props: {
+        currentSearch: Object
     },
     methods: {        
         getSponsored(page = 1) {
@@ -56,11 +66,25 @@ export default {
             .catch(error => {
                 console.error('Errore:', error);
             });
-        }
+        },
+         setScroll () {
+            if (window.scrollY > 0 ) {
+                this.scrollZero = false
+            } else if (window.scrollY == 0) {
+                this.scrollZero = true
+            }
+        } 
     },
-    created() {
+    created () {
+        window.addEventListener('scroll', this.setScroll);
         this.getSponsored();
-    }
+    },
+    updated() {
+        this.currentSearch = this.currentSearch;
+    },
+    destroyed () {
+        window.removeEventListener('scroll', this.setScroll);
+    } 
 }
 </script>
 
@@ -79,26 +103,30 @@ export default {
            background-image: url(https://a0.muscache.com/im/pictures/57b9f708-bb12-498c-bc33-769f8fc43e63.jpg?im_w=960);
            background-size: cover;
            background-position:  0 60% ;
+
+            strong {
+                text-align: center;
+            }
+    
+        //    a {
+        //        margin: 10px 0;
+        //        padding: 22px 56px;
+        //        border-radius: 54px;
+        //        background-color: $white;
+        //        transition: 0.2s;
    
-           a {
-               margin: 10px 0;
-               padding: 22px 56px;
-               border-radius: 54px;
-               background-color: $white;
-               transition: 0.2s;
+        //        &:hover {
+        //            box-shadow: 0 0 5px 2px rgba($gray-1, 0.2);
+        //        }
    
-               &:hover {
-                   box-shadow: 0 0 5px 2px rgba($gray-1, 0.2);
-               }
-   
-               span {
-                   font-weight: 700;
-                   background: $primary-h;
-                   background-clip: text;
-                   -webkit-background-clip: text;
-                   -webkit-text-fill-color: transparent;
-               }
-           }
+        //        span {
+        //            font-weight: 700;
+        //            background: $primary-h;
+        //            background-clip: text;
+        //            -webkit-background-clip: text;
+        //            -webkit-text-fill-color: transparent;
+        //        }
+        //    }
         }
         .home-content {
             position: relative;
@@ -117,14 +145,37 @@ export default {
                 background-size: 25%;
                 background-color: rgba($white, .2);
             }
+
+            h2 {
+                font-size: 47px;
+                text-align: center;
+            }
+
             .container {
                 position: relative;
+            }
+            .sponsored {
+                grid-template-columns: repeat(1, 1fr);
+                grid-template-rows: auto;
+                gap: 60px;            
+            }
+        }
+    }
 
-                .sponsored {
-                    grid-template-columns: repeat(3, 1fr);
-                    grid-template-rows: auto;
-                    gap: 60px;            
-                }
+    @media screen and (min-width: 768px) {
+
+        .home .home-content {
+            .sponsored{
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    }
+
+    @media screen and (min-width: 992px) {
+
+        .home .home-content {
+            .sponsored{
+                grid-template-columns: repeat(3, 1fr);
             }
         }
     }

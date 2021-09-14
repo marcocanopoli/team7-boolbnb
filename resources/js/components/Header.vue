@@ -17,7 +17,7 @@
             
             <!-- Search -->            
             <!-- <div v-if="$route.name != 'apartments'" > -->
-            <div>
+            <div class="search">
 
                 <!-- Full search box -->
                 <v-search
@@ -30,7 +30,7 @@
                 <v-light-search
                     :currentSearch="currentSearch"
                     v-on="$listeners" 
-                    v-else/>
+                    v-if="$route.name == 'home' && !visibleFullSearch"/>
                 <!-- /Light search box -->
 
             </div>
@@ -76,13 +76,6 @@ export default {
         return {
             activeDrop: false,
             visibleFullSearch: true,
-            // currentSearch: {
-            //     inputSearch: "",
-            //     rooms: '',
-            //     beds: '',
-            //     services: '',
-            //     km: ''
-            // }
         }
     },
     props: {
@@ -118,7 +111,9 @@ export default {
     @import '../../sass/partials/variables.scss';
       
     .my-header {
+        position: relative;
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
         align-items: center;
         position: fixed;
@@ -132,6 +127,8 @@ export default {
         .logo-box {
             font-size: 20px;
             font-weight: 700;
+            margin: 16px 0;
+            align-self: flex-start;
 
             svg {
                 height: 32px;
@@ -143,9 +140,15 @@ export default {
             }
         }
 
+        .search {
+            margin: 16px 0;
+        }
+
         .header-user {
-            position: relative;
+            position: absolute;
             border: 1px solid rgba($gray-1, 0.2);
+            top: 16px;
+            right: 24px;
 
             &:hover {
                 box-shadow: 0 0 5px 2px rgba($gray-1, 0.2);
@@ -182,6 +185,23 @@ export default {
             a {
                 margin: 0 10px;
                 color: $black;                
+            }
+        }
+    }
+
+    @media screen and (min-width: 576px) {
+
+        .my-header {
+            flex-direction: row;
+
+            .search {
+                margin: 0;
+            }
+
+            .header-user {
+                position: relative;
+                right: 0;
+                top: 0;
             }
         }
     }

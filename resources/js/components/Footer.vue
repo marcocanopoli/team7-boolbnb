@@ -35,7 +35,7 @@ export default {
         flex-direction: column;
         align-items: center;
         justify-content: space-around;
-        height: $footerHeight;
+        min-height: $footerHeight;
         background-color: $white;
         box-shadow: 0 -4px 8px 4px rgba($black, 0.1);
         color: $gray-1;
@@ -46,9 +46,11 @@ export default {
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
             list-style: none;
 
             li {
+                padding: 8px 0;
                 &:not(:last-child)::after {
                     content: '\00B7';
                     padding: 0 8px;
@@ -67,6 +69,19 @@ export default {
                 }
             }
         }
+    }
+
+    @media screen and (min-width: 576px) {
+        .bnb-footer {
+            ul {
+                flex-direction: row;
+
+                li {
+                    padding: 0;
+                }
+            }
+        }
+        
     }
 
 </style>
