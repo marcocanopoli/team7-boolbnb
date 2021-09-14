@@ -25,8 +25,9 @@ Route::middleware('auth') //autenticazione
     Route::post('houses/{house_id}/payments/{promotion_name}', 'HouseController@payments')->name('success');
     Route::get('houses/{house_id}/payments/{promotion_name}', 'PaymentsController@make')->name('payment');
     Route::get('houses/{house_id}/promotions', 'PromotionsController@promote')->name('promotions');
-
     Route::resource('messages', 'MessageController');
+    Route::get('chart/', 'ChartController@index')->name('chart');
+    
     
     Route::get("{any?}", "HomeController@index")->where("any", ".*");
 

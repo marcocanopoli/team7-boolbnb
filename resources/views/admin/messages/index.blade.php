@@ -30,11 +30,10 @@
                         @foreach ( $houseMessages as $index => $msg)
                             <div class="col-lg-6 ">
                                 <div class="card-msg mb-4 position-relative shadow">
-                                    <h4 class="h4">Richiesta di prenotazione</h4>
-                                    <span class="index-msg">Messaggio {{ $index + 1 }} </span>
-                                    <h5 class="h5"><strong>Nome ospite: </strong>{{ $msg->guest_name }}</h5>
-                                    <h5 class="h5"><strong>E-mail ospite: </strong>{{ $msg->guest_email }}</h5>
-                                    <h6 class="h6">Contenuto Messaggio: </h6>
+                                    <h4 class="h4 my-3">Messaggio {{ $index + 1 }} </h4>
+                                    
+                                    <h5 class="h5"><strong>Nome: </strong>{{ $msg->guest_name }}</h5>
+                                    <h5 class="h5"><strong>E-mail: </strong>{{ $msg->guest_email }}</h5>
                                     <p>{{ $msg->content }}</p>
                                     
                                     {{-- form-absolute delete button --}}
@@ -50,18 +49,18 @@
                                     </div> {{-- form-absolute delete button --}}
 
                                     <div class="btn-row">
-                                        <div class="col-12 col-sm-6 col-md-6 col-lg-6 my-2 padd-btn padd-btn-left">
-                                            <a class="bnb-a bnb-btn bnb-btn-white bnb-btn-resp" href="mailto:team7@boolbnb.com">
+                                        <div class="col-12 my-2 padd-btn padd-btn-left">
+                                            <a class="bnb-a bnb-btn bnb-btn-white bnb-btn-resp" href="mailto:{{$msg->guest_email}}">
                                                 <i class="fas fa-reply"></i>
                                                 RISPONDI
                                             </a>
                                         </div>
-                                        <div class="col-12 col-sm-6 col-md-6 col-lg-6 my-2 padd-btn padd-btn-rgt">
+                                        {{-- <div class="col-12 col-sm-6 col-md-6 col-lg-6 my-2 padd-btn padd-btn-rgt">
                                             <button type="submit" class="bnb-a bnb-btn bnb-btn-brand bnb-btn-resp">
                                                 <i class="fas fa-check"></i>
                                                 CONFERMA
                                             </button>
-                                        </div>
+                                        </div> --}}
                                     </div> 
 
                                 </div>
