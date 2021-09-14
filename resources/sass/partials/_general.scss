@@ -8,6 +8,7 @@ body, html {
     font-size: 16px;
     font-weight: 400;
     letter-spacing: 0.5px;
+    min-height: 100vh;
 }
 
 a.bnb-a {
@@ -214,7 +215,7 @@ button {
 
 //header
 .navbar.my-navbar {
-    min-height: 90px;
+    min-height: $headerHeight;
     padding: 8px 24px;
     
     svg {
