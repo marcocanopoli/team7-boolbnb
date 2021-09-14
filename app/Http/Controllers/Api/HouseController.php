@@ -48,9 +48,9 @@ class HouseController extends Controller
         return response()->json($houses);
     }
 
-    public function show($id) {
+    public function show($slug) {
 
-        $house = House::findOrFail($id);
+        $house = House::where('slug', $slug)->first();
 
         return response()->json($house);
     }

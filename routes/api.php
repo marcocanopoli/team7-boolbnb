@@ -26,7 +26,7 @@ Route::namespace('Api')
         
         Route::get('/houses', 'HouseController@index');
         Route::get('/sponsored', 'HouseController@sponsored');
-        Route::get('/houses/{id}', 'HouseController@show');
+        Route::get('/houses/{slug}', 'HouseController@show');
         Route::get('/search', 'HouseController@search');
 
         Route::get('/housetypes', function() {

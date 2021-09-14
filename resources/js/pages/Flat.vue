@@ -73,7 +73,7 @@ export default {
         }
     },
     mounted() {
-        this.getFlat(this.$route.params.house_id);
+        this.getFlat(this.$route.params.house_slug);
     },
     methods: {
         getTomTomMap() {
@@ -100,8 +100,8 @@ export default {
             });
             return houseType
         },
-        getFlat(id) {
-             axios.get(`http://127.0.0.1:8000/api/houses/${id}`)
+        getFlat(slug) {
+             axios.get(`http://127.0.0.1:8000/api/houses/${slug}`)
              .then(res => {
                  this.house = res.data;
                  this.getTomTomMap();

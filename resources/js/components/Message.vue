@@ -49,13 +49,9 @@ export default {
         errors: {},
         success: false,
         sending: false,
-        users: [],
         mails: [],
         matchMail: []
       }
-    },
-    mounted() { 
-      this.getUsers();
     },
     methods: {
       sendForm: function(){
@@ -86,16 +82,6 @@ export default {
           console.log(err);
         });
       },
-      getUsers(){
-        axios.get('http://127.0.0.1:8000/api/authuser')
-        .then((result) => {
-          console.log('axios get all users data',result.data); // get array of obj of users  
-          this.users = result.data;
-          this.getMails();
-        }).catch((err) => {
-          console.log('error get registred user mail', err);
-        });
-      },
       getMails(){
         this.users.forEach( el => {
           return this.mails.push(el.email); //ok email in array
@@ -122,6 +108,8 @@ export default {
     border-radius: 5px;
     box-shadow: 0 0 3px 0 rgba($brand, 0.2);
     border: 1px solid rgba($black, 0.1);
+    background-color: $white;
+    
     form {
       label{
         font-size: 13px;
