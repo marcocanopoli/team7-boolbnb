@@ -29,6 +29,7 @@ export default {
     .flat-card {
         position: relative;
         overflow: hidden;
+        background-color: $white;
 
         &:hover {
         cursor: pointer;

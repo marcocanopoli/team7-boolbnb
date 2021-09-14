@@ -17,20 +17,20 @@
             
             <!-- Search -->            
             <!-- <div v-if="$route.name != 'apartments'" > -->
-            <div>
+            <div class="search">
 
                 <!-- Full search box -->
                 <v-search
-                    :lastSearch="lastSearch"
+                    :currentSearch="currentSearch"
                     v-on="$listeners" 
                     v-if="visibleFullSearch && $route.name != 'home'"/>                
                 <!-- /Full search box -->
 
                 <!-- Light search box -->
                 <v-light-search
-                    :lastSearch="lastSearch"
+                    :currentSearch="currentSearch"
                     v-on="$listeners" 
-                    v-else/>
+                    v-if="$route.name == 'home' && !visibleFullSearch"/>
                 <!-- /Light search box -->
 
             </div>
@@ -39,10 +39,22 @@
             <!-- User -->
                 <div class="header-user navbar-toggler" @click="setDrop()">
                     <i class="fas fa-bars"></i>
+
                     <i class="far fa-user"></i>
+                         
+                    <!-- <img v-else
+                        class="header-avatar"
+                        :src="'storage/' + user.profile_pic" alt=""> -->
+
                     <div v-if="activeDrop" class="bnb-dropdown">
-                        <a href="/register">Registrati</a>
-                        <a href="/login">Accedi</a>
+                        <div v-if="!user">
+                            <a href="/register">Registrati</a>
+                            <a href="/login">Accedi</a>
+                        </div>
+                        <div v-else>
+                            <a href="/admin">Dashboard</a>
+                            <a @click="$emit('handleLogout')">Logout</a>
+                        </div>
                     </div>
                 </div>
             <!-- /User -->  
@@ -64,17 +76,11 @@ export default {
         return {
             activeDrop: false,
             visibleFullSearch: true,
-            lastSearch: {
-                inputSearch: "",
-                rooms: '',
-                beds: '',
-                services: '',
-                km: ''
-            }
         }
     },
     props: {
-        currentSearch: Object
+        currentSearch: Object,
+        user: Object
     },
     methods: {
         setDrop: function() {
@@ -86,13 +92,13 @@ export default {
             } else if (window.scrollY == 0) {
                 this.visibleFullSearch = true
             }
-        }
+        } 
     },
     created () {
       window.addEventListener('scroll', this.setScroll);
     },
     updated() {
-        this.lastSearch = this.currentSearch;
+        this.currentSearch = this.currentSearch;
     },
     destroyed () {
       window.removeEventListener('scroll', this.setScroll);
@@ -105,7 +111,9 @@ export default {
     @import '../../sass/partials/variables.scss';
       
     .my-header {
+        position: relative;
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
         align-items: center;
         position: fixed;
@@ -113,12 +121,14 @@ export default {
         width: 100%;
         padding: 0 24px;
         transition: .1s ease-out;
-        min-height: 90px;
+        min-height: $headerHeight;
         z-index: 99;
 
         .logo-box {
             font-size: 20px;
             font-weight: 700;
+            margin: 16px 0;
+            align-self: flex-start;
 
             svg {
                 height: 32px;
@@ -130,9 +140,15 @@ export default {
             }
         }
 
+        .search {
+            margin: 16px 0;
+        }
+
         .header-user {
-            position: relative;
+            position: absolute;
             border: 1px solid rgba($gray-1, 0.2);
+            top: 16px;
+            right: 24px;
 
             &:hover {
                 box-shadow: 0 0 5px 2px rgba($gray-1, 0.2);
@@ -169,6 +185,23 @@ export default {
             a {
                 margin: 0 10px;
                 color: $black;                
+            }
+        }
+    }
+
+    @media screen and (min-width: 576px) {
+
+        .my-header {
+            flex-direction: row;
+
+            .search {
+                margin: 0;
+            }
+
+            .header-user {
+                position: relative;
+                right: 0;
+                top: 0;
             }
         }
     }

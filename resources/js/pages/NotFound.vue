@@ -16,12 +16,14 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../sass/partials/variables.scss';
-section {
-    margin-top: 90px;
-    padding: 20px;
-    color: $brand;
-    img {
-        width: 30%;
+
+    section {
+        color: $brand;
+        height: 100%;
+        padding-top: $headerHeight;
+
+        img {
+            width: 30%;
+        }
     }
-}
 </style>

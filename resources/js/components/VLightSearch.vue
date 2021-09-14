@@ -6,20 +6,20 @@
                 <span class="search-label">Dove</span>
                 <input type="text" placeholder="Dove vuoi andare?"
                     v-model="searchData.inputSearch"
-                    @keyup.enter="lightSearch"
-                    @keyup="getLocation">
+                    @keyup.enter="lightSearch">
+                    <!-- @keyup="getLocation" -->
             </div>
             <button class="search-btn" @click="lightSearch"><i class="fas fa-search"></i></button>
         </div>  
     </section>
-    <ul v-if="cities.length > 0" id="sizelist">
+    <!-- <ul v-if="cities.length > 0" id="sizelist">
         <li v-for="(city, index) in cities" :key="city.id"
         :class="{'active': active === index}"
         v-show="city.address.municipality"
         @click="setLocation(city.address.freeformAddress,city.address.countrySubdivision,city.address.countryCode)">
             {{city.address.freeformAddress}}, {{city.address.countrySubdivision}}, {{city.address.countryCode}}
         </li>
-    </ul>
+    </ul> -->
 </div>
 </template>
 
@@ -40,7 +40,7 @@ export default {
         }
     },
     props: {
-        lastSearch: Object
+        currentSearch: Object
     },
     methods: {
         lightSearch() {
@@ -86,7 +86,7 @@ export default {
     },    
     mounted () {
         document.addEventListener("keyup", this.nextItem);
-        this.searchData = this.lastSearch;
+        this.searchData = this.currentSearch;
     }
 }
 </script>

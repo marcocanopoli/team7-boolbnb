@@ -3,7 +3,6 @@
 /* width */
 ::-webkit-scrollbar {
     width: 0px;
-}
 
 #geo-address {
 
@@ -39,6 +38,7 @@
     font-size: 16px;
     font-weight: 400;
     letter-spacing: 0.5px;
+    min-height: 100vh;
 }
 
 a.bnb-a {
@@ -202,9 +202,45 @@ button {
     }
 }
 
+.bnb-pagination {
+    width: 100%;
+    text-align: center;
+
+    .pag-btn {        
+
+        &:hover {
+            text-decoration: none;
+            background-color: $brand-end;
+            color: $white;
+            border-color: $brand-end;
+        }
+
+        &.disabled-button {
+            background-color: $gray-1;
+            color: $gray-hover;                
+            cursor: default;
+    
+            &:hover {
+                background-color: $gray-1;
+                border-color: $gray-1;
+            }
+        }
+    
+        &.focus-button {
+            background-color: $primary-2;
+
+            &:hover {
+                color: $white;
+                background-color: $primary-1;
+                border-color: $primary-1;
+            }
+        }
+    }
+}
+
 //header
 .navbar.my-navbar {
-    min-height: 90px;
+    min-height: $headerHeight;
     padding: 8px 24px;
     
     svg {
@@ -478,12 +514,12 @@ button {
 
 .img-container {
     position: relative;
-    overflow: hidden;
-    border-radius: 12px;
+    overflow: hidden;    
     
     img {        
         height: 200px;
         width: 100%;
+        border-radius: 12px;
     }
 }
 
@@ -594,6 +630,7 @@ button {
     .btn-row {
         flex-direction: row ;
     }
+
 }
 
 @media screen and (min-width: 768px) {

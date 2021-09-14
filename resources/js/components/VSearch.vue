@@ -37,14 +37,14 @@
                 </div>
 
         </section>
-        <ul v-if="cities.length > 0" id="sizelist">
+        <!-- <ul v-if="cities.length > 0" id="sizelist">
             <li v-for="(city, index) in cities" :key="city.id"
             :class="{'active': active === index}"
             v-show="city.address.municipality"
             @click="setLocation(city.address.freeformAddress,city.address.countrySubdivision,city.address.countryCode)">
                 {{city.address.freeformAddress}}, {{city.address.countrySubdivision}}, {{city.address.countryCode}}
             </li>
-        </ul>
+        </ul> -->
     </div>
 </template>
 
@@ -65,7 +65,7 @@ export default {
         }
     },
     props: {
-        lastSearch: Object
+        currentSearch: Object
     },
     methods: {
         getLocation() {
@@ -105,7 +105,7 @@ export default {
     },
     mounted () {
         document.addEventListener("keyup", this.nextItem);
-        this.searchData = this.lastSearch;
+        this.searchData = this.currentSearch;
     }
 }
 </script>

@@ -16,7 +16,7 @@ class HouseController extends Controller
         $addressQuery = $addressQuery . ".json";
         
         $coordinatesResponse = Http::get('https://api.tomtom.com/search/2/geocode/' . $addressQuery, [
-            'key' => '9klnGNAqb9IZGTnJpPeD3XymW9LUsIDx'
+            'key' => 'MAy8CruNqMtQAbImXBd9FqGR76Ch0nGA'
         ]);
         
         $coordinatesResponse->json();        
@@ -35,8 +35,9 @@ class HouseController extends Controller
     public function sponsored() {
         $houses = House::whereHas('promotions', function (Builder $query) {
             $now = new DateTime();
-            $query->where('end_date', '>=', $now->format('Y-m-d H:i:s'),);
-        })->get();
+            $query->where('end_date', '>=', $now->format('Y-m-d H:i:s'));
+        })->simplePaginate(3);
+        
         return response()->json($houses);
     }
 
@@ -57,7 +58,7 @@ class HouseController extends Controller
     public function search(Request $request) {
         
         //get query parameters with defaults
-        $address = $request->query('query', '');
+        $search = $request->query('search', '');
         $km = $request->query('km', 20);
         $rooms = $request->query('rooms', '');
         $beds = $request->query('beds', '');
@@ -66,7 +67,7 @@ class HouseController extends Controller
         $results = [];
         $filteredByServices = [];
         
-        $coordinates = $this->getCoordinates($address);
+        $coordinates = $this->getCoordinates($search);
 
         //filter by selected parameters
         $filteredByParameters = House::where([
