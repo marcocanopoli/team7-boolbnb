@@ -331,19 +331,11 @@ button {
     display: block;
     width: 100%;
     padding: 0.25rem 1.5rem;
-    font-weight: 400;
-    color: #212529;
-    text-align: inherit;
     white-space: nowrap;
-    background-color: transparent;
     border: 0;
 
     &:hover {
-        text-decoration: none;
-        background-color: rgba($gray-1, 0.1);
-    }
-    &:active {
-        color: $white;
+        color: $white !important;
         background-color: $brand;
     }
 }
@@ -360,10 +352,10 @@ button {
         border-top: 1px solid rgba($gray-1, 0.2);
 
         .input-form {
+            padding: 0;
             width: 320px;
             border-radius: 8px;
             border: 1px solid rgba($gray-1, 0.2);
-            overflow: hidden;
     
             .label {
                 position: relative;
@@ -377,7 +369,8 @@ button {
                 }
         
                 input,
-                textarea {
+                textarea,
+                select {
                     padding: 20px 10px;
                     border: 0;
                     border-radius: 8px;
@@ -515,6 +508,7 @@ button {
 
 .img-container {
     position: relative;
+    border-radius: 12px;
     overflow: hidden;    
     
     img {        

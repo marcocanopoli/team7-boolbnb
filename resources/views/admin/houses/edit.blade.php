@@ -1,140 +1,127 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="container create-form">
+<div class="container create-form user-form">
     
-    <div class="d-flex my-4">
-        <h1>Modifica: <span class="text-info">{{$house->title}}</span></h1>
+    <div class="my-4">
+        <h1>Modifica: <span class="color-brand">{{$house->title}}</span></h1>
     </div>
     
-    <form action="{{ route('admin.houses.update', $house->id) }}" method="POST" enctype="multipart/form-data" autocomplete="off">
+    <form action="{{ route('admin.houses.update', $house->id) }}" method="POST" enctype="multipart/form-data" autocomplete="off" class="bnb-form">
         @csrf
         @method('PATCH')
 
         {{-- Titolo --}}
-        <div class="form-group">
-            <label for="title">Nome della struttura</label>
-            <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" placeholder="Inserisci il nome della struttura" name="title" value="{{ old('title', $house->title) }}">
-            @error('title')
-            <small class="text-danger">{{ $message }}</small>
-            @enderror
+        <div class="input-form mt-2 w-100">
+            <div class="label w-100">
+                <label for="title">Nome della struttura</label>
+                <input type="text" class="w-100 @error('title') is-invalid @enderror" id="title" placeholder="Inserisci il nome della struttura" name="title" value="{{ old('title', $house->title) }}">
+            </div>
         </div>
         {{-- /Titolo --}}
 
         {{-- Descrizione --}}
-        <div class="form-group">
-            <label for="description">Descrizione</label>
-            <textarea class="form-control @error('description') is-invalid @enderror" id="description" rows="6" name="description" placeholder="Descrivi la tua struttura">{{ old('description', $house->description) }}</textarea>
-            @error('description')
-            <small class="text-danger">{{ $message }}</small>
-            @enderror
+        <div class="input-form mt-2 w-100">
+            <div class="label w-100">
+                <label for="description">Descrizione</label>
+                <textarea class="w-100 @error('description') is-invalid @enderror" id="description" rows="6" name="description" placeholder="Descrivi la tua struttura">{{ old('description', $house->description) }}</textarea>
+            </div>
         </div>
         {{-- /Descrizione --}}
 
         {{-- Tipologia --}}
-        <div class="form-group">
-            <label for="house_type_id">Tipo di struttura </label>
-            <select class="form-control @error('house_type_id') is-invalid @enderror" name="house_type_id" id="house_type_id">
-                <option value="">-- Seleziona il tipo di struttura--</option>
-                @foreach ($houseTypes as $type)
-                <option value="{{ $type->id }}"
-                    {{ ($type->id == old('house_type_id', $house->house_type_id )) ? 'selected' : '' }}
-                    >{{ $type->name }}</option>
-                    @endforeach
+        <div class="input-form mt-2 w-100">
+            <div class="label w-100">
+                <label for="house_type_id">Tipo di struttura </label>
+                <select class="w-100 @error('house_type_id') is-invalid @enderror" name="house_type_id" id="house_type_id">
+                    <option value="">-- Seleziona il tipo di struttura--</option>
+                    @foreach ($houseTypes as $type)
+                    <option value="{{ $type->id }}"
+                        {{ ($type->id == old('house_type_id', $house->house_type_id )) ? 'selected' : '' }}
+                        >{{ $type->name }}
+                    </option>
+                        @endforeach
                 </select>
-                @error('house_type_id')
-                <small class="text-danger">{{ $message }}</small>
-                @enderror
             </div>
+        </div>
         {{-- /Tipologia --}}
 
-        <div class="row d-flex">
+    
+        <div class="d-flex flex-wrap justify-content-between my-4">
 
             {{-- Camere --}}
-            <div class="form-group col-12 col-md-6">
-                <label for="rooms">Numero camere</label>
-                <input type="number" name="rooms" value="{{ old('rooms', $house->rooms) }}" class="form-control @error('rooms') is-invalid @enderror" id="rooms" placeholder="Camere disponibili">
-                @error('rooms')
-                <small class="text-danger">{{ $message }}</small>
-                @enderror
+            <div class="input-form mt-2 col-12 col-md-5">
+                <div class="label w-100">
+                    <label for="rooms">Numero camere</label>
+                    <input type="number" name="rooms" value="{{ old('rooms', $house->rooms) }}" class="w-100 @error('rooms') is-invalid @enderror" id="rooms">
+                </div>
             </div>
             {{-- /Camere --}}
 
             {{-- Ospiti --}}
-            <div class="form-group col-12 col-md-6">
-                <label for="guests">Numero ospiti</label>
-                <input type="number" name="guests" value="{{ old('guests', $house->guests) }}" class="form-control @error('guests') is-invalid @enderror" id="guests" placeholder="Numero ospiti">
-                @error('guests')
-                <small class="text-danger">{{ $message }}</small>
-                @enderror
+            <div class="input-form mt-2 col-12 col-md-5">
+                <div class="label w-100">
+                    <label for="guests">Numero ospiti</label>
+                    <input type="number" name="guests" value="{{ old('guests', $house->guests) }}" class="w-100 @error('guests') is-invalid @enderror" id="guests">
+                </div>
             </div>
             {{-- /Ospiti --}}
 
             {{-- Letti --}}
-            <div class="form-group col-12 col-md-6">
-                <label for="beds">Numero letti</label>
-                <input type="number" name="beds" value="{{ old('beds', $house->beds) }}" class="form-control @error('beds') is-invalid @enderror" id="beds" placeholder="Letti disponibili">
-                @error('beds')
-                <small class="text-danger">{{ $message }}</small>
-                @enderror
+            <div class="input-form mt-2 col-12 col-md-5">
+                <div class="label w-100">
+                    <label for="beds">Numero letti</label>
+                    <input type="number" name="beds" value="{{ old('beds', $house->beds) }}" class="w-100 @error('beds') is-invalid @enderror" id="beds">
+                </div>
             </div>
             {{-- /Letti --}}
             
             {{-- Bagni --}}
-            <div class="form-group col-12 col-md-6">
-                <label for="bathrooms">Numero bagni</label>
-                <input type="number" name="bathrooms" value="{{ old('bathrooms', $house->bathrooms) }}" class="form-control @error('bathrooms') is-invalid @enderror" id="bathrooms" placeholder="Bagni disponibili">
-                @error('bathrooms')
-                <small class="text-danger">{{ $message }}</small>
-                @enderror
+            <div class="input-form mt-2 col-12 col-md-5">
+                <div class="label w-100">
+                    <label for="bathrooms">Numero bagni</label>
+                    <input type="number" name="bathrooms" value="{{ old('bathrooms', $house->bathrooms) }}" class="w-100 @error('bathrooms') is-invalid @enderror" id="bathrooms">
+                </div>
             </div>
             {{-- /Bagni --}}
 
             {{-- MQ --}}
-            <div class="form-group col-12 col-md-6">
-                <label for="square_meters">Mq</label>
-                <input type="number" name="square_meters" value="{{ old('square_meters', $house->square_meters) }}" class="form-control @error('square_meters') is-invalid @enderror" id="square_meters"
-                placeholder="Inserisci i Mq">
-                @error('square_meters')
-                <small class="text-danger">{{ $message }}</small>
-                @enderror
+            <div class="input-form mt-2 col-12 col-md-5">
+                <div class="label w-100">
+                    <label for="square_meters">Mq</label>
+                    <input type="number" name="square_meters" value="{{ old('square_meters', $house->square_meters) }}" class="w-100 @error('square_meters') is-invalid @enderror" id="square_meters">
+                </div>
             </div>
             {{-- /MQ --}}            
         </div>
-        
-        <div class="form-group row d-flex">
+
+        <div class="d-flex flex-wrap my-4 justify-content-between">
 
             {{-- Indirizzo --}}
-            <div class="col-12 col-md-4 mb-2" id="geo-address">
-                <label for="address">Indirizzo</label>
-                <input type="text" name="address" value="{{ old('address', $house->address) }}" class="form-control @error('address') is-invalid @enderror" id="address"
-                placeholder="Indirizzo della struttura">
-                <ul id="finded" class="d-none"></ul>
-                @error('address')
-                <small class="text-danger">{{ $message }}</small>
-                @enderror
+            <div class="input-form mt-2 col-12 col-md-3">
+                <div class="label w-100" id="geo-address">
+                    <label for="address">Indirizzo</label>
+                    <input type="text" name="address" value="{{ old('address', $house->address) }}" class="w-100 @error('address') is-invalid @enderror" id="address">
+                    <ul id="finded" class="d-none"></ul>
+                </div>
             </div>
             {{-- /Indirizzo --}}
 
             {{-- CAP --}}
-            <div class="col-12 col-md-4 mb-2">
-                <label for="zip_code">CAP</label>
-                <input type="text" name="zip_code" value="{{ old('zip_code', $house->zip_code) }}" class="form-control @error('zip_code') is-invalid @enderror" id="zip_code"
-                placeholder="Inserisci il CAP">
-                @error('zip_code')
-                <small class="text-danger">{{ $message }}</small>
-                @enderror
+            <div class="input-form mt-2 col-12 col-md-3">
+                <div class="label w-100">
+                    <label for="zip_code">CAP</label>
+                    <input type="text" name="zip_code" value="{{ old('zip_code', $house->zip_code) }}" class="w-100 @error('zip_code') is-invalid @enderror" id="zip_code">
+                </div>
             </div>
             {{-- /CAP --}}
 
             {{-- Citta' --}}
-            <div class="col-12 col-md-4 mb-2">
-                <label for="city">Citta'</label>
-                <input type="text" name="city" value="{{ old('city', $house->city) }}" class="form-control @error('city') is-invalid @enderror" id="city"
-                placeholder="Inserisci la città">
-                @error('city')
-                <small class="text-danger">{{ $message }}</small>
-                @enderror
+            <div class="input-form mt-2 col-12 col-md-3">
+                <div class="label w-100">
+                    <label for="city">Citta'</label>
+                    <input type="text" name="city" value="{{ old('city', $house->city) }}" class="w-100 @error('city') is-invalid @enderror" id="city">
+                </div>
             </div>
             {{-- Citta' --}}            
         </div>
@@ -173,7 +160,7 @@
                 <div class="form-check form-check-inline d-flex"> 
                     <label class="form-check-label container-checkbox del-label" for="delete-img-{{ $photo->id }}">
                         <input class="form-check-input" type="checkbox" id="delete-img-{{ $photo->id }}" name="delete-imgs[]" value="{{ $photo->id }}">
-                    <span class="delete-txt"> Delete </span>
+                    <span class="delete-txt"> Rimuovi </span>
                         <span class="checkmark del-span"></span>
                     </label>
                 </div>
@@ -181,41 +168,6 @@
             </div>
             @endforeach
         </div>
-
-        {{-- 
-        <label class="container-checkbox form-check-label not-strong" for="service-{{ $service->id }}">{{ $service->name }}
-
-            <input class="form-check-input vertical-align-center mx-3" type="checkbox" id="service-{{ $service->id }}" value="{{ $service->id }}" name="services[]"
-            @if (count($house->services->where('id', $service->id)))
-                checked
-            @endif
-            >
-            <span class="checkmark"></span>
-        </label> --}}
-
-
-
-        {{-- photo gallery --}}
-        {{-- <label class="form-label">Foto della struttura: </label>
-        <div class="row mb-5">
-            @foreach ($house->photos as $photo)
-            <div class="edit-photos col-12 col-sm-5 col-md-3">
-                <img src="{{ asset('storage/' . $photo->path)}}" alt="House-img-{{ $photo->id }}" class="mb-2 me-3 d-block">
-                @if (count($house->photos) > 1 )
-                <div class="form-check form-check-inline d-flex"> 
-                    
-                    <input class="form-check-input me-2" type="checkbox" id="delete-img-{{ $photo->id }}" name="delete-imgs[]" value="{{ $photo->id }}">
-                    <label class="form-check-label" for="delete-img-{{ $photo->id }}">Rimuovi</label>
-                </div>
-                @endif
-            </div>
-            @endforeach
-        </div> --}}
-        {{-- /photo gallery --}}
-
-
-
-
 
         {{-- Foto --}}
         <div class="form-group mb-4">
@@ -266,38 +218,13 @@
         </div>
         {{-- /Disponibilita'  toggle switch--}}
 
-        {{-- Disponibilita' --}}
-        {{-- <div class="form-group">
-            <h6>Visibilita'</h6>
-            <div class="edit-visible pl-3">
-                <div class="mr-5">
-                    <input class="form-check-input @error('visible') is-invalid @enderror" type="radio"
-                    value="1" {{ old('visible', $house->visible) == 1 ? 'checked' : '' }} name="visible">
-                    <label class="form-check-label mr-2 not-strong" for="visible">Visibile</label>
-                </div>
-                <div>
-                    <input class="form-check-input @error('visible') is-invalid @enderror" type="radio"
-                    value="2" {{ old('visible', $house->visible) == 2 ? 'checked' : '' }} name="visible">
-                    <label class="form-check-label not-strong" for="visible">Attualmente non visibile</label>
-                </div>
-            </div> 
-            @error('visible')
-            <div>
-                <small class="text-danger">{{ $message }}</small> 
-            </div>
-            @enderror   
-        </div> --}} 
-        {{-- /Disponibilita' --}}
-
         {{-- Prezzo --}}
-        <div class="row">
-            <div class="form-group mb-5 col-md-4">
-                <label for="price">Prezzo per notte</label>
-                <input type="number" name="price" value="{{ old('price', $house->price) }}" step="0.01" min="1" class="form-control @error('price') is-invalid @enderror" id="price"
-                placeholder="Inserisci il prezzo per notte">
-                @error('price')
-                <small class="text-danger">{{ $message }}</small>
-                @enderror
+        <div class="d-flex">
+            <div class="input-form mb-5 col-md-4">
+                <div class="label w-100">
+                    <label for="price">Prezzo per notte</label>
+                    <input type="number" name="price" value="{{ old('price', $house->price) }}" step="0.01" min="1" class="w-100 @error('price') is-invalid @enderror" id="price">
+                </div>
             </div>
         </div>
         {{-- /Prezzo --}}
