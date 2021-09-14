@@ -25,7 +25,7 @@ class House extends Model
         'visible'
     ];
 
-    protected $with = [ 'photos', 'services'];    
+    protected $with = [ 'photos', 'services', 'messages'];    
 
     //one to many->side many
     public function user() {

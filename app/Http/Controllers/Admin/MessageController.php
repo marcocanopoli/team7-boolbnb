@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
+use App\House;
+use App\Message;
+
 class MessageController extends Controller
 {
     /**
@@ -14,8 +18,16 @@ class MessageController extends Controller
      */
     public function index()
     {
-        
-        return view('admin.messages.message');
+        $messages = [];
+        $houses = House::where('user_id', Auth::id())->get();
+
+        foreach ($houses as $house) {
+            $messages[] = Message::where('house_id', $house->id)
+            ->with('house')
+            ->get();    
+        }
+
+        return view('admin.messages.index', compact('houses', 'messages'));
     }
 
     /**
@@ -79,8 +91,12 @@ class MessageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy(Message $message)
+    {   
+        
+        $message->delete();
+
+        return back()
+        ->with('messagedel', $message->guest_name);
     }
 }

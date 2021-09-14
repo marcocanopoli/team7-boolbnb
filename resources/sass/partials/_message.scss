@@ -1,0 +1,21 @@
+@import './variables';
+
+
+.msg-box {
+    
+    .title-container {
+        h2 {
+            margin: 0;
+        }
+        i{
+            font-size: 24px;
+            color: $brand;
+        }
+    }
+    .card-msg{
+        padding: 16px;
+        border-radius: 15px;
+        border: 1px solid rgba( $black, 0.1);
+    }
+
+}

@@ -26,9 +26,8 @@ Route::middleware('auth') //autenticazione
     Route::get('houses/{house_id}/payments/{promotion_name}', 'PaymentsController@make')->name('payment');
     Route::get('houses/{house_id}/promotions', 'PromotionsController@promote')->name('promotions');
 
-    Route::get('messages/', 'MessageController@index')->name('messages');
+    Route::resource('messages', 'MessageController');
     
-
     Route::get("{any?}", "HomeController@index")->where("any", ".*");
 
 });
