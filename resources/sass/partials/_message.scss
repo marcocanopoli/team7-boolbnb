@@ -16,7 +16,10 @@
         padding: 32px;
         border-radius: 15px;
         border: 1px solid rgba( $black, 0.1);
-        // box-shadow: ;
+        .padd-btn {
+            padding-left: 0;
+            padding-right: 0;
+        }
     }
     h5.h5 {
         font-size: 14px
@@ -49,7 +52,7 @@
         width: 100%;
         margin: auto;
         display: flex;
-        justify-content: center;
+        justify-content: space-evenly;
         a {
             padding: 4px;
             color: $black;
@@ -58,5 +61,23 @@
                 text-decoration: none;
             }
         }
+        span.active a {
+            color: $brand;
+        }
+        span.disabled a {
+            display: none;
+        }
     }
+}
+
+@media screen and (min-width: 576px) {
+    .padd-btn-left {
+        margin-left: 0;
+        margin-right: 0.5rem;
+    }
+    .padd-btn-rgt {
+        margin-left: 0.5rem;
+        margin-right: 0;
+    }
+
 }
