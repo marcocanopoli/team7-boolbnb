@@ -1,5 +1,13 @@
 @import './_variables';
 
+
+.card-msg{
+    padding: 16px;
+    border-radius: 5px;
+    border: 1xp solid rgba($color: $brand, $alpha: .2);
+}
+
+
 * {
     font-family: 'Manrope', sans-serif;
 }
@@ -480,6 +488,7 @@ button {
     .btn-row {
         flex-direction: row ;
     }
+
 }
 
 @media screen and (min-width: 768px) {

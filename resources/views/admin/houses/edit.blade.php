@@ -170,14 +170,51 @@
                 <img src="{{ asset('storage/' . $photo->path)}}" alt="House-img-{{ $photo->id }}" class="mb-2 me-3 d-block">
                 @if (count($house->photos) > 1 )
                 <div class="form-check form-check-inline d-flex"> 
+                    <label class="form-check-label container-checkbox del-label" for="delete-img-{{ $photo->id }}">
+                        <input class="form-check-input" type="checkbox" id="delete-img-{{ $photo->id }}" name="delete-imgs[]" value="{{ $photo->id }}">
+                    <span class="delete-txt"> Delete </span>
+                        <span class="checkmark del-span"></span>
+                    </label>
+                </div>
+                @endif
+            </div>
+            @endforeach
+        </div>
+
+        {{-- 
+        <label class="container-checkbox form-check-label not-strong" for="service-{{ $service->id }}">{{ $service->name }}
+
+            <input class="form-check-input vertical-align-center mx-3" type="checkbox" id="service-{{ $service->id }}" value="{{ $service->id }}" name="services[]"
+            @if (count($house->services->where('id', $service->id)))
+                checked
+            @endif
+            >
+            <span class="checkmark"></span>
+        </label> --}}
+
+
+
+        {{-- photo gallery --}}
+        {{-- <label class="form-label">Foto della struttura: </label>
+        <div class="row mb-5">
+            @foreach ($house->photos as $photo)
+            <div class="edit-photos col-12 col-sm-5 col-md-3">
+                <img src="{{ asset('storage/' . $photo->path)}}" alt="House-img-{{ $photo->id }}" class="mb-2 me-3 d-block">
+                @if (count($house->photos) > 1 )
+                <div class="form-check form-check-inline d-flex"> 
+                    
                     <input class="form-check-input me-2" type="checkbox" id="delete-img-{{ $photo->id }}" name="delete-imgs[]" value="{{ $photo->id }}">
                     <label class="form-check-label" for="delete-img-{{ $photo->id }}">Delete</label>
                 </div>
                 @endif
             </div>
             @endforeach
-        </div>
+        </div> --}}
         {{-- /photo gallery --}}
+
+
+
+
 
         {{-- Foto --}}
         <div class="form-group mb-4">

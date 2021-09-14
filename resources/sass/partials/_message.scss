@@ -1,0 +1,62 @@
+@import './variables';
+
+
+.msg-box {
+    
+    .title-container {
+        h2 {
+            margin: 0;
+        }
+        i{
+            font-size: 24px;
+            color: $brand;
+        }
+    }
+    .card-msg{
+        padding: 32px;
+        border-radius: 15px;
+        border: 1px solid rgba( $black, 0.1);
+        // box-shadow: ;
+    }
+    h5.h5 {
+        font-size: 14px
+    }
+    .index-msg {
+        display: block;
+        font-size: 12px;
+        margin-bottom: 16px;
+    }
+    .form-absolute {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+    
+        .del-msg-radius {
+            border-radius: 50%;
+            height: 30px;
+            width: 30px;
+            position: relative;
+            i {
+                transform: translate(-40%, -33%);
+            }
+        }
+        .del-msg-txt{
+            display: none;
+        }
+    }
+    //my-pagination
+    .my-pagination{
+        width: 100%;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        a {
+            padding: 4px;
+            color: $black;
+            &:hover {
+                color: $brand;
+                text-decoration: none;
+            }
+        }
+    }
+}

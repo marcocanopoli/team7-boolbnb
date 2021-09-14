@@ -100,7 +100,7 @@ export default {
            align-items: center;
            width: 100%;
            height: 100vh;
-           background-image: url(https://a0.muscache.com/im/pictures/57b9f708-bb12-498c-bc33-769f8fc43e63.jpg?im_w=960);
+           background-image: url('/images/bg-bool.png');
            background-size: cover;
            background-position:  0 60% ;
 
