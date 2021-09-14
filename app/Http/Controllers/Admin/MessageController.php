@@ -24,7 +24,7 @@ class MessageController extends Controller
         foreach ($houses as $house) {
             $messages[] = Message::where('house_id', $house->id)
             ->with('house')
-            ->get();    
+            ->paginate(6);    
         }
 
         return view('admin.messages.index', compact('houses', 'messages'));
