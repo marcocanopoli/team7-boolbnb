@@ -10,6 +10,7 @@ class House extends Model
         'user_id',
         'house_type_id',
         'title',
+        'slug',
         'rooms',
         'beds',
         'bathrooms',

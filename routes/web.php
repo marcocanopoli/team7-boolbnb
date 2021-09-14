@@ -22,6 +22,8 @@ Route::middleware('auth') //autenticazione
     ->group(function() {
     Route::get('/', 'HomeController@index')->name('home');
     Route::resource('houses', 'HouseController');	
+    Route::get('houses/{slug}', 'HouseController@show');
+    Route::get('houses/{slug}/edit', 'HouseController@edit');
     Route::post('houses/{house_id}/payments/{promotion_name}', 'HouseController@payments')->name('success');
     Route::get('houses/{house_id}/payments/{promotion_name}', 'PaymentsController@make')->name('payment');
     Route::get('houses/{house_id}/promotions', 'PromotionsController@promote')->name('promotions');

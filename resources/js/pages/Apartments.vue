@@ -43,12 +43,6 @@
                     </button>
                 </div>
             </v-modal>
-
-            <div class="row">
-                <div class="col-md-6" v-if="loading">
-                    <FlatLoader/>
-                </div>
-
                 <div class="col-md-6" v-if="houses.length == 0 && !loading">
                     <h2 class="no-results text-center">Nessun risultato da mostrare!</h2>
                 </div>
@@ -56,7 +50,7 @@
                 <div class="houses col-md-6 py-4" v-if="houses.length > 0 && !loading">                    
                     <router-link                         
                         v-for="house in houses" :key="house.id"
-                        :to="{ name: 'flat', params: { house_id : house.id  } }"
+                        :to="{ name: 'flat', params: { house_slug : house.slug } }"
                         class="single-house bnb-a row">                    
 
                         <div class="img-container col-md-4">

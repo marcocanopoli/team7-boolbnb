@@ -29,6 +29,7 @@ class CreateHousesTable extends Migration
                     ->onDelete('SET NULL');
 
             $table->string('title', 100);
+            $table->string('slug')->unique();
             $table->unsignedTinyInteger('rooms');
             $table->unsignedTinyInteger('beds');
             $table->unsignedTinyInteger('bathrooms');
