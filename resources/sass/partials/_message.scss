@@ -54,10 +54,12 @@
         display: flex;
         justify-content: space-evenly;
         a {
-            padding: 4px;
+            padding: 4px 8px;
+            border-radius: 5px;
             color: $black;
             &:hover {
                 color: $brand;
+                background-color: $gray-hover;
                 text-decoration: none;
             }
         }
@@ -80,4 +82,13 @@
         margin-right: 0;
     }
 
+}
+
+@media screen and (min-width: 992px) {
+    .my-pagination{
+        justify-content: center !important;
+        span {
+            margin: 0 4px;
+        }
+    }
 }

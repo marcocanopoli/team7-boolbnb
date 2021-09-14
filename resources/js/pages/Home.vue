@@ -59,7 +59,7 @@ export default {
            align-items: center;
            width: 100%;
            height: 100vh;
-           background-image: url('/images/bg-bool.png');
+           background-image: url('/images/bg-bool.jpg');
            background-size: cover;
            background-position:  0 60% ;
    
