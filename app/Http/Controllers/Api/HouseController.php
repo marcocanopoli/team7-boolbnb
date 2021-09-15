@@ -13,6 +13,31 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class HouseController extends Controller
 {    
 
+    private function isSponsored($house) {
+        $activeSponsor = false;
+        if(count($house->promotions) > 0) {
+            $lastPromotionDate = $house->promotions->last()->pivot->end_date;
+            $now = new DateTime();
+
+            if ($lastPromotionDate > $now->format('Y-m-d H:i:s')) {
+                $activeSponsor = true;
+            }
+        }
+        return $activeSponsor;
+    }
+
+    public function splitMergeSponsored($houses) {
+        $sponsored = [];
+
+        foreach ($houses as $index => $house) {
+            if($this->isSponsored($house)){
+                $sponsored[] = $house;
+                array_splice($houses, $index, 1);
+            }
+        }
+        return array_merge($sponsored, $houses);
+    }
+
     public function compareDistance($a, $b) {
         return strcmp($a->distance, $b->distance);
     }
@@ -118,8 +143,10 @@ class HouseController extends Controller
                 $results[] = $house;
             }
         }
-        
+
         usort($results, array($this, "compareDistance"));
+        $results = $this->splitMergeSponsored($results);
+
 
         $current_page = LengthAwarePaginator::resolveCurrentPage();
         $perPage = 4;
