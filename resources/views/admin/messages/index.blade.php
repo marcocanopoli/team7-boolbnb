@@ -1,6 +1,6 @@
 @extends('layouts.app')
-{{-- @dump($houses)  /case logged user ok
-@dump($messages) --}}
+{{-- @dump($houses)  /case logged user ok --}}
+@dump($messages) 
 
 
 @section('content')
@@ -30,8 +30,7 @@
                         @foreach ( $houseMessages as $index => $msg)
                             <div class="col-lg-6 ">
                                 <div class="card-msg mb-4 position-relative shadow">
-                                    <h4 class="h4 my-3">Messaggio {{ $index + 1 }} </h4>
-                                    
+                                    <small class="d-block mb-2"><strong> Ricevuto il: </strong>{{$msg->created_at}}</small>
                                     <h5 class="h5"><strong>Nome: </strong>{{ $msg->guest_name }}</h5>
                                     <h5 class="h5"><strong>E-mail: </strong>{{ $msg->guest_email }}</h5>
                                     <p>{{ $msg->content }}</p>
