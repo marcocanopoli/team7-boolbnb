@@ -21,11 +21,11 @@
         
             @foreach ($messages as $houseMessages)
                 @if( count($houseMessages) > 0 )
+                <div class="d-flex flex-column  my-5">
+                    <h3 class=""> Messaggi per la struttura: <strong>{{ $houseMessages[0]->house->title }}</strong></h3>
+                    <span class="bnb-btn bnb-btn-brand-2 align-self-start"><small>{{$houseMessages[0]->house->city}}</small></span>
+                </div>
                     
-                <h3 class="h3 my-5"> Messaggi per la struttura: <strong>{{ $houseMessages[0]->house->title }}</strong></h3>
-                    
-
-        
                     <div class="d-flex flex-wrap justify-content-between">
                         @foreach ( $houseMessages as $index => $msg)
                             <div class="col-lg-6 ">
