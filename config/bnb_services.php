@@ -18,7 +18,7 @@ return [
         'icon' => 'cucina.svg'
     ],
     [
-        'name' => 'Colazione inclusa',
+        'name' => 'Colazione',
         'icon' => 'colazione.svg'
     ],
     [

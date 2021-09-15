@@ -3,14 +3,14 @@
         <Header 
             @search="performSearch"
             @handleLogout="logout"
+            :houses="houses"
             :currentSearch="currentSearch"
+            :allServices="allServices"
             :user="user"/>
         <router-view class="main"
             @search="performSearch"
-            @getServices="getServices"            
             :houses="houses" 
             :currentSearch="currentSearch"            
-            :allServices="allServices"
             :loading="loading"
             :searchCoordinates="searchCoordinates">
         </router-view>
@@ -93,14 +93,15 @@ export default {
                 searchData.services = '';
             }
 
-            // if(
-            //     JSON.stringify(this.currentSearch) === JSON.stringify(searchData)  
-            //     || searchData.inputSearch == '') {
-            //     console.log(JSON.stringify(this.currentSearch));
-            //     console.log(JSON.stringify(searchData));
-            //         // alert('Stai già visualizzando questa ricerca!');
-            //     return
-            // }
+            if(searchData.inputSearch == '') {
+                // JSON.stringify(this.currentSearch) === JSON.stringify(searchData)  
+                // || searchData.inputSearch == '') {
+                // console.log(JSON.stringify(this.currentSearch));
+                // console.log(JSON.stringify(searchData));
+                    // alert('Stai già visualizzando questa ricerca!');
+                this.loading = false;
+                return
+            }
 
             let queryObj = {
                 search: searchData.inputSearch,
@@ -120,7 +121,7 @@ export default {
                 //     ...(searchData.services ? {services: searchData.services } : {} )
                 // }      
             }).then(res => {
-                console.log('Chiamata API ricerca', res)
+                // console.log('Chiamata API ricerca', res)
                 this.houses = res.data;
                 this.currentSearch = searchData;
 

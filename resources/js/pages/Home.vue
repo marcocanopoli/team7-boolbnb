@@ -5,7 +5,7 @@
             <a class="bnb-a" href="">
                 <span>Sono flessibile</span>
             </a> -->
-            <v-light-search                
+            <v-search                
                 :currentSearch="currentSearch"
                 v-on="$listeners" 
                 v-if="scrollZero"/>
@@ -35,14 +35,14 @@
 
 <script>
 import VPagination from '../components/VPagination.vue';
-import VLightSearch from '../components/VLightSearch.vue';
+import VSearch from '../components/VSearch.vue';
 import FlatCard from '../components/FlatCard.vue'
 export default {
     name: 'Home',
     components: {
         FlatCard,
         VPagination,
-        VLightSearch
+        VSearch
     },
     data() {
         return {

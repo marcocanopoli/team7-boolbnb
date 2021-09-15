@@ -1,26 +1,51 @@
 <template>
-<div class="position-relative">
-    <section class="searchbar">
-        <div class="search-element">
-            <div class="d-flex flex-column">
-                <span class="search-label">Dove</span>
-                <input type="text" placeholder="Dove vuoi andare?"
-                    v-model="searchData.inputSearch"
-                    @keyup.enter="lightSearch">
-                    <!-- @keyup="getLocation" -->
-            </div>
-            <button class="search-btn" @click="lightSearch"><i class="fas fa-search"></i></button>
-        </div>  
-    </section>
-    <!-- <ul v-if="cities.length > 0" id="sizelist">
-        <li v-for="(city, index) in cities" :key="city.id"
-        :class="{'active': active === index}"
-        v-show="city.address.municipality"
-        @click="setLocation(city.address.freeformAddress,city.address.countrySubdivision,city.address.countryCode)">
-            {{city.address.freeformAddress}}, {{city.address.countrySubdivision}}, {{city.address.countryCode}}
-        </li>
-    </ul> -->
-</div>
+    <div class="position-relative">
+        <section class="searchbar">
+
+                <div class="search-element">
+                    <span class="search-label">Dove</span>
+                    <input type="text" placeholder="Dove vuoi andare?"
+                        v-model="searchData.inputSearch"
+                        @keyup.enter="$emit('search', searchData)">
+                        <!-- closeAutoComplete()"                        
+                        @keyup="getLocation">  -->
+
+                </div>
+
+                <div class="search-element">
+                    <span class="search-label">Camere</span>
+                    <input type="number" min="1" name="rooms" placeholder="Quante camere?" 
+                        v-model="searchData.rooms"
+                        @change="$emit('search', searchData)">
+                </div>
+
+                <div class="search-element">
+                    <span class="search-label">Letti</span>
+                    <input type="number" min="1" name="beds" placeholder="Quanti letti?" 
+                        v-model="searchData.beds"
+                        @change="$emit('search', searchData)">
+                </div>
+
+                <div class="search-element">
+                    <div class="d-flex flex-column">
+                        <span class="search-label">Km</span>
+                        <input type="number" min="1" name="km" placeholder="Raggio?"
+                            v-model="searchData.km"
+                            @keyup.enter="$emit('search', searchData)">
+                    </div>
+                    <button class="search-btn" @click="$emit('search', searchData)"><i class="fas fa-search"></i></button>
+                </div>
+
+        </section>
+        <!-- <ul v-if="cities.length > 0" id="sizelist">
+            <li v-for="(city, index) in cities" :key="city.id"
+            :class="{'active': active === index}"
+            v-show="city.address.municipality"
+            @click="setLocation(city.address.freeformAddress,city.address.countrySubdivision,city.address.countryCode)">
+                {{city.address.freeformAddress}}, {{city.address.countrySubdivision}}, {{city.address.countryCode}}
+            </li>
+        </ul> -->
+    </div>
 </template>
 
 <script>
@@ -43,12 +68,6 @@ export default {
         currentSearch: Object
     },
     methods: {
-        lightSearch() {
-            this.$emit('search', [this.searchData.inputSearch]);
-            for (let key in this.searchData) {
-                this.searchData[key] = '';
-            }
-        },
         getLocation() {
             const currentAxios = axios.create();
             currentAxios.defaults.headers.common = {};
@@ -83,7 +102,7 @@ export default {
       	        this.active++
             }
         }
-    },    
+    },
     mounted () {
         document.addEventListener("keyup", this.nextItem);
         this.searchData = this.currentSearch;
@@ -92,18 +111,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-    @import '../../sass/partials/_variables.scss';
-
-    .search-element{
-        &:hover {
-            background-color: $white;
-            input {
-                background-color: $white;
-            }
-        }
-    }
+@import '../../sass/partials/variables.scss';
     ul {
+        width: 30%;
         position: absolute;
         top: 65px;
         left: 0;
@@ -124,5 +134,5 @@ export default {
             }
         }
     }
-
+   
 </style>
