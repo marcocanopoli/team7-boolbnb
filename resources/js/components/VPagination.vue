@@ -1,5 +1,7 @@
 <template>
-    <section class="bnb-pagination">
+    <section 
+        v-if="last_page > 1"
+        class="bnb-pagination">
         <button type="button" 
             class="pag-btn"
             :class="current_page == 1 ? 'disabled' : '' "

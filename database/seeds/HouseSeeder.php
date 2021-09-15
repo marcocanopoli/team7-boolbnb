@@ -12,12 +12,12 @@ class HouseSeeder extends Seeder
      */
     public function run()
     {   
-        $houses = config('houses');
+        $houses = config('newhouses');
 
         foreach ($houses as $house) {
             $newHouse = new House();
             $newHouse->fill($house);
             $newHouse->save();
-        }
+        }        
     }
 }

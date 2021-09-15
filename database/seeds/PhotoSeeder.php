@@ -12,12 +12,15 @@ class PhotoSeeder extends Seeder
      */
     public function run()
     {
-        $photos = config('images');
+        $housesPhotos = config('house_photos');
 
-        foreach ($photos as $photo) {
-            $newPhoto = new Photo();
-            $newPhoto->fill($photo);
-            $newPhoto->save();
+        foreach ($housesPhotos as $index => $singleHousePhotos) {
+            foreach ($singleHousePhotos as $photo) {
+                $newPhoto = new Photo();
+                $newPhoto->house_id = $index + 1;
+                $newPhoto->path = $photo . '.jpg';
+                $newPhoto->save();               
+            }
         }
     }
 }

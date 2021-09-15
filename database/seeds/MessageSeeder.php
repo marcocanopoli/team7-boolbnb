@@ -12,7 +12,7 @@ class MessageSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 1; $i < 6; $i++) {
+        for ($i = 1; $i < 5; $i++) {
             $message = new Message();
             $message->house_id = $i;
             $message->guest_name = 'user' . $i;
