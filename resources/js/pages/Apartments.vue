@@ -5,14 +5,14 @@
                 <h1>Strutture</h1>
             </div>
             
-            <div class="row">
+            <div class="outer-row row">
                 <div class="col-xl-6" v-if="loading">
                     <FlatLoader/>
                 </div>
                 <div class="no-results col-xl-6" v-if="houses.length == 0 && !loading">
                     <h2 class="py-4">Nessun risultato da mostrare!</h2>
                 </div>
-                
+               
                 <div class="houses col-xl-6 py-4" v-if="houses.length > 0 && !loading">                    
                     <router-link                         
                         v-for="house in houses" :key="house.id"
@@ -61,11 +61,13 @@
 
                 </div>
 
-                <div class="col-xl-6">
+                <div class="map-container col-xl-6">
                     <div class="row">
                         <div id="map-div" class="apartments-map col-md-10 offset-md-1"></div>
                     </div>
                 </div>
+            
+                
             </div>
 
         </div>
@@ -76,11 +78,9 @@
 <script>
 import VPagination from '../components/VPagination.vue';
 import FlatLoader from '../components/FlatLoader.vue';
-import VSearch from '../components/VSearchOLD.vue';
 export default {    
     name: 'Apartments',
     components: {
-        VSearch,
         FlatLoader,
         VPagination
     },
@@ -126,7 +126,11 @@ export default {
             map.addControl(new tt.FullscreenControl());
             map.addControl(new tt.NavigationControl());
 
-            new tt.Marker().setLngLat(coordinates).addTo(map);
+            var element = document.createElement('div');
+            element.id = 'marker';
+            if(this.houses.length == 0) {
+                new tt.Marker({element: element}).setLngLat(coordinates).addTo(map);
+            }
 
             if(this.houses.length > 0) {
                 this.houses.forEach(house => {
@@ -194,7 +198,7 @@ export default {
                 justify-content: center;
                 align-items: center;
             }
-    
+
             .house-container {
                 width: 50%;
             }
@@ -227,6 +231,13 @@ export default {
 
     #map-div.apartments-map {
         height: calc(100vh - 204px);
+    }
+
+    #marker {
+        background-image: url('/images/house-pin.png');
+        background-size: contain;
+        width: 40px;
+        height: 60px;
     }
 
 </style>
