@@ -125,7 +125,8 @@ export default {
                 rooms: 1,
                 beds: 1,
                 services: '',
-                km: ''
+                km: '',
+                page: ''
             },
             cities: [],
             active: 0,            
@@ -218,7 +219,12 @@ export default {
             this.toggleModal();
         }, 
     },
-    mounted () {
+    watch: {
+        $route(to, from) {
+            this.searchData = this.currentSearch;
+        },
+    },
+    created () {
         document.addEventListener("keyup", this.nextItem);
         this.searchData = this.currentSearch;
     }

@@ -16,7 +16,7 @@
                 <div class="houses col-md-6 py-4" v-if="houses.length > 0 && !loading">                    
                     <router-link                         
                         v-for="house in houses" :key="house.id"
-                        :to="{ name: 'flat', params: { house_slug : house.slug }}"
+                        :to="{ name: 'flat', query: { title : house.slug }}"
                         class="single-house bnb-a row">                    
 
                         <div class="img-container col-md-4">
@@ -24,7 +24,11 @@
                         </div>
 
                         <div class="details-container col-md-8">
-                            <p>{{ house.house_type.name }} a {{house.city}}</p>
+                            <div class="d-flex">
+                                <p>{{ house.house_type.name }} a {{house.city}}</p>
+                                <i  v-if="isSponsored(house)"
+                                    class="fas fa-gem show-sponsor-icon ml-3"></i>   
+                            </div>
                             <h4>{{house.title}}</h4>
                             <p>
                                 {{house.guests}}
@@ -48,6 +52,7 @@
                             </p>
                         </div>
                     </router-link>
+
                 </div>
 
                 <div class="col-md-6">
@@ -63,13 +68,15 @@
 </template>
 
 <script>
+import VPagination from '../components/VPagination.vue';
 import FlatLoader from '../components/FlatLoader.vue';
 import VSearch from '../components/VSearchOLD.vue';
 export default {    
     name: 'Apartments',
     components: {
         VSearch,
-        FlatLoader
+        FlatLoader,
+        VPagination
     },
     data() {
         return{
@@ -80,7 +87,9 @@ export default {
                 services: [],
                 km: '20'
             },
-            URLquery: {}
+            URLquery: {},                        
+            current_page: 1,
+            last_page: 1,
         }
     },
     props: {
@@ -125,6 +134,19 @@ export default {
                 this.URLquery.inputSearch = this.$route.query.search;
                 this.$emit('search', this.URLquery);
             }
+        },
+        isSponsored(house) {
+            let sponsored =  false;
+            const lastPromotion = house.promotions[house.promotions.length - 1];
+            const now = new Date();
+            if(lastPromotion) {
+                const endDateString = lastPromotion.pivot.end_date;
+                const endDate = new Date(endDateString);
+                if(endDate > now) {
+                    sponsored = true;
+                }
+            }
+            return sponsored;
         }
     },
     watch: {
@@ -186,6 +208,10 @@ export default {
                     }
                 }
             }
+        }
+
+        .show-sponsor-icon {
+            font-size: 16px;
         }
     }
 

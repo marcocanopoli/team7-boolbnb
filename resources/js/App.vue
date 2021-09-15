@@ -9,7 +9,7 @@
             :user="user"/>
         <router-view class="main"
             @search="performSearch"
-            :houses="houses" 
+            :houses="houses"
             :currentSearch="currentSearch"            
             :loading="loading"
             :searchCoordinates="searchCoordinates">
@@ -34,7 +34,8 @@ export default {
     data(){
         return{
             houses: [],
-            allServices: new Array(),
+            sponsoredHouses: [],
+            allServices: [],
             user: {},
             searchCoordinates: {},
             loading:  false,
@@ -44,16 +45,17 @@ export default {
                 rooms: '',
                 beds: '',
                 services: '',
-                km: ''
+                km: '',
+                page: '',
             },
         }
     },
     name: 'App',
-    methods: {        
+    methods: {           
         getUser() {
             axios.get('api/user')
             .then(res => {
-                this.user = res.data;                
+                this.user = res.data;
             })
              .catch(error => {
                 if (error.response) {
@@ -69,7 +71,7 @@ export default {
                     console.log('Error', error.message);
                 }
             });  
-        },       
+        },      
         getServices() {
             axios.get('api/services')
             .then(res => {
@@ -77,7 +79,23 @@ export default {
             }).catch(err => {
                 console.log('Service error: ', err)
             });
-        },       
+        },
+        splitMergeSponsored(array) {
+            array.forEach((house, index) => {
+                let lastPromotion = house.promotions[house.promotions.length - 1];
+                let now = new Date();
+                if(lastPromotion) {
+                    let endDateString = lastPromotion.pivot.end_date;
+                    let endDate = new Date(endDateString);
+                    if(endDate > now) {
+                        this.sponsoredHouses.push(house);
+                        this.houses.splice(index, 1);
+                    }
+                }
+            })
+            this.houses = this.sponsoredHouses.concat(this.houses);
+            this.sponsoredHouses = [];
+        },   
         performSearch(searchData) {
 
             this.loading = true;
@@ -91,6 +109,7 @@ export default {
                 searchData.rooms = '';
                 searchData.beds = '';
                 searchData.services = '';
+                searchData.page = 1;
             }
 
             if(searchData.inputSearch == '') {
@@ -108,7 +127,8 @@ export default {
                 ...(searchData.km ? {km: searchData.km } : {} ),
                 ...(searchData.rooms ? {rooms: searchData.rooms } : {} ),
                 ...(searchData.beds ? {beds: searchData.beds } : {} ),
-                ...(searchData.services ? {services: searchData.services } : {} )
+                ...(searchData.services ? {services: searchData.services } : {} ),
+                ...(searchData.page ? {page: searchData.page } : {} )
             };
 
             axios.get('api/search', {
@@ -121,10 +141,11 @@ export default {
                 //     ...(searchData.services ? {services: searchData.services } : {} )
                 // }      
             }).then(res => {
-                // console.log('Chiamata API ricerca', res)
-                this.houses = res.data;
-                this.currentSearch = searchData;
+                console.log('Chiamata API ricerca', res)
+                this.houses = res.data.data;
+                this.splitMergeSponsored(this.houses);
 
+                this.currentSearch = searchData;
                 this.$router.push(
                     {
                         name: 'apartments',
@@ -177,12 +198,12 @@ export default {
                         }
                     });
             }
-        },       
+        }
     },
     created() {
         this.getUser();
         this.getServices();
-    }  
+    },
 }
 </script>
 

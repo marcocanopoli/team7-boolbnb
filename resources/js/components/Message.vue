@@ -1,30 +1,32 @@
 <template>
-  <div class="box-message">
+  <div class="box-message user-form">
       <h3 class="h3"> <i> Contatta l'host </i> </h3>
       <div class="alert alert-success" v-show="success">
         <h5 class="h5">Messaggio inviato correttamente</h5>
       </div>
-      <form class="form-group" method="POST" @submit.prevent="sendForm">
-        <div>
-          <label for="guest_name">Nome:*</label>
-          <input v-model="name" id="guest_name"  class="form-control" type="text" placeholder="Inserisci il tuo nome" name="guest_name"
-          :class="{ 'is-invalid' : errors.guest_name }">
-          <small class="text-danger" v-for="err_name, index in errors.guest_name" :key="`err-name${index}`">{{err_name}}</small>
+      <form class="form-group bnb-form" method="POST" @submit.prevent="sendForm" >
+        <div class="input-form mt-2 w-100">
+            <div class="label w-100">
+                <label for="guest_name">Nome:*</label>
+                <input v-model="name" id="guest_name"  class="w-100" type="text" name="guest_name"
+                :class="{ 'is-invalid' : errors.guest_name }">
+            </div>
+        </div>
+        <div class="input-form mt-2 w-100">
+            <div class="label w-100">
+                <label for="guest_mail">E-mail:*</label>
+                <input v-model="email" id="guest_email" class="w-100" type="text" name="guest_email"
+                :class="{ 'is-invalid' : errors.guest_email }">
+        </div>
         </div>
 
-        <div>
-          <label for="guest_mail">E-mail:*</label>
-          <input v-model="email" id="guest_email" class="form-control" type="email" placeholder="Inserisci la tua Mail" name="guest_email"
-          :class="{ 'is-invalid' : errors.guest_email }" >
-          <small class="text-danger" v-for="err_email, index in errors.guest_email" :key="`err-mail${index}`">{{err_email}}</small>
+        <div class="input-form mt-2 w-100">
+            <div class="label w-100">
+                <label for="content">Message:*</label>
+                <textarea v-model="content" id="content" class="form-control" cols="30" rows="10" name="content" :class="{ 'is-invalid' : errors.content }"></textarea>
+            </div>
         </div>
-
-
-        <div>
-          <label for="content">Message:*</label>
-          <textarea v-model="content" id="content" class="form-control" cols="30" rows="10" placeholder="Scrivi il tuo messaggio" name="content" :class="{ 'is-invalid' : errors.content }"></textarea>
-          <small class="text-danger" v-for="err_content, index in errors.content" :key="`err-content${index}`">{{err_content}}</small>
-        </div>
+        
         <button class="bnb-btn bnb-btn-brand bnb-btn-resp" type="submit" :disabled="sending">
           {{ sending ? 'Invio in corso' : 'INVIA' }}
         </button>
@@ -43,7 +45,7 @@ export default {
         content:'',
         errors: {},
         success: false,
-        sending: false
+        sending: false,
       }
     },
     methods: {
@@ -74,7 +76,19 @@ export default {
         }).catch((err) => {
           console.log(err);
         });
+      },
+      getMails(){
+        if (this.user == null) {
+          this.email = ''
+          this.name = ''
+        } else {
+          this.email = this.user.email
+          this.name = `${this.user.first_name} ${this.user.last_name}`
+        }
       }
+    },
+    mounted() {
+      this.getMails()
     }
 }
 </script>
