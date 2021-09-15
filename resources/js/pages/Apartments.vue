@@ -24,10 +24,11 @@
                         </div>
 
                         <div class="details-container col-md-8">
-                            <div class="d-flex">
+                            <div class="d-flex mb-0">
                                 <p>{{ house.house_type.name }} a {{house.city}}</p>
                                 <i  v-if="isSponsored(house)"
                                     class="fas fa-gem show-sponsor-icon ml-3"></i>   
+                                <p class="ml-3 flex-grow-1 text-right"><strong>{{ house.distance }}  km</strong> da {{currentSearch.inputSearch}}</p>
                             </div>
                             <h4>{{house.title}}</h4>
                             <p>

@@ -12,6 +12,11 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class HouseController extends Controller
 {    
+
+    public function compareDistance($a, $b) {
+        return strcmp($a->distance, $b->distance);
+    }
+
     private function getCoordinates($address) {
         $addressQuery = urlencode($address);
         $addressQuery = $addressQuery . ".json";
@@ -102,15 +107,19 @@ class HouseController extends Controller
         } else {
             $filteredByServices = $filteredByParameters;
         }
-
+        
         //filter by distance
         foreach ($filteredByServices as $house) {
             $distance = $this->getDistance($house->latitude, $house->longitude, $coordinates['lat'], $coordinates['lon']);
 
             if ($distance <= $km) {
+
+                $house->distance = floor($distance);
                 $results[] = $house;
             }
         }
+        
+        usort($results, array($this, "compareDistance"));
 
         $current_page = LengthAwarePaginator::resolveCurrentPage();
         $perPage = 4;
