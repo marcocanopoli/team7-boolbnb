@@ -290,9 +290,8 @@ class HouseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($slug)
-    {
-        $house = House::where('slug', $slug)->first();
+    public function destroy(House $house) {
+
         $house->delete();
 
         foreach ($house->photos as $photo) {

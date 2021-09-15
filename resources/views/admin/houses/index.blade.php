@@ -66,11 +66,12 @@
                             <i class="fas fa-pen"></i>
                         </a>
                         <div class="bnb-btn-delete">
-                            <form action="{{route('admin.houses.show', $house->slug)}}" method="POST">
+                            <form action="{{route('admin.houses.destroy', $house->id)}}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <label for="delete"><i class="fas fa-times"></i></label>
-                                <input type="submit" id="delete" onclick="return confirm('Do you want delete this post? this action can\'tn be undone')" value="ELIMINA">
+                                <label for="delete-{{$house->id}}"><i class="fas fa-times"></i></label>
+                                <button type="submit" id="delete-{{$house->id}}" 
+                                    onclick="return confirm('Vuoi davvero eliminare questa struttura? (L\'operazione non può essere annullata)')">
                             </form>
                         </div>
                     </div>

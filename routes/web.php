@@ -20,6 +20,7 @@ Route::middleware('auth') //autenticazione
     ->name('admin.') // direttiva alla route admin.pizzas.index admin.yournames.show
     ->prefix('admin') //url rotte
     ->group(function() {
+
     Route::get('/', 'HomeController@index')->name('home');
     Route::resource('houses', 'HouseController');	
     Route::get('houses/{slug}', 'HouseController@show');
@@ -28,7 +29,7 @@ Route::middleware('auth') //autenticazione
     Route::get('houses/{house_id}/payments/{promotion_name}', 'PaymentsController@make')->name('payment');
     Route::get('houses/{house_id}/promotions', 'PromotionsController@promote')->name('promotions');
     Route::resource('messages', 'MessageController');
-    Route::get('chart/', 'ChartController@index')->name('chart');
+    // Route::get('chart/', 'ChartController@index')->name('chart');
     
     
     Route::get("{any?}", "HomeController@index")->where("any", ".*");
