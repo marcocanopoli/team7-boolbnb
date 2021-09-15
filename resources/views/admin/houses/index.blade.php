@@ -3,6 +3,7 @@
 
     <div class="container">
 
+        
         @if (session('deleted'))
             <div class="alert alert-success my-alert">
                 La struttura <strong>'{{ session('deleted') }}'</strong> è stata eliminata con successo!
