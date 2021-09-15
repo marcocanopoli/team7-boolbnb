@@ -69,8 +69,9 @@ export default {
             loading: true
         }
     },
-    mounted() {
-        this.getFlat(this.$route.params.house_slug);
+    created() {
+        // console.log(this.$route.query.slug);
+        this.getFlat(this.$route.query.title);
         
     },
     methods: {
