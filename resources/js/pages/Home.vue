@@ -21,7 +21,7 @@
                 </div>
 
                 <v-pagination
-                    @getSponsored="getSponsored"
+                    @page="getSponsored"
                     :last_page="last_page"
                     :current_page="current_page"
                     />

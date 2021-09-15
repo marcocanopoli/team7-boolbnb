@@ -206,35 +206,31 @@ button {
 .bnb-pagination {
     width: 100%;
     text-align: center;
+    display: flex;
+    justify-content: center;
 
-    .pag-btn {        
 
-        &:hover {
+    .pag-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 24px;
+        height: 24px;
+        padding: 8px;
+        margin: 0 4px;
+
+        &:hover span{
+            color: $brand;
+            background-color: $gray-hover;
             text-decoration: none;
-            background-color: $brand-end;
-            color: $white;
-            border-color: $brand-end;
         }
 
-        &.disabled-button {
-            background-color: $gray-1;
-            color: $gray-hover;                
-            cursor: default;
-    
-            &:hover {
-                background-color: $gray-1;
-                border-color: $gray-1;
-            }
+        &.disabled span {
+            display: none;
         }
     
-        &.focus-button {
-            background-color: $primary-2;
-
-            &:hover {
-                color: $white;
-                background-color: $primary-1;
-                border-color: $primary-1;
-            }
+        &.active{
+            color: $brand;
         }
     }
 }

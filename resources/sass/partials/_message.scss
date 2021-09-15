@@ -51,24 +51,28 @@
         }
     }
     //my-pagination
-    .my-pagination{
+    .my-pagination {
         width: 100%;
         margin: auto;
         display: flex;
         justify-content: space-evenly;
+        
         a {
             padding: 4px 8px;
             border-radius: 5px;
             color: $black;
-            &:hover {
-                color: $brand;
-                background-color: $gray-hover;
-                text-decoration: none;
-            }
         }
+
+        a:hover{
+            color: $brand;
+            background-color: $gray-hover;
+            text-decoration: none;
+        }
+        
         span.active a {
             color: $brand;
         }
+        
         span.disabled a {
             display: none;
         }

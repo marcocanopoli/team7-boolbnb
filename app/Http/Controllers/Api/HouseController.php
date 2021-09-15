@@ -37,14 +37,14 @@ class HouseController extends Controller
         $houses = House::whereHas('promotions', function (Builder $query) {
             $now = new DateTime();
             $query->where('end_date', '>=', $now->format('Y-m-d H:i:s'));
-        })->simplePaginate(3);
+        })->paginate(3);
         
         return response()->json($houses);
     }
 
     public function index() {
 
-        $houses = House::with('houseType')->with('houseType', 'promotions')->paginate(2);
+        $houses = House::with('houseType')->with('houseType', 'promotions')->paginate(4);
 
         return response()->json($houses);
     }
@@ -113,7 +113,7 @@ class HouseController extends Controller
         }
 
         $current_page = LengthAwarePaginator::resolveCurrentPage();
-        $perPage = 1;
+        $perPage = 4;
         $current_page_results = array_slice($results, ($current_page - 1) * $perPage, $perPage);
 
         $results_to_show = new LengthAwarePaginator($current_page_results, count($results), $perPage);
