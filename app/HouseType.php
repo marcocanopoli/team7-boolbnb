@@ -12,6 +12,6 @@ class HouseType extends Model
     protected $with = ['houses'];
 
     public function houses() {
-        return $this->hasMany('App\House');
+        return $this->hasMany('App\House', 'id');
     }
 }

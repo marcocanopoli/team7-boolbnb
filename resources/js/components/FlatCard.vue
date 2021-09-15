@@ -1,6 +1,6 @@
 <template>
     <router-link 
-        :to="{ name: 'flat', params: { house_id : house.id }}"
+        :to="{ name: 'flat', params: { house_slug : house.slug }}"
         class="flat-card bnb-card shadow">
         <div class="img-box mb-3">
             <img :src="'storage/' + house.photos[0].path" :alt="'Foto' + house.photos[0].id">

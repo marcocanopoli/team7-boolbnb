@@ -5,15 +5,15 @@
             <a class="bnb-a" href="">
                 <span>Sono flessibile</span>
             </a> -->
-            <v-light-search                
+            <v-search                
                 :currentSearch="currentSearch"
                 v-on="$listeners" 
                 v-if="scrollZero"/>
         </div>
         <div class="home-content">
             <!-- sponsored -->
+            <h2 class="home-title mb-5">In evidenza</h2>
             <div class="container">                
-                <h2 class="mb-4">In evidenza</h2>
 
                 <div class="sponsored bnb-cards-container mb-4">
                     <flat-card 
@@ -35,14 +35,14 @@
 
 <script>
 import VPagination from '../components/VPagination.vue';
-import VLightSearch from '../components/VLightSearch.vue';
+import VSearch from '../components/VSearch.vue';
 import FlatCard from '../components/FlatCard.vue'
 export default {
     name: 'Home',
     components: {
         FlatCard,
         VPagination,
-        VLightSearch
+        VSearch
     },
     data() {
         return {
@@ -100,7 +100,7 @@ export default {
            align-items: center;
            width: 100%;
            height: 100vh;
-           background-image: url('/images/bg-bool.png');
+           background-image: url('/images/bg-bool.jpg');
            background-size: cover;
            background-position:  0 60% ;
 
@@ -130,7 +130,8 @@ export default {
         }
         .home-content {
             position: relative;
-            padding: 36px 0 56px 0;
+            // padding: 36px 0 56px 0;
+            padding-bottom: 56px;
 
             &::before {
                 content: ' ';
@@ -140,15 +141,17 @@ export default {
                 top: 0;
                 width: 100%;
                 height: 100%;
-                opacity: 0.2;
                 background-image: url('/images/bg-travels.jpg');
-                background-size: 25%;
                 background-color: rgba($white, .2);
             }
-
-            h2 {
+            .home-title {
                 font-size: 47px;
                 text-align: center;
+                color: $white;
+                background: linear-gradient(90deg, $brand, $primary-2);
+                position: relative;
+                z-index: 1;
+
             }
 
             .container {

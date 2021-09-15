@@ -29,10 +29,10 @@ Route::namespace('Api')
         Route::get('/houses/{slug}', 'HouseController@show');
         Route::get('/search', 'HouseController@search');
 
-        Route::get('/housetypes', function() {
-            $house_types = HouseType::all();
-            return response()->json($house_types);
-        });
+        // Route::get('/housetypes', function() {
+        //     $house_types = HouseType::all();
+        //     return response()->json($house_types);
+        // });
 
         Route::get('/services', function() {
             $services = Service::all();
