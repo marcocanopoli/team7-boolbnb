@@ -57,11 +57,11 @@
                         @guest
                         
                             @if (Route::currentRouteName() == 'login' )
-                                <li class="nav-item">
+                                <li class="nav-item bnb-nav-item">
                                     <a class="bnb-a bnb-btn bnb-btn-white bnb-btn-resp" href="{{ route('register') }}">{{ __('Registrati') }}</a>
                                 </li> 
                             @else
-                                <li class="nav-item">
+                                <li class="nav-item bnb-nav-item">
                                     <a class="bnb-btn bnb-btn-brand bnb-btn-resp" href="{{ route('login') }}">{{ __('Accedi') }}</a>
                                 </li> 
                             @endif

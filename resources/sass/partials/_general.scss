@@ -326,7 +326,7 @@ button {
     border-radius: 12px;
 }
 
-//auth 
+//auth
 .log-out {
     display: block;
     width: 100%;
@@ -353,7 +353,6 @@ button {
 
         .input-form {
             padding: 0;
-            width: 320px;
             border-radius: 8px;
             border: 1px solid rgba($gray-1, 0.2);
     
@@ -469,17 +468,6 @@ button {
 .show-sponsor-icon {
     font-size: 2rem;
 }
-
-// .index-sponsor-box {
-//     position: absolute;
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     top: 12px;
-//     left: 27px;
-//     width: 40px;
-//     height: 40px;
-// }
 
 .index-sponsor-icon {
     top: 8px;
@@ -597,6 +585,27 @@ button {
 }
 
 //media queries
+@media screen and (max-width: 767px) {
+    .bnb-nav-item {
+        text-align: right;
+        a {
+            margin: 0 20px;
+            padding: 0;
+            color: $brand;
+            background-color: transparent;
+            border: 0;
+    
+            &:hover {
+                border: 0;
+            }
+        }
+    }
+}
+@media screen and (min-width: 350px) {
+    .input-form {
+        width: 320px;
+    }
+}
 @media screen and (min-width: 576px) {
     
     .show-photos {
