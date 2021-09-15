@@ -53,7 +53,7 @@ export default {
         getUser() {
             axios.get('api/user')
             .then(res => {
-                this.user = res.data;                
+                this.user = res.data;          
             })
              .catch(error => {
                 if (error.response) {
@@ -177,12 +177,12 @@ export default {
                         }
                     });
             }
-        },       
+        }     
     },
     created() {
         this.getUser();
         this.getServices();
-    }  
+    },
 }
 </script>
 
