@@ -15,7 +15,9 @@ class CreatePhotosTable extends Migration
     {
         Schema::create('photos', function (Blueprint $table) {
             $table->id();
+            
             $table->unsignedBigInteger('house_id')->nullable();
+
             $table->foreign('house_id')
                 ->references('id')
                 ->on('houses')

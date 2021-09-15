@@ -29,10 +29,6 @@ class ViewSeeder extends Seeder
                 'house_id' => 4,
                 'ip_address' => '127.136.5.14'
             ],
-            [
-                'house_id' => 5,
-                'ip_address' => '127.256.23.2'
-            ],
         ];
 
         foreach ($views as $view) {
