@@ -34,6 +34,7 @@ export default {
     data(){
         return{
             houses: [],
+            sponsoredHouses: [],
             allServices: new Array(),
             user: {},
             searchCoordinates: {},
@@ -77,7 +78,23 @@ export default {
             }).catch(err => {
                 console.log('Service error: ', err)
             });
-        },       
+        },
+        splitMergeSponsored(array) {
+            array.forEach((house, index) => {
+                let lastPromotion = house.promotions[house.promotions.length - 1];
+                let now = new Date();
+                if(lastPromotion) {
+                    let endDateString = lastPromotion.pivot.end_date;
+                    let endDate = new Date(endDateString);
+                    if(endDate > now) {
+                        this.sponsoredHouses.push(house);
+                        this.houses.splice(index, 1);
+                    }
+                }
+            })
+            this.houses = this.sponsoredHouses.concat(this.houses);
+            this.sponsoredHouses = [];
+        },   
         performSearch(searchData) {
 
             this.loading = true;
@@ -123,8 +140,9 @@ export default {
             }).then(res => {
                 // console.log('Chiamata API ricerca', res)
                 this.houses = res.data;
-                this.currentSearch = searchData;
+                this.splitMergeSponsored(this.houses);
 
+                this.currentSearch = searchData;
                 this.$router.push(
                     {
                         name: 'apartments',
