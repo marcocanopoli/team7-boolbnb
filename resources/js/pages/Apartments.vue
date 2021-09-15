@@ -1,7 +1,7 @@
 <template>
     <section class="apartments ">
         <div class="container-fluid apartments-content">
-            <div class="d-flex my-4 align-items-center">
+            <div class="d-flex align-items-center">
                 <h1>Strutture</h1>
             </div>
             

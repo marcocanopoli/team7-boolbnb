@@ -12,8 +12,8 @@
         </div>
         <div class="home-content">
             <!-- sponsored -->
+            <h2 class="home-title mb-5">In evidenza</h2>
             <div class="container">                
-                <h2 class="mb-4">In evidenza</h2>
 
                 <div class="sponsored bnb-cards-container mb-4">
                     <flat-card 
@@ -130,7 +130,8 @@ export default {
         }
         .home-content {
             position: relative;
-            padding: 36px 0 56px 0;
+            // padding: 36px 0 56px 0;
+            padding-bottom: 56px;
 
             &::before {
                 content: ' ';
@@ -140,15 +141,17 @@ export default {
                 top: 0;
                 width: 100%;
                 height: 100%;
-                opacity: 0.2;
                 background-image: url('/images/bg-travels.jpg');
-                background-size: 25%;
                 background-color: rgba($white, .2);
             }
-
-            h2 {
+            .home-title {
                 font-size: 47px;
                 text-align: center;
+                color: $white;
+                background: linear-gradient(90deg, $brand, $primary-2);
+                position: relative;
+                z-index: 1;
+
             }
 
             .container {
