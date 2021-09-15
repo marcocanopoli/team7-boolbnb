@@ -37,7 +37,7 @@
 <script>
 export default {
     name: 'Message',
-    props: ['house_id'],
+    props: ['house_id', 'user'],
     data(){
       return{
         name:'',
@@ -78,7 +78,7 @@ export default {
         });
       },
       getMails(){
-        if (this.user == null) {
+        if (this.user == undefined) {
           this.email = ''
           this.name = ''
         } else {

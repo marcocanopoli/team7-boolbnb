@@ -47,7 +47,9 @@
 
                 <div class="show-details col-12 col-md-6">
                     <!-- box form -->
-                    <Message :house_id="house.id"/>
+                    <Message 
+                        :user="user"
+                        :house_id="house.id"/>
                     <!-- //box form -->
                 </div> 
             </div>  <!-- /row -->
@@ -69,6 +71,7 @@ export default {
             loading: true
         }
     },
+    props: ['user'],
     created() {
         // console.log(this.$route.query.slug);
         this.getFlat(this.$route.query.title);

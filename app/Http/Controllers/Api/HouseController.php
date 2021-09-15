@@ -113,7 +113,7 @@ class HouseController extends Controller
         }
 
         $current_page = LengthAwarePaginator::resolveCurrentPage();
-        $perPage = 5;
+        $perPage = 1;
         $current_page_results = array_slice($results, ($current_page - 1) * $perPage, $perPage);
 
         $results_to_show = new LengthAwarePaginator($current_page_results, count($results), $perPage);

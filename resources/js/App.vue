@@ -9,6 +9,7 @@
             :user="user"/>
         <router-view class="main"
             @search="performSearch"
+            :user="user"
             :houses="houses"
             :currentSearch="currentSearch"            
             :loading="loading"
