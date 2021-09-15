@@ -59,6 +59,9 @@
                         <a class="bnb-btn-index" href="{{route('admin.promotions', $house->id)}}">
                             <i class="fas fa-gem"></i>
                         </a>
+                        <a class="bnb-btn-index" href="{{route('admin.messages.index')}}">
+                            <i class="far fa-paper-plane"></i>
+                        </a>
                         <a class="bnb-btn-index" href="{{route('admin.houses.edit', $house->slug)}}">
                             <i class="fas fa-pen"></i>
                         </a>

@@ -48,6 +48,9 @@
                             <li class="nav-item">
                                 <a class="nav-link {{Route::currentRouteName() == 'admin.houses.index' ? 'active' : '' }}" href="{{ route('admin.houses.index') }}">Le mie strutture</a>
                             </li>                            
+                            <li class="nav-item">
+                                <a class="nav-link {{Route::currentRouteName() == 'admin.messages.index' ? 'active' : '' }}" href="{{ route('admin.houses.index') }}">Messaggi</a>
+                            </li>                         
                         @endauth
                     </ul>
 
