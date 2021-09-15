@@ -60,7 +60,6 @@ export default {
 <style lang="scss" scoped>
 @import '../../sass/partials/variables.scss';
     .loader-container {
-        width: 45%;
         padding: 50px;
 
         .loader {
