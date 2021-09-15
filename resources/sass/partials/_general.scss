@@ -325,24 +325,16 @@ button {
     border-radius: 12px;
 }
 
-//auth 
+//auth
 .log-out {
     display: block;
     width: 100%;
     padding: 0.25rem 1.5rem;
-    font-weight: 400;
-    color: #212529;
-    text-align: inherit;
     white-space: nowrap;
-    background-color: transparent;
     border: 0;
 
     &:hover {
-        text-decoration: none;
-        background-color: rgba($gray-1, 0.1);
-    }
-    &:active {
-        color: $white;
+        color: $white !important;
         background-color: $brand;
     }
 }
@@ -359,10 +351,9 @@ button {
         border-top: 1px solid rgba($gray-1, 0.2);
 
         .input-form {
-            width: 320px;
+            padding: 0;
             border-radius: 8px;
             border: 1px solid rgba($gray-1, 0.2);
-            overflow: hidden;
     
             .label {
                 position: relative;
@@ -376,7 +367,8 @@ button {
                 }
         
                 input,
-                textarea {
+                textarea,
+                select {
                     padding: 20px 10px;
                     border: 0;
                     border-radius: 8px;
@@ -476,17 +468,6 @@ button {
     font-size: 2rem;
 }
 
-// .index-sponsor-box {
-//     position: absolute;
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     top: 12px;
-//     left: 27px;
-//     width: 40px;
-//     height: 40px;
-// }
-
 .index-sponsor-icon {
     top: 8px;
     left: 8px;
@@ -514,6 +495,7 @@ button {
 
 .img-container {
     position: relative;
+    border-radius: 12px;
     overflow: hidden;    
     
     img {        
@@ -602,6 +584,27 @@ button {
 }
 
 //media queries
+@media screen and (max-width: 767px) {
+    .bnb-nav-item {
+        text-align: right;
+        a {
+            margin: 0 20px;
+            padding: 0;
+            color: $brand;
+            background-color: transparent;
+            border: 0;
+    
+            &:hover {
+                border: 0;
+            }
+        }
+    }
+}
+@media screen and (min-width: 350px) {
+    .input-form {
+        width: 320px;
+    }
+}
 @media screen and (min-width: 576px) {
     
     .show-photos {

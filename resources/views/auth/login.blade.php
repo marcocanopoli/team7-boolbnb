@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8 ">
+        <div class="">
             <div class="user-form">
                 <div class="header text-center">Accedi o registrati</div>
                 <div class="bnb-form d-flex flex-column align-items-center">

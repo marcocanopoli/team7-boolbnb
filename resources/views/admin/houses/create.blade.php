@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="container create-form">    
+<div class="container create-form user-form">    
 
     {{-- @if ($errors->any())
     <div class="alert alert-danger">
@@ -12,139 +12,125 @@
     </div>
     @endif --}}
 
-    <div class="d-flex my-4">
+    <div class=" my-4">
         <h1>Creazione nuova struttura</h1>
     </div>
 
-    <form action="{{ route('admin.houses.store') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
+    <form action="{{ route('admin.houses.store') }}" method="POST" enctype="multipart/form-data" autocomplete="off" class="bnb-form">
         @csrf
         @method('POST')
 
         {{-- Titolo --}}
-        <div class="form-group">
-            <label for="title">Nome della struttura</label>
-            <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" placeholder="Inserisci il nome della struttura" name="title" value="{{ old('title') }}">
-            @error('title')
-            <small class="text-danger">{{ $message }}</small>
-            @enderror
+        <div class="input-form mt-2 w-100">
+            <div class="label w-100">
+                <label for="title">Nome della struttura</label>
+                <input type="text" class="w-100 @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title') }}">
+            </div>
         </div>
         {{-- /Titolo --}}
 
         {{-- Descrizione --}}
-        <div class="form-group">
-            <label for="description">Descrizione</label>
-            <textarea class="form-control @error('description') is-invalid @enderror" id="description" rows="6" name="description" placeholder="Descrivi la tua struttura">{{ old('description') }}</textarea>
-            @error('description')
-            <small class="text-danger">{{ $message }}</small>
-            @enderror
+        <div class="input-form mt-2 w-100">
+            <div class="label w-100">
+                <label for="description">Descrizione</label>
+                <textarea class="w-100 @error('description') is-invalid @enderror" id="description" rows="6" name="description">{{ old('description') }}</textarea>
+            </div>
         </div>
         {{-- /Descrizione --}}
 
         {{-- Tipologia --}}
-        <div class="form-group">
-            <label for="house_type_id">Tipo di struttura </label>
-            <select class="form-control @error('house_type_id') is-invalid @enderror" name="house_type_id" id="house_type_id">
-                <option value="">-- Seleziona il tipo di struttura--</option>
-                @foreach ($houseTypes as $type)
-                
-                <option value="{{ $type->id }}"
-                    {{ ($type->id == old('house_type_id')) ? 'selected' : '' }}
-                    >{{ $type->name }}</option>
+        <div class="input-form mt-2 w-100">
+            <div class="label w-100">
+                <label for="house_type_id">Tipo di struttura </label>
+                <select class="w-100 @error('house_type_id') is-invalid @enderror" name="house_type_id" id="house_type_id">
+                    <option value="">-- Seleziona il tipo di struttura--</option>
+                    @foreach ($houseTypes as $type)
+                    
+                    <option value="{{ $type->id }}"
+                        {{ ($type->id == old('house_type_id')) ? 'selected' : '' }}
+                        >{{ $type->name }}
+                    </option>
                     @endforeach
                 </select>
-                @error('house_type_id')
-                <small class="text-danger">{{ $message }}</small>
-                @enderror
             </div>
+        </div>
         {{-- /Tipologia --}}
 
-        <div class="row d-flex">
+        <div class="d-flex flex-wrap justify-content-between my-4">
 
             {{-- Camere --}}
-            <div class="form-group col-12 col-md-6">
-                <label for="rooms">Numero camere</label>
-                <input type="number" name="rooms" value="{{ old('rooms') }}" class="form-control @error('rooms') is-invalid @enderror" id="rooms" placeholder="Camere disponibili">
-                @error('rooms')
-                <small class="text-danger">{{ $message }}</small>
-                @enderror
+            <div class="input-form mt-2 col-12 col-md-5">
+                <div class="label w-100">
+                    <label for="rooms">Numero camere</label>
+                    <input type="number" name="rooms" min="1" value="{{ old('rooms') }}" class="w-100 @error('rooms') is-invalid @enderror" id="rooms">
+                </div>
             </div>
             {{-- /Camere --}}
 
             {{-- Ospiti --}}
-            <div class="form-group col-12 col-md-6">
-                <label for="guests">Numero ospiti</label>
-                <input type="number" name="guests" value="{{ old('guests') }}" class="form-control @error('guests') is-invalid @enderror" id="guests" placeholder="Numero ospiti">
-                @error('guests')
-                <small class="text-danger">{{ $message }}</small>
-                @enderror
+            <div class="input-form mt-2 col-12 col-md-5">
+                <div class="label w-100">
+                    <label for="guests">Numero ospiti</label>
+                    <input type="number" name="guests" min="1" value="{{ old('guests') }}" class="w-100 @error('guests') is-invalid @enderror" id="guests">
+                </div>
             </div>
             {{-- /Ospiti --}}
 
             {{-- Letti --}}
-            <div class="form-group col-12 col-md-6">
-                <label for="beds">Numero letti</label>
-                <input type="number" name="beds" value="{{ old('beds') }}" class="form-control @error('beds') is-invalid @enderror" id="beds" placeholder="Letti disponibili">
-                @error('beds')
-                <small class="text-danger">{{ $message }}</small>
-                @enderror
+            <div class="input-form mt-2 col-12 col-md-5">
+                <div class="label w-100">
+                    <label for="beds">Numero letti</label>
+                    <input type="number" name="beds" min="1" value="{{ old('beds') }}" class="w-100 @error('beds') is-invalid @enderror" id="beds">
+                </div>
             </div>
             {{-- /Letti --}}
             
             {{-- Bagni --}}
-            <div class="form-group col-12 col-md-6">
-                <label for="bathrooms">Numero bagni</label>
-                <input type="number" name="bathrooms" value="{{ old('bathrooms') }}" class="form-control @error('bathrooms') is-invalid @enderror" id="bathrooms" placeholder="Bagni disponibili">
-                @error('bathrooms')
-                <small class="text-danger">{{ $message }}</small>
-                @enderror
+            <div class="input-form mt-2 col-12 col-md-5">
+                <div class="label w-100">
+                    <label for="bathrooms">Numero bagni</label>
+                    <input type="number" name="bathrooms" min="1" value="{{ old('bathrooms') }}" class="w-100 @error('bathrooms') is-invalid @enderror" id="bathrooms">
+                </div>
             </div>
             {{-- /Bagni --}}
 
             {{-- MQ --}}
-            <div class="form-group col-12 col-md-6">
-                <label for="square_meters">Mq</label>
-                <input type="number" name="square_meters" value="{{ old('square_meters') }}" class="form-control @error('square_meters') is-invalid @enderror" id="square_meters"
-                placeholder="Inserisci i Mq">
-                @error('square_meters')
-                <small class="text-danger">{{ $message }}</small>
-                @enderror
+            <div class="input-form mt-2 col-12 col-md-5">
+                <div class="label w-100">
+                    <label for="square_meters">Mq</label>
+                    <input type="number" name="square_meters" min="1" value="{{ old('square_meters') }}" class="w-100 @error('square_meters') is-invalid @enderror" id="square_meters">
+                </div>
             </div>
             {{-- /MQ --}}            
         </div>
         
-        <div class="form-group row d-flex">
+        <div class="d-flex flex-wrap my-4 justify-content-between">
 
             {{-- Indirizzo --}}
-            <div class="col-12 col-md-4 mb-2 position-relative" id="geo-address">
-                <label for="address">Indirizzo</label>
-                <input type="text" name="address" value="{{ old('address') }}" class="form-control @error('address') is-invalid @enderror" id="address"
-                placeholder="Indirizzo della struttura">
-                <ul id="finded" class="d-none"></ul>
-                @error('address')
-                <small class="text-danger">{{ $message }}</small>
-                @enderror
+            <div class="input-form mt-2 col-12 col-md-3">
+                <div class="label w-100" id="geo-address">
+                    <label for="address">Indirizzo</label>
+                    <input type="text" name="address" value="{{ old('address') }}" class="w-100 @error('address') is-invalid @enderror" id="address">
+                    <ul id="finded" class="d-none"></ul>
+                </div>
             </div>
             {{-- /Indirizzo --}}
 
             {{-- CAP --}}
-            <div class="col-12 col-md-4 mb-2">
-                <label for="zip_code">CAP</label>
-                <input type="text" name="zip_code" value="{{ old('zip_code') }}" class="form-control @error('zip_code') is-invalid @enderror" id="zip_code"
-                placeholder="Inserisci il CAP">
-                @error('zip_code')
-                <small class="text-danger">{{ $message }}</small>
-                @enderror
+            <div class="input-form mt-2 col-12 col-md-3">
+                <div class="label w-100">
+                    <label for="zip_code">CAP</label>
+                    <input type="text" name="zip_code" value="{{ old('zip_code') }}" class="w-100 @error('zip_code') is-invalid @enderror" id="zip_code">
+                </div>
             </div>
             {{-- /CAP --}}
 
             {{-- Citta' --}}
-            <div class="col-12 col-md-4 mb-2">
-                <label for="city">Citta'</label>
-                <input type="text" name="city" value="{{ old('city') }}" class="form-control @error('city') is-invalid @enderror" id="city"
-                placeholder="Inserisci la città">
-                @error('city')
-                <small class="text-danger">{{ $message }}</small>
-                @enderror
+            <div class="input-form mt-2 col-12 col-md-3">
+                <div class="label w-100">
+                    <label for="city">Citta'</label>
+                    <input type="text" name="city" value="{{ old('city') }}" class="w-100 @error('city') is-invalid @enderror" id="city">
+                </div>
             </div>
             {{-- Citta' --}}            
         </div>
@@ -198,27 +184,6 @@
         </div>
         {{-- /Foto --}}
 
-        {{-- Disponibilita' --}}
-        {{-- <div class="form-group">
-            <h6>Disponibilita'</h6>
-            <div class="create-visible pl-3">
-                <div class="mr-5">
-                    <input class="form-check-input @error('visible') is-invalid @enderror" type="radio" value="1" checked name="visible">
-                    <label class="form-check-label mr-2 not-strong" for="visible">Disponibile</label>
-                </div>
-                <div>
-                    <input class="form-check-input @error('visible') is-invalid @enderror" type="radio" value="2" @if(old('visible') == 2) checked @endif name="visible">
-                    <label class="form-check-label not-strong" for="visible">Attualmente non disponibile</label>
-                </div>
-            </div> 
-            @error('visible')
-            <div>
-                <small class="text-danger">{{ $message }}</small> 
-            </div>
-            @enderror   
-        </div> --}}
-        {{-- /Disponibilita' --}}
-
         {{-- Disponibilita' toggle switch --}}
         <div class="form-group d-flex flex-wrap justify-content-between">
             <h6 class="pt-2">Vuoi rendere visibile la tua struttura?</h6>
@@ -242,14 +207,12 @@
         {{-- /Disponibilita' toggle switch --}}
 
         {{-- Prezzo --}}
-        <div class="row">
-            <div class="form-group mb-5 col-md-4">
-                <label for="price">Prezzo per notte</label>
-                <input type="number" name="price" value="{{ old('price') }}" step="0.01" min="1" class="form-control @error('price') is-invalid @enderror" id="price"
-                placeholder="Inserisci il prezzo">
-                @error('price')
-                <small class="text-danger">{{ $message }}</small>
-                @enderror
+        <div class="d-flex">
+            <div class="input-form mb-5 col-md-4">
+                <div class="label w-100">
+                    <label for="price">Prezzo per notte</label>
+                    <input type="number" name="price" value="{{ old('price') }}" step="0.01" min="1" class="w-100 @error('price') is-invalid @enderror" id="price">
+                </div>
             </div>
         </div>
         {{-- /Prezzo --}}
