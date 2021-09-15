@@ -25,7 +25,7 @@ class MessageController extends Controller
             $messages[] = Message::where('house_id', $house->id)
             ->orderBy('created_at', 'DESC')
             ->with('house')
-            ->paginate(6);    
+            ->paginate(4);    
         }
 
         return view('admin.messages.index', compact('houses', 'messages'));

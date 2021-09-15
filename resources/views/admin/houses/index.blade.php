@@ -21,7 +21,7 @@
         <div>
             @foreach ($houses as $house)
             <div class="house-container row">
-                <div class="col-12 col-md-10">
+                <div class="col-12 col-md-9">
                     <a href="{{route('admin.houses.show', $house->slug)}}" class="bnb-a">
                         <div class="row">
                             <div class="col-12 col-md-4">
@@ -55,7 +55,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-12 col-md-2 align-self-center">
+                <div class="col-12 col-md-3 align-self-center">
                     <div class="d-flex justify-content-around">
                         <a class="bnb-btn-index" href="{{route('admin.promotions', $house->id)}}">
                             <i class="fas fa-gem"></i>
