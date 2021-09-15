@@ -1,13 +1,13 @@
 <template>
-    <div class="top-distance">
+    <div class="top-distance ">
         <!-- Mappa -->
         <div id="map-div" class=""></div>
         <!-- /Mappa  -->
-        <div class="container flat-content"
+        <div class="container flat-content px-4"
             v-if="!loading">
 
             <!-- titolo -->
-            <div class="d-flex">
+            <div class="d-flex ">
                 <h1 class="h1">{{ house.title }}</h1>
                 <span class="bnb-btn bnb-btn-brand-2 align-self-center mx-4"> {{ house.house_type.name }} </span>
             </div>
@@ -15,14 +15,14 @@
             
             <p><strong>Indirizzo: </strong>{{house.address}}, {{house.zip_code}}, {{house.city}}</p>
 
-            <div class="show-photos my-4">
+            <div class="show-photos my-4 ">
                 <div v-for="photo, index in house.photos" :key="index">
                     <img :src="'/storage/' + photo.path" :alt="'foto di ' + house.title">
                 </div> 
             </div>
 
-            <div class="row">
-                <div class="show-info col-md-6">
+            <div class="row ">
+                <div class="show-info col-12 col-md-6">
                     <p><strong>Numero ospiti: </strong>{{house.guests}}</p>
                     <p><strong>Numero camere: </strong>{{house.rooms}}</p>
                     <p><strong>Numero letti: </strong>{{house.beds}}</p>
@@ -37,17 +37,20 @@
                             {{service.name}}
                         </li>
                     </ul>
-                    <strong class="my-2">Descrizione:</strong>
-                    <p>{{house.description}}</p>
-                    <strong>Prezzo: <span>{{house.price}} &euro;</span></strong>
+                    <div class="my-3">
+                        <strong class="">Descrizione:</strong>
+                        <p>{{house.description}}</p>
+                        <strong>Prezzo: <span>{{house.price}} &euro;</span></strong>
+                    </div>
                 </div> 
     
 
-                <div class="show-details col-lg-6">
-                    <!-- //box form -->
+                <div class="show-details col-12 col-md-6">
+                    <!-- box form -->
                     <Message :house_id="house.id"/>
+                    <!-- //box form -->
                 </div> 
-            </div>
+            </div>  <!-- /row -->
 
         </div> <!-- container fluid -->
     </div> <!-- main div -->

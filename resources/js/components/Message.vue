@@ -15,15 +15,10 @@
         <div>
           <label for="guest_mail">E-mail:*</label>
           <input v-model="email" id="guest_email" class="form-control" type="text" placeholder="Inserisci la tua Mail" name="guest_email"
-          :class="{ 'is-invalid' : errors.guest_email }"
-          @change="findMail()">
+          :class="{ 'is-invalid' : errors.guest_email }" >
           <small class="text-danger" v-for="err_email, index in errors.guest_email" :key="`err-mail${index}`">{{err_email}}</small>
         </div>
-        <ul v-if="matchMail.length > 0" id="sizelist">
-            <li v-for="(mail, index) in mails" :key="index">
-                {{mail}}
-            </li>
-        </ul>
+
 
         <div>
           <label for="content">Message:*</label>
@@ -48,9 +43,7 @@ export default {
         content:'',
         errors: {},
         success: false,
-        sending: false,
-        mails: [],
-        matchMail: []
+        sending: false
       }
     },
     methods: {
@@ -81,20 +74,6 @@ export default {
         }).catch((err) => {
           console.log(err);
         });
-      },
-      getMails(){
-        this.users.forEach( el => {
-          return this.mails.push(el.email); //ok email in array
-        });
-      },
-      findMail() {
-        this.mails.filter(el => {
-          el.toLowerCase().includes(this.email.toLowerCase());
-          return this.matchMail.push(el);
-        });
-       if(this.email.length == 0 ) {
-          this.matchMail = []
-        }
       }
     }
 }
