@@ -144,6 +144,7 @@ export default {
                         margin-bottom: 0;
                         line-height: 0;
                         align-self: center;
+                        text-transform: capitalize;
                     }
             }
     }
