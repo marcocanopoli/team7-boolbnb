@@ -23,7 +23,7 @@ class MessageController extends Controller
 
         foreach ($houses as $house) {
             $messages[] = Message::where('house_id', $house->id)
-            ->orderBy('id', 'DESC')
+            ->orderBy('created_at', 'DESC')
             ->with('house')
             ->paginate(6);    
         }
