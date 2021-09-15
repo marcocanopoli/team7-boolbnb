@@ -1,6 +1,6 @@
 @extends('layouts.app')
 {{-- @dump($houses)  /case logged user ok --}}
-@dump($messages) 
+{{-- @dump($messages)  --}}
 
 
 @section('content')
