@@ -1,6 +1,6 @@
 <template>
   <div class="box-message">
-      <h3 class="h3"> <i> Inviaci in messaggio </i> </h3>
+      <h3 class="h3"> <i> Contatta l'host </i> </h3>
       <div class="alert alert-success" v-show="success">
         <h5 class="h5">Messaggio inviato correttamente</h5>
       </div>
@@ -32,7 +32,7 @@
         </div>
         <button class="bnb-btn bnb-btn-brand bnb-btn-resp" type="submit" :disabled="sending">
           {{ sending ? 'Invio in corso' : 'INVIA' }}
-          </button>
+        </button>
       </form>
   </div>
 </template>
@@ -109,7 +109,7 @@ export default {
     box-shadow: 0 0 3px 0 rgba($brand, 0.2);
     border: 1px solid rgba($black, 0.1);
     background-color: $white;
-    
+
     form {
       label{
         font-size: 13px;

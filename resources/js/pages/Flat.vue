@@ -1,15 +1,15 @@
 <template>
-    <div class=" top-distance">
-
+    <div class="top-distance">
         <!-- Mappa -->
         <div id="map-div" class=""></div>
         <!-- /Mappa  -->
-        <div class="container">
+        <div class="container flat-content"
+            v-if="!loading">
 
             <!-- titolo -->
-            <div class="d-flex mt-4 mb-2">
+            <div class="d-flex">
                 <h1 class="h1">{{ house.title }}</h1>
-                <span class="bnb-btn bnb-btn-brand-2 align-self-center mx-4"> {{ getHouseType(house.house_type_id) }}</span>
+                <span class="bnb-btn bnb-btn-brand-2 align-self-center mx-4"> {{ house.house_type.name }} </span>
             </div>
             <!-- /titolo -->
             
@@ -39,6 +39,7 @@
                     </ul>
                     <strong class="my-2">Descrizione:</strong>
                     <p>{{house.description}}</p>
+                    <strong>Prezzo: <span>{{house.price}} &euro;</span></strong>
                 </div> 
     
 
@@ -47,11 +48,6 @@
                     <Message :house_id="house.id"/>
                 </div> 
             </div>
-
-            <div>
-                <strong>Prezzo: <span>{{house.price}} &euro;</span></strong>                
-            </div>
-
 
         </div> <!-- container fluid -->
     </div> <!-- main div -->
@@ -64,16 +60,15 @@ export default {
     components: {
         Message
     },
-    props: {
-        houseTypes: Array,
-    },
     data(){
         return{
-            house: {}
+            house: {},
+            loading: true
         }
     },
     mounted() {
         this.getFlat(this.$route.params.house_slug);
+        
     },
     methods: {
         getTomTomMap() {
@@ -86,29 +81,23 @@ export default {
                 center: coordinates,
                 zoom: 16
             });
+
             map.scrollZoom.disable();//disattiva scroll x zoom in/out usare bottoni
             map.addControl(new tt.FullscreenControl());
             map.addControl(new tt.NavigationControl());
             new tt.Marker().setLngLat(coordinates).addTo(map);
         },
-       getHouseType(houseTypeId) {
-            let houseType = '';
-            this.houseTypes.forEach(element => {
-                if(element.id == houseTypeId ) {
-                    houseType = element.name;
-                }
-            });
-            return houseType
-        },
         getFlat(slug) {
-             axios.get(`http://127.0.0.1:8000/api/houses/${slug}`)
-             .then(res => {
-                 this.house = res.data;
-                 this.getTomTomMap();
-             }).catch(err => {
-                 console.log(err);
-             })
-        },
+            this.loading = true;
+            axios.get(`http://127.0.0.1:8000/api/houses/${slug}`)
+            .then(res => {
+                this.house = res.data;
+                this.loading = false;
+                this.getTomTomMap();
+            }).catch(err => {
+                console.log(err);
+            });
+        }
     }
 }
 
@@ -121,11 +110,15 @@ export default {
  .top-distance {
     padding-top: 90px;
 
+    .flat-content {
+        padding: 36px 0 56px 0;
+    }
+
     .show-details {
-        height: 300px;
         width: 150px;
         border: 1px solid red($color: #000000);
     }
+
     #map-div {
         height: 400px;
         width: 100%;

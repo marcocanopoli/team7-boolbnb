@@ -43,14 +43,14 @@ class HouseController extends Controller
 
     public function index() {
 
-        $houses = House::all();
+        $houses = House::with('houseType')->get();
 
         return response()->json($houses);
     }
 
     public function show($slug) {
 
-        $house = House::where('slug', $slug)->first();
+        $house = House::where('slug', $slug)->with('houseType')->first() ;
 
         return response()->json($house);
     }
@@ -74,7 +74,7 @@ class HouseController extends Controller
                     ['rooms', '>=', $rooms],
                     ['beds', '>=', $beds],
                     ['visible', 1]
-                ])->get();
+                ])->with('houseType')->get();
         
         //filter by services
         if ($services) {
