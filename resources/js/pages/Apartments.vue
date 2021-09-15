@@ -24,7 +24,11 @@
                         </div>
 
                         <div class="details-container col-md-8">
-                            <p>{{ house.house_type.name }} a {{house.city}}</p>
+                            <div class="d-flex">
+                                <p>{{ house.house_type.name }} a {{house.city}}</p>
+                                <i  v-if="isSponsored(house)"
+                                    class="fas fa-gem show-sponsor-icon ml-3"></i>   
+                            </div>
                             <h4>{{house.title}}</h4>
                             <p>
                                 {{house.guests}}
@@ -125,6 +129,19 @@ export default {
                 this.URLquery.inputSearch = this.$route.query.search;
                 this.$emit('search', this.URLquery);
             }
+        },
+        isSponsored(house) {
+            let sponsored =  false;
+            const lastPromotion = house.promotions[house.promotions.length - 1];
+            const now = new Date();
+            if(lastPromotion) {
+                const endDateString = lastPromotion.pivot.end_date;
+                const endDate = new Date(endDateString);
+                if(endDate > now) {
+                    sponsored = true;
+                }
+            }
+            return sponsored;
         }
     },
     watch: {
@@ -186,6 +203,10 @@ export default {
                     }
                 }
             }
+        }
+
+        .show-sponsor-icon {
+            font-size: 16px;
         }
     }
 

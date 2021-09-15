@@ -74,7 +74,7 @@ class HouseController extends Controller
                     ['rooms', '>=', $rooms],
                     ['beds', '>=', $beds],
                     ['visible', 1]
-                ])->with('houseType')->get();
+                ])->with('houseType', 'promotions')->get();
         
         //filter by services
         if ($services) {
