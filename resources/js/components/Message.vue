@@ -12,13 +12,12 @@
                 :class="{ 'is-invalid' : errors.guest_name }">
             </div>
         </div>
-
         <div class="input-form mt-2 w-100">
             <div class="label w-100">
                 <label for="guest_mail">E-mail:*</label>
                 <input v-model="email" id="guest_email" class="w-100" type="text" name="guest_email"
                 :class="{ 'is-invalid' : errors.guest_email }">
-            </div>
+        </div>
         </div>
 
         <div class="input-form mt-2 w-100">

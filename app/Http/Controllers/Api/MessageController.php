@@ -18,14 +18,16 @@ class MessageController extends Controller
         //validaizione maunale
         $validator = Validator::make($data, [
             'guest_name' => 'required|max:30',
-            'guest_email' => 'required|max:30',
+            'guest_email' => 'required|email|max:30',
             'content' => 'required'
         ],
         [
             'guest_name.required' => 'inserisci nome',
             'guest_email.required' => 'inserisci mail',
+            'guest_email.email' => 'inserisci mail valida',
             'content.required' => 'scrivi un messaggio'
         ]);
+        
         if($validator->fails()) {
             return response()->json([
                 'errors' => $validator->errors()

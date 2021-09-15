@@ -7,9 +7,9 @@
             v-if="!loading">
 
             <!-- titolo -->
-            <div class="d-flex ">
+            <div class="d-flex flex-column my-3">
                 <h1 class="h1">{{ house.title }}</h1>
-                <span class="bnb-btn bnb-btn-brand-2 align-self-center mx-4"> {{ house.house_type.name }} </span>
+                <span class="bnb-btn bnb-btn-brand-2 align-self-start mt-2"> {{ house.house_type.name }} </span>
             </div>
             <!-- /titolo -->
             
