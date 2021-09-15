@@ -12,7 +12,9 @@
             @emptySearch="emptySearch"
             :user="user"
             :houses="houses"
-            :currentSearch="currentSearch"            
+            :currentSearch="currentSearch"
+            :last_page="last_page"           
+            :current_page="current_page"           
             :loading="loading"
             :searchCoordinates="searchCoordinates">
         </router-view>
@@ -44,12 +46,14 @@ export default {
 
             currentSearch: {
                 inputSearch : "",
-                rooms: '',
-                beds: '',
+                rooms: 1,
+                beds: 1,
                 services: '',
                 km: '',
                 page: '',
             },
+            current_page: 1,
+            last_page: 1,
         }
     },
     name: 'App',
@@ -107,12 +111,12 @@ export default {
             // light search
                       
             if(searchData.length == 1) {
-                let search = searchData[0]
+                let inputSearch = searchData[0]
                 searchData = {};  //if single search input
-                searchData.inputSearch = search ; //assign to inputSearch
+                searchData.inputSearch = inputSearch ; //assign to inputSearch
                 searchData.km = '';
-                searchData.rooms = '';
-                searchData.beds = '';
+                searchData.rooms = 1;
+                searchData.beds = 1;
                 searchData.services = '';
                 searchData.page = 1;
             }
@@ -151,12 +155,16 @@ export default {
                 this.splitMergeSponsored(this.houses);
 
                 this.currentSearch = searchData;
+                this.current_page = res.data.current_page; 
+                this.last_page = res.data.last_page;
+
                 this.$router.push(
                     {
                         name: 'apartments',
                         query: queryObj
                     }
                     ).catch(()=>{});
+
 
                 this.loading = false;
                 this.getCoordinates();

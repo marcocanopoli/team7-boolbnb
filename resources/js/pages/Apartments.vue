@@ -6,14 +6,14 @@
             </div>
             
             <div class="row">
-                <div class="col-md-6" v-if="loading">
+                <div class="col-xl-6" v-if="loading">
                     <FlatLoader/>
                 </div>
-                <div class="col-md-6" v-if="houses.length == 0 && !loading">
-                    <h2 class="no-results text-center">Nessun risultato da mostrare!</h2>
+                <div class="no-results col-xl-6" v-if="houses.length == 0 && !loading">
+                    <h2 class="py-4">Nessun risultato da mostrare!</h2>
                 </div>
                 
-                <div class="houses col-md-6 py-4" v-if="houses.length > 0 && !loading">                    
+                <div class="houses col-xl-6 py-4" v-if="houses.length > 0 && !loading">                    
                     <router-link                         
                         v-for="house in houses" :key="house.id"
                         :to="{ name: 'flat', query: { title : house.slug }}"
@@ -53,9 +53,15 @@
                         </div>
                     </router-link>
 
+                    <v-pagination
+                        @page="searchURL"
+                        :last_page="last_page"
+                        :current_page="current_page"
+                    />
+
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-xl-6">
                     <div class="row">
                         <div id="map-div" class="apartments-map col-md-10 offset-md-1"></div>
                     </div>
@@ -85,18 +91,19 @@ export default {
                 rooms: '',
                 beds: '',
                 services: [],
-                km: '20'
+                km: '20',
+                page: '',
             },
-            URLquery: {},                        
-            current_page: 1,
-            last_page: 1,
+            URLquery: {}
         }
     },
     props: {
         houses: Array,
         currentSearch: Object,
         loading: Boolean,
-        searchCoordinates: Object
+        searchCoordinates: Object,
+        current_page: Number,
+        last_page: Number,
     },
     methods: {
         getTomTomMap() {
@@ -128,10 +135,11 @@ export default {
                 })
             }
         },
-        searchURL() {
+        searchURL(page = 1) {
             this.URLquery = this.$route.query;
             if(this.URLquery.search) {
                 this.URLquery.inputSearch = this.$route.query.search;
+                this.URLquery.page = page;
                 this.$emit('search', this.URLquery);
             }
         },
@@ -182,7 +190,9 @@ export default {
             }
     
             .no-results {
-                padding-top: 170px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
     
             .house-container {
