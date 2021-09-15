@@ -8,6 +8,7 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class HouseController extends Controller
 {    
@@ -111,6 +112,12 @@ class HouseController extends Controller
             }
         }
 
-        return response()->json($results);
+        $current_page = LengthAwarePaginator::resolveCurrentPage();
+        $perPage = 5;
+        $current_page_results = array_slice($results, ($current_page - 1) * $perPage, $perPage);
+
+        $results_to_show = new LengthAwarePaginator($current_page_results, count($results), $perPage);
+
+        return response()->json($results_to_show);
     }
 }

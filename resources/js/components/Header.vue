@@ -107,9 +107,6 @@ export default {
     created () {
       window.addEventListener('scroll', this.setScroll);
     },
-    updated() {
-        this.currentSearch = this.currentSearch;
-    },
     destroyed () {
       window.removeEventListener('scroll', this.setScroll);
     } 
