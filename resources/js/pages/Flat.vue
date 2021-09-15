@@ -132,6 +132,9 @@ export default {
     .title-box {
         display: flex;
         flex-direction: column;
+        h1 {
+            text-transform: capitalize;
+        }
 
     }
 
@@ -144,7 +147,6 @@ export default {
                         margin-bottom: 0;
                         line-height: 0;
                         align-self: center;
-                        text-transform: capitalize;
                     }
             }
     }
