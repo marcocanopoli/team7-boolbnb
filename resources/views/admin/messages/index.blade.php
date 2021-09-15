@@ -41,9 +41,8 @@
                                         <form action="{{ route('admin.messages.destroy', $msg->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="bnb-btn bnb-btn-brand-2 del-msg-radius" type="submit" id="delete" value="ELIMINA">
+                                            <button class=" bnb-btn-brand-2 del-msg-radius" type="submit" id="delete" value="ELIMINA">
                                                 <i class="fas fa-times"></i>
-                                                <span class="del-msg-txt"> ELIMINA </span>
                                             </button>
                                         </form>    
                                     </div> {{-- form-absolute delete button --}}
