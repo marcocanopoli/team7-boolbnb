@@ -200,6 +200,9 @@ export default {
         $route(to, from) {
             this.searchData = this.currentSearch;
         },
+        searchData: function() {
+            this.searchData.page = 1;
+        }
     },
     created () {
         document.addEventListener("keyup", this.nextItem);

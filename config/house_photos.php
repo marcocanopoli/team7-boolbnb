@@ -69,17 +69,17 @@
             'bari/apt/apt-5'
         ],
         [
-            'bari/cot/cott-1',
-            'bari/cot/cott-2',
-            'bari/cot/cott-3',
-            'bari/cot/cott-4',
-            'bari/cot/cott-5',
-            'bari/cot/cott-6',
-            'bari/cot/cott-7',
-            'bari/cot/cott-8',
-            'bari/cot/cott-9',
-            'bari/cot/cott-10',
-            'bari/cot/cott-11'
+            'bari/cott/cott-1',
+            'bari/cott/cott-2',
+            'bari/cott/cott-3',
+            'bari/cott/cott-4',
+            'bari/cott/cott-5',
+            'bari/cott/cott-6',
+            'bari/cott/cott-7',
+            'bari/cott/cott-8',
+            'bari/cott/cott-9',
+            'bari/cott/cott-10',
+            'bari/cott/cott-11'
         ],
         [
             'firenze/apt/apt-1',
