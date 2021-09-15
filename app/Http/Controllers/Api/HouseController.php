@@ -44,14 +44,14 @@ class HouseController extends Controller
 
     public function index() {
 
-        $houses = House::with('houseType')->get();
+        $houses = House::with('houseType')->with('houseType', 'promotions')->paginate(2);
 
         return response()->json($houses);
     }
 
     public function show($slug) {
 
-        $house = House::where('slug', $slug)->with('houseType')->first() ;
+        $house = House::where('slug', $slug)->with('houseType', 'promotions')->first() ;
 
         return response()->json($house);
     }

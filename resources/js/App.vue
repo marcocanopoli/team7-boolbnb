@@ -9,6 +9,7 @@
             :user="user"/>
         <router-view class="main"
             @search="performSearch"
+            @emptySearch="emptySearch"
             :user="user"
             :houses="houses"
             :currentSearch="currentSearch"            
@@ -96,7 +97,10 @@ export default {
             })
             this.houses = this.sponsoredHouses.concat(this.houses);
             this.sponsoredHouses = [];
-        },   
+        },
+        emptySearch() {
+            this.currentSearch.inputSearch = '';
+        },  
         performSearch(searchData) {
 
             this.loading = true;

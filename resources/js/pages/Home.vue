@@ -1,14 +1,12 @@
 <template>
     <section class="home">
         <div class="jbt">            
-            <!-- <strong>Non sai dove andare? Nessun problema!</strong>
-            <a class="bnb-a" href="">
+            <strong>Non sai dove andare? Nessun problema!</strong>
+            <button 
+                @click="getRndCity"
+                class="bnb-a" >
                 <span>Sono flessibile</span>
-            </a> -->
-            <v-search                
-                :currentSearch="currentSearch"
-                v-on="$listeners" 
-                v-if="scrollZero"/>
+            </button>
         </div>
         <div class="home-content">
             <!-- sponsored -->
@@ -49,7 +47,8 @@ export default {
             houses: '',            
             current_page: 1,
             last_page: 1,
-            scrollZero: true
+            scrollZero: true,
+            cities: ['milano', 'firenze', 'bologna']
         }
     },
     props: {
@@ -73,7 +72,12 @@ export default {
             } else if (window.scrollY == 0) {
                 this.scrollZero = true
             }
-        } 
+        },
+        getRndCity() {
+            const city = this.cities[Math.floor(Math.random()*this.cities.length)];
+            this.$emit('emptySearch');
+            this.$emit('search', [city]);
+        }
     },
     created () {
         window.addEventListener('scroll', this.setScroll);
@@ -108,25 +112,25 @@ export default {
                 text-align: center;
             }
     
-        //    a {
-        //        margin: 10px 0;
-        //        padding: 22px 56px;
-        //        border-radius: 54px;
-        //        background-color: $white;
-        //        transition: 0.2s;
+            button {
+               margin: 10px 0;
+               padding: 22px 56px;
+               border-radius: 54px;
+               background-color: $white;
+               transition: 0.2s;
    
-        //        &:hover {
-        //            box-shadow: 0 0 5px 2px rgba($gray-1, 0.2);
-        //        }
+               &:hover {
+                   box-shadow: 0 0 5px 2px rgba($gray-1, 0.2);
+               }
    
-        //        span {
-        //            font-weight: 700;
-        //            background: $primary-h;
-        //            background-clip: text;
-        //            -webkit-background-clip: text;
-        //            -webkit-text-fill-color: transparent;
-        //        }
-        //    }
+               span {
+                   font-weight: 700;
+                   background: $primary-h;
+                   background-clip: text;
+                   -webkit-background-clip: text;
+                   -webkit-text-fill-color: transparent;
+               }
+           }
         }
         .home-content {
             position: relative;

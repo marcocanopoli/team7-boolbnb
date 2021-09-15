@@ -15,23 +15,14 @@
             </router-link>
             <!-- Logo -->
             
-            <!-- Search -->            
-            <!-- <div v-if="$route.name != 'apartments'" > -->
+            <!-- Search -->
             <div class="search">
-
-                <!-- Full search box -->
-                <!-- <v-search
-                    class="hidden-xs"
-                    :currentSearch="currentSearch"
-                    v-on="$listeners" 
-                    v-if="$route.name != 'home' && visibleFullSearch "/>                 -->
-                <!-- /Full search box -->
 
                 <!-- Light search box -->
                 <v-search
                     :currentSearch="currentSearch"
                     v-on="$listeners"
-                    v-if="$route.name == 'home' && !visibleFullSearch"/>
+                    v-if="$route.name == 'home'"/>
                 <!-- /Light search box -->
 
                 <!-- Light search w/ filters -->
@@ -40,7 +31,7 @@
                     :houses="houses"
                     :allServices="allServices"
                     v-on="$listeners"
-                    v-if="$route.name != 'home'"/>
+                    v-else/>
                 <!-- /Light search w/ filters -->
 
             </div>
