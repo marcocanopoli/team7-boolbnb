@@ -7,9 +7,9 @@
             v-if="!loading">
 
             <!-- titolo -->
-            <div class="d-flex flex-column my-3">
-                <h1 class="h1">{{ house.title }}</h1>
-                <span class="bnb-btn bnb-btn-brand-2 align-self-start mt-2"> {{ house.house_type.name }} </span>
+            <div class="title-box my-3">
+                <h1 class="h1 mr-4">{{ house.title }}</h1>
+                <span class="bnb-btn bnb-btn-brand-2 align-self-start d-block"> {{ house.house_type.name }} </span>
             </div>
             <!-- /titolo -->
             
@@ -120,16 +120,38 @@ export default {
     .flat-content {
         padding: 36px 0 56px 0;
     }
-
     .show-details {
         width: 150px;
         border: 1px solid red($color: #000000);
     }
-
     #map-div {
         height: 400px;
         width: 100%;
     }
+
+    .title-box {
+        display: flex;
+        flex-direction: column;
+        h1 {
+            text-transform: capitalize;
+        }
+
+    }
+
+    @media all and(min-width: 576px) {
+
+            .title-box {
+                flex-direction: row ;
+                align-items: center;
+                    h1 {
+                        margin-bottom: 0;
+                        line-height: 0;
+                        align-self: center;
+                    }
+            }
+    }
+
+
  }  
 
 </style>
