@@ -15,7 +15,7 @@
 
         <div class="d-flex my-4">
             <h1>Strutture</h1> 
-            <a class="bnb-a bnb-btn-r5 bnb-btn-white align-self-center mx-4" href="{{route('admin.houses.create')}}">AGGIUNGI UNA STRUTTURA</a>
+            <a class="bnb-a bnb-btn-r5 bnb-btn-white align-self-center mx-4" href="{{route('admin.houses.create')}}">AGGIUNGI</a>
         </div>
         <div>
             @foreach ($houses as $house)
