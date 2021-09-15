@@ -14,12 +14,12 @@
     @endif
 
     <div class="d-flex flex-column align-items-start">
+    
+    @if($activeSponsor)
+    <i class="fas fa-gem show-sponsor-icon"></i>              
+    @endif
+    
         <h1>{{$house->title}}</h1>
-        
-        @if($activeSponsor)
-            <i class="fas fa-gem show-sponsor-icon"></i>              
-        @endif
-
         
         <span class="bnb-btn bnb-btn-brand-2 ">{{ $house->houseType['name'] }}</span>
     </div>
