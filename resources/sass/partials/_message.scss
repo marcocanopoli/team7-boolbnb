@@ -33,14 +33,17 @@
         position: absolute;
         right: 20px;
         top: 20px;
-    
-        .del-msg-radius {
-            border-radius: 50%;
+        form {
             height: 30px;
             width: 30px;
-            position: relative;
-            i {
-                transform: translate(-40%, -33%);
+        }
+        button {
+            display: block;
+            height: 30px;
+            width: 30px;
+            border-radius: 50%;
+            button.del-msg-radius {
+                position: relative;
             }
         }
         .del-msg-txt{
