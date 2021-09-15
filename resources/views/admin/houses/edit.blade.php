@@ -15,7 +15,7 @@
         <div class="input-form mt-2 w-100">
             <div class="label w-100">
                 <label for="title">Nome della struttura</label>
-                <input type="text" class="w-100 @error('title') is-invalid @enderror" id="title" placeholder="Inserisci il nome della struttura" name="title" value="{{ old('title', $house->title) }}">
+                <input type="text" class="w-100 @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title', $house->title) }}">
             </div>
         </div>
         {{-- /Titolo --}}
@@ -24,7 +24,7 @@
         <div class="input-form mt-2 w-100">
             <div class="label w-100">
                 <label for="description">Descrizione</label>
-                <textarea class="w-100 @error('description') is-invalid @enderror" id="description" rows="6" name="description" placeholder="Descrivi la tua struttura">{{ old('description', $house->description) }}</textarea>
+                <textarea class="w-100 @error('description') is-invalid @enderror" id="description" rows="6" name="description">{{ old('description', $house->description) }}</textarea>
             </div>
         </div>
         {{-- /Descrizione --}}
@@ -101,7 +101,7 @@
             <div class="input-form mt-2 col-12 col-md-3">
                 <div class="label w-100" id="geo-address">
                     <label for="address">Indirizzo</label>
-                    <input type="text" name="address" value="{{ old('address', $house->address) }}" class="w-100 @error('address') is-invalid @enderror" id="address">
+                    <input type="text" name="address" value="{{ old('address', $house->address) }}" class="w-100 @error('address') is-invalid @enderror" id="address" onkeyup="getLocation()">
                     <ul id="finded" class="d-none"></ul>
                 </div>
             </div>
@@ -245,8 +245,10 @@
     <script src="{{ asset('js/upload_preview.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js" integrity="sha512-lTLt+W7MrmDfKam+r3D2LURu0F47a3QaW5nF0c6Hl0JDZ57ruei+ovbg7BrZ+0bjVJ5YgzsAWE+RreERbpPE1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        const address = document.getElementById('address')
-        address.addEventListener('keyup', getLocation)
+        window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+        const currentAxios = axios.create();
+        currentAxios.defaults.headers.common = {};
+        currentAxios.defaults.headers.common.accept = 'application/json';
 
         var cities = []
         var resAddress = ''
@@ -256,7 +258,7 @@
 
                 var search = address.value.replace(/\s/g, '%20')
                 if (search.length > 2) {
-                    axios
+                    currentAxios
                         .get(`https://api.tomtom.com/search/2/geocode/${search}.json?limit=10&countrySet=it&language=it-IT&key=MAy8CruNqMtQAbImXBd9FqGR76Ch0nGA&language=it-IT`)
                         .then(
                             res => {

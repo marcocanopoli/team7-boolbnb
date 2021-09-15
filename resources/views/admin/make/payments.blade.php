@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="container w-50">
+<div class="bnb-50">
     <div class="summary">
         <h2 class="mb-4">Riepilogo acquisto:</h2>
         <p><strong>Sponsorizzazzione</strong>: pacchetto <span>{{$promotion->name}}</span></p>
@@ -23,9 +23,9 @@
         <div id="dropin"></div>
         
         <input id="nonce" name="payment_method_nonce" type="hidden"/>
-        <div class="text-center">
-            <a class="bnb-a bnb-btn bnb-btn-white bnb-btn-resp mt-5 mr-5" href="{{URL::previous()}}">Annulla transazione</a>
-            <button class="bnb-btn bnb-btn-brand bnb-btn-resp" type="submit">Conferma acquisto</button>
+        <div class="d-flex flex-column">
+            <a class="bnb-a bnb-btn bnb-btn-white bnb-btn-resp align-self-center my-2" href="{{URL::previous()}}">Annulla transazione</a>
+            <button class="bnb-btn bnb-btn-brand bnb-btn-resp align-self-center" type="submit">Conferma acquisto</button>
         </div>
     </form>
 </div>

@@ -8,8 +8,6 @@
                         <input type="text" placeholder="Dove vuoi andare?"
                             v-model="searchData.inputSearch"
                             @keyup.enter="$emit('search', searchData)">
-                            <!-- closeAutoComplete()"                        
-                            @keyup="getLocation">  -->
                     </div>
                     <button id="filters" @click="toggleModal"><i class="fas fa-sliders-h"></i></button>
                     <button class="search-btn" @click="$emit('search', searchData)"><i class="fas fa-search"></i></button>
@@ -31,8 +29,6 @@
                                     <input type="text" placeholder="Dove vuoi andare?"
                                         v-model="searchData.inputSearch"
                                         @keyup.enter="closeSearch">
-                                        <!-- closeAutoComplete()"                        
-                                        @keyup="getLocation">  -->
                                 </div>
                             </div>
                             <div class="modal-filter">
@@ -100,14 +96,6 @@
                 </v-modal>
 
         </section>
-        <!-- <ul v-if="cities.length > 0" id="sizelist">
-            <li v-for="(city, index) in cities" :key="city.id"
-            :class="{'active': active === index}"
-            v-show="city.address.municipality"
-            @click="setLocation(city.address.freeformAddress,city.address.countrySubdivision,city.address.countryCode)">
-                {{city.address.freeformAddress}}, {{city.address.countrySubdivision}}, {{city.address.countryCode}}
-            </li>
-        </ul> -->
     </div>
 </template>
 
@@ -158,17 +146,6 @@ export default {
         setLocation(city,country,state) {
             this.searchData.inputSearch = `${city}, ${country}, ${state}`;
             this.cities = []
-        },
-        closeAutoComplete() {
-            this.searchData.inputSearch = ''
-            this.cities = []
-        },
-        nextItem () {
-    	    if (event.keyCode == 38 && this.active > 0) {
-      	        this.active--
-            } else if (event.keyCode == 40 && this.active < this.cities.length -1) {
-      	        this.active++
-            }
         },
         checkService(service_id) {
             this.toggleService(service_id);
@@ -233,28 +210,6 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../sass/partials/variables.scss';
-    ul {
-        width: 30%;
-        position: absolute;
-        top: 65px;
-        left: 0;
-        list-style: none;
-        padding: 0;
-        border: 1px solid rgba($gray-1, 0.3);
-        border-radius: 12px;
-        overflow: hidden;
-        background-color: $white;
-
-        li {
-            padding: 5px 10px;
-            cursor: pointer;
-
-            &:hover,
-            &.active {
-                background-color: rgba($gray-1, 0.1);
-            }
-        }
-    }
 
     .search-element {
         flex-direction: row;

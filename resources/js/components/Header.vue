@@ -11,7 +11,7 @@
                         </path>
                     </g>
                 </svg>                    
-                <strong class="ml-2" :class="$route.name == 'home' && visibleFullSearch ? 'color-white' : 'color-brand' ">boolbnb</strong>                    
+                <strong class="ml-2" :class="$route.name == 'home' && visibleFullSearch ? 'color-white' : 'color-brand' ">BoolBnB</strong>                    
             </router-link>
             <!-- Logo -->
             

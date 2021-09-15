@@ -318,11 +318,18 @@ button {
         }
     }
 }
+.bnb-50 {
 
-.summary {
-    padding: 5px 10px;
-    border: 1px solid rgba($gray-1, 0.3);
-    border-radius: 12px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+
+    .summary {
+        padding: 5px 10px;
+        border: 1px solid rgba($gray-1, 0.3);
+        border-radius: 12px;
+    }
 }
 
 //auth
@@ -650,6 +657,10 @@ button {
     .create-services,
     .edit-services{
         height: 300px;
+    }
+
+    .bnb-50 {
+        width: 50%;
     }
 }
 
