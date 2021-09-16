@@ -183,7 +183,7 @@ button {
 
 .bnb-btn-index,
 .bnb-btn-delete {
-    color: rgba($gray-1, 0.2);
+    color: rgba($gray-1, 0.6);
     transition: 0.3s;
     font-size: 24px;
 
@@ -535,8 +535,7 @@ button {
 
 .triangle {
     
-    
-    &::after {
+    &::before {
         content: '';
         position: absolute;
         left: 0;
@@ -547,6 +546,7 @@ button {
         border-right: 56px solid transparent;
         border-radius: 12px 0 0 0;
     }
+    
 }
   
 

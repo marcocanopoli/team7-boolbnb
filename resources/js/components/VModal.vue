@@ -49,6 +49,7 @@ export default {
         background-color: $white;
         transform: translateY(170px);
         border-radius: 30px;
+        overflow-y: auto;  
 
         .btn-times {
             position: absolute;
@@ -60,6 +61,7 @@ export default {
             font-weight: 700;
             color: $brand;
         }
+        
     }
 }
 
