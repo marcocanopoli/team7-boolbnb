@@ -23,7 +23,7 @@
         <div class="input-form mt-2 w-100">
             <div class="label w-100">
                 <label for="content">Message:*</label>
-                <textarea v-model="content" id="content" class="w-100" cols="30" rows="10" name="content" :class="{ 'is-invalid' : errors.content }"></textarea>
+                <textarea v-model="content" id="content" spellcheck="false" class="w-100" cols="30" rows="10" name="content" :class="{ 'is-invalid' : errors.content }"></textarea>
             </div>
         </div>
         

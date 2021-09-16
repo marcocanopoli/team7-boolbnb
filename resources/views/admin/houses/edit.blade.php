@@ -24,7 +24,7 @@
         <div class="input-form mt-2 w-100">
             <div class="label w-100">
                 <label for="description">Descrizione</label>
-                <textarea class="w-100 @error('description') is-invalid @enderror" id="description" rows="6" name="description">{{ old('description', $house->description) }}</textarea>
+                <textarea spellcheck="false" class="w-100 @error('description') is-invalid @enderror" id="description" rows="6" name="description">{{ old('description', $house->description) }}</textarea>
             </div>
         </div>
         {{-- /Descrizione --}}
