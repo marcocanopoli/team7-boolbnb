@@ -40,7 +40,7 @@
                     <div class="my-3">
                         <strong class="">Descrizione:</strong>
                         <p>{{house.description}}</p>
-                        <strong>Prezzo: <span>{{house.price}} &euro;</span></strong>
+                        <strong>Prezzo: <span>{{house.price}} &euro;</span> <small>a persona/Notte</small></strong>
                     </div>
                 </div> 
     

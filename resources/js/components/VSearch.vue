@@ -17,7 +17,9 @@
         :class="{'active': active === index}"
         v-show="city.address.municipality"
         @click="setLocation(city.address.freeformAddress,city.address.countrySubdivision,city.address.countryCode)">
-            {{city.address.freeformAddress}}, {{city.address.countrySubdivision}}, {{city.address.countryCode}}
+            <div class="d-flex align-items-center">
+                <i class="fas fa-map-marker-alt mx-2"></i>{{city.address.freeformAddress}}, {{city.address.countrySubdivision}}, {{city.address.countryCode}}
+            </div>
         </li>
     </ul>
 </div>

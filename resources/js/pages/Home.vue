@@ -48,7 +48,7 @@ export default {
             current_page: 1,
             last_page: 1,
             scrollZero: true,
-            cities: ['milano', 'firenze', 'bologna']
+            cities: ['milano', 'firenze', 'bologna', 'napoli', 'bari', 'roma']
         }
     },
     props: {

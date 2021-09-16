@@ -33,11 +33,12 @@
             <h4>Messaggi &rsaquo;</h4>
             <p>Visualizza e rispondi ai messaggi e richiete degli utenti</p>
         </a>
-        <a href="#" class="bnb-card shadow">
+        <span class="bnb-card shadow disable">
             <i class="fas fa-chart-pie"></i>
             <h4>Statistiche &rsaquo;</h4>
             <p>Visualizza statistiche riguardanti le tue strutture</p>
-        </a>
+            <div class="coming">COMING SOON . . .</div>
+        </span>
     </div>
 
 </div>

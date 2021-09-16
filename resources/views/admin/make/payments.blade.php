@@ -24,7 +24,7 @@
         
         <input id="nonce" name="payment_method_nonce" type="hidden"/>
         <div class="d-flex flex-column">
-            <a class="bnb-a bnb-btn bnb-btn-white bnb-btn-resp align-self-center my-2" href="{{URL::previous()}}">Annulla transazione</a>
+            <a class="bnb-a bnb-btn bnb-btn-white bnb-btn-resp align-self-center my-2" href="{{route('admin.houses.index')}}">Annulla transazione</a>
             <button class="bnb-btn bnb-btn-brand bnb-btn-resp align-self-center" type="submit">Conferma acquisto</button>
         </div>
     </form>
