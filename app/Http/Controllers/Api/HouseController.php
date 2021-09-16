@@ -32,10 +32,11 @@ class HouseController extends Controller
         foreach ($houses as $index => $house) {
             if($this->isSponsored($house)){
                 $sponsored[] = $house;
-                array_splice($houses, $index, 1);
+                unset($houses[$index]);
             }
         }
-        return array_merge($sponsored, $houses);
+        $merged = array_merge($sponsored, $houses);
+        return $merged;
     }
 
     public function compareDistance($a, $b) {
@@ -99,61 +100,61 @@ class HouseController extends Controller
         $filteredByServices = [];
         
         $coordinates = $this->getCoordinates($search);
-
+        
         //filter by selected parameters
         $filteredByParameters = House::where([
-                    ['rooms', '>=', $rooms],
-                    ['beds', '>=', $beds],
-                    ['visible', 1]
-                ])->with('houseType', 'promotions')->get();
-        
-        //filter by services
-        if ($services) {
-            foreach ($filteredByParameters as $house) {
-                $valid = false;
-
-                foreach ($services as $service_id) {
+            ['rooms', '>=', $rooms],
+            ['beds', '>=', $beds],
+            ['visible', 1]
+            ])->with('houseType', 'promotions')->get();
+            
+            //filter by services
+            if ($services) {
+                foreach ($filteredByParameters as $house) {
                     $valid = false;
-
-                    foreach($house->services as $houseService) {
-
-                        if ($service_id == $houseService->id) {
-                            $valid = true;                         
+                    
+                    foreach ($services as $service_id) {
+                        $valid = false;
+                        
+                        foreach($house->services as $houseService) {
+                            
+                            if ($service_id == $houseService->id) {
+                                $valid = true;                         
+                            }
                         }
+                        
                     }
                     
+                    if ($valid) {
+                        $filteredByServices[] = $house;
+                    }
                 }
                 
-                if ($valid) {
-                    $filteredByServices[] = $house;
+            } else {
+                $filteredByServices = $filteredByParameters;
+            }
+            
+            //filter by distance
+            foreach ($filteredByServices as $house) {
+                $distance = $this->getDistance($house->latitude, $house->longitude, $coordinates['lat'], $coordinates['lon']);
+                
+                if ($distance <= $km) {
+                    
+                    $house->distance = floor($distance);
+                    $results[] = $house;
                 }
             }
 
-        } else {
-            $filteredByServices = $filteredByParameters;
+            usort($results, array($this, "compareDistance"));
+            $results = $this->splitMergeSponsored($results);
+            
+            $current_page = LengthAwarePaginator::resolveCurrentPage();
+            $perPage = 4;
+            $current_page_results = array_slice($results, ($current_page - 1) * $perPage, $perPage);
+            
+            $results_to_show = new LengthAwarePaginator($current_page_results, count($results), $perPage);
+            
+            return response()->json($results_to_show);
         }
-        
-        //filter by distance
-        foreach ($filteredByServices as $house) {
-            $distance = $this->getDistance($house->latitude, $house->longitude, $coordinates['lat'], $coordinates['lon']);
-
-            if ($distance <= $km) {
-
-                $house->distance = floor($distance);
-                $results[] = $house;
-            }
-        }
-
-        usort($results, array($this, "compareDistance"));
-        $results = $this->splitMergeSponsored($results);
-
-
-        $current_page = LengthAwarePaginator::resolveCurrentPage();
-        $perPage = 4;
-        $current_page_results = array_slice($results, ($current_page - 1) * $perPage, $perPage);
-
-        $results_to_show = new LengthAwarePaginator($current_page_results, count($results), $perPage);
-
-        return response()->json($results_to_show);
     }
-}
+    
