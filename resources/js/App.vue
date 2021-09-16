@@ -38,7 +38,7 @@ export default {
     data(){
         return{
             houses: [],
-            sponsoredHouses: [],
+            // sponsoredHouses: [],
             allServices: [],
             user: {},
             searchCoordinates: {},
@@ -49,7 +49,7 @@ export default {
                 rooms: 1,
                 beds: 1,
                 services: '',
-                km: '',
+                km: 20,
                 page: '',
             },
             current_page: 1,
@@ -114,7 +114,7 @@ export default {
                 let inputSearch = searchData[0]
                 searchData = {};  //if single search input
                 searchData.inputSearch = inputSearch ; //assign to inputSearch
-                searchData.km = '';
+                searchData.km = 20;
                 searchData.rooms = 1;
                 searchData.beds = 1;
                 searchData.services = '';

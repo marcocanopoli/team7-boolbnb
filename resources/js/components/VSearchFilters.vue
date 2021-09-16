@@ -55,10 +55,14 @@
                             
                             <div class="modal-filter">
                                 <span class="filter-title">Km</span>
-                                <div class="filter-counter">
-                                    <input type="text" placeholder="Raggio?"
+                                <div class="filter-counter d-flex flex-column align-items-center ">
+                                    <span>{{searchData.km}}</span>
+                                    <input type="range" id="range-selector"
+                                            min="0" max="1000" step="10"
+                                            v-model="searchData.km">
+                                    <!-- <input type="text" placeholder="Raggio?"
                                         v-model="searchData.km"
-                                        @keyup.enter="closeSearch">
+                                        @keyup.enter="closeSearch"> -->
                                 </div>
                             </div>
 
@@ -113,7 +117,7 @@ export default {
                 rooms: 1,
                 beds: 1,
                 services: '',
-                km: '',
+                km: 20,
                 page: ''
             },
             cities: [],
@@ -202,6 +206,7 @@ export default {
         },
         searchData: function() {
             this.searchData.page = 1;
+            this.searchData.km = 20;
         }
     },
     created () {
@@ -251,13 +256,17 @@ export default {
                 display: flex;
                 font-size: 14px; 
 
+                input:not(#range-selector) {                    
+                    border: 1px solid $gray-1;
+                    
+                }
+
                 input {
                     padding: 4px 0;                    
                     padding-left: 16px;
                     width: 100%;
                     border-radius: 30px;
                     outline: none;
-                    border: 1px solid $gray-1;
                     transition: .2s;
 
                     &:focus {
@@ -340,6 +349,11 @@ export default {
         }
     }
 
+    #range-selector::-moz-range-progress {
+            background-color: $brand;
+            outline: none;
+            border-color: transparent;
+            }
 
     @media screen and (max-width: 767px) {
 
@@ -381,6 +395,8 @@ export default {
         }
 
     }
+
+    
 
     @media screen and (min-width: 768px) {
 
