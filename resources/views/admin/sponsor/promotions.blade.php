@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Promotion')
+
 @section('content')
     <div class="container">
         <div class="bnb-cards-container">

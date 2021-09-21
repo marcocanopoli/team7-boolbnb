@@ -28,7 +28,7 @@ class User extends Authenticatable
 
     protected $with = ['houses'];
 
-    //one to many
+    //one to many - side->one
     public function houses() {
         return $this->hasMany('App\House');
     }

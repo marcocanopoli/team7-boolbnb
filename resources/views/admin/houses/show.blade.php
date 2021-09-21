@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('content')
 
+@section('title', 'House')
+
 <div class="container show">
 
     @if (session('created'))

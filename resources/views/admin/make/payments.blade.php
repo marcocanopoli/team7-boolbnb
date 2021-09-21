@@ -1,4 +1,7 @@
 @extends('layouts.app')
+
+@section('title', 'Payment')
+
 @section('content')
 <div class="bnb-50">
     <div class="summary">

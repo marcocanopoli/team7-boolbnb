@@ -2,6 +2,7 @@
 {{-- @dump($houses)  /case logged user ok --}}
 {{-- @dump($messages)  --}}
 
+@section('title', 'All Messages')
 
 @section('content')
     <div class="container msg-box ">
@@ -20,11 +21,19 @@
         
         
             @foreach ($messages as $houseMessages)
-                @if( count($houseMessages) > 0 )
-                <div class="d-flex flex-column  my-5">
-                    <h3 class=""> Messaggi per la struttura: <strong>{{ $houseMessages[0]->house->title }}</strong></h3>
-                    <span class="bnb-btn bnb-btn-brand-2 align-self-start"><small>{{$houseMessages[0]->house->city}}</small></span>
-                </div>
+                @if (count($houseMessages) == 0)
+                    {{-- accrocco puccio per messaggio 'non ci sono messaggi 'funxiona ma è brutto :D --}}
+                    @if ($loop->first)
+                        Non ci sono messaggi
+                    @endif
+                @elseif( count($houseMessages) > 0 )
+                    {{-- titolo struttura --}}
+                    <div class="d-flex flex-column  my-5">
+                        <h3 class=""> Messaggi per la struttura: <strong>{{ $houseMessages[0]->house->title }}</strong></h3>
+                        <span class="bnb-btn bnb-btn-brand-2 align-self-start"><small>{{$houseMessages[0]->house->city}}</small></span>
+                    </div>
+                    {{-- /titolo strutture --}}
+                    
                     
                     <div class="d-flex flex-wrap justify-content-between">
                         @foreach ( $houseMessages as $index => $msg)
@@ -47,18 +56,18 @@
                                     </div> {{-- form-absolute delete button --}}
 
                                     <div class="btn-row">
-                                        <div class="col-12 my-2 padd-btn padd-btn-left">
+                                        <div class="col-12 col-sm-6 col-md-6 col-lg-6 my-2 padd-btn padd-btn-rgt">
                                             <a class="bnb-a bnb-btn bnb-btn-white bnb-btn-resp" href="mailto:{{$msg->guest_email}}">
                                                 <i class="fas fa-reply"></i>
                                                 RISPONDI
                                             </a>
                                         </div>
-                                        {{-- <div class="col-12 col-sm-6 col-md-6 col-lg-6 my-2 padd-btn padd-btn-rgt">
-                                            <button type="submit" class="bnb-a bnb-btn bnb-btn-brand bnb-btn-resp">
+                                        <div class="col-12 col-sm-6 col-md-6 col-lg-6 my-2 padd-btn padd-btn-rgt">
+                                            <a href="{{ route('admin.messages.show', $msg->id) }}" type="submit" class="bnb-a bnb-btn bnb-btn-brand bnb-btn-resp">
                                                 <i class="fas fa-check"></i>
-                                                CONFERMA
-                                            </button>
-                                        </div> --}}
+                                                VISUALIZZA
+                                            </a> 
+                                        </div>
                                     </div> 
 
                                 </div>
@@ -87,6 +96,9 @@
                         @endif
                     </div> {{-- /container msg card --}}
                 @endif
+                
             @endforeach
+
+
     </div> {{-- /container --}}
 @endsection

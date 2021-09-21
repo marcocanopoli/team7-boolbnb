@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" sizes="76x76" type="image/x-icon" href="https://a0.muscache.com/airbnb/static/logotype_favicon-21cc8e6c6a2cca43f061d2dcabdf6e58.ico">
-    <title>{{ config('app.name', 'BoolBnB') }}</title>
+    <title>{{ config('app.name') }} | @yield('title')</title>
     
     <!-- Scripts -->    
     <script src="{{ asset('js/app.js') }}" defer></script>
